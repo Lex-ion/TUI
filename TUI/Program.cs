@@ -8,6 +8,7 @@ namespace TUI
 
         static void Main(string[] args)
         {
+
             Console.WriteLine("Hello, World!");
 
             TUIMenu menu = new(new ObjectBuilderDefaults());
@@ -31,8 +32,8 @@ namespace TUI
 
             menu.ObjectBuilder.Reset();
             menu.ObjectBuilder
-                .AddFrame("F1", 1, 10, new(-1, -1),new())
-                .AddTextBox("T1",1,10)
+                .AddFrame("F1", 10, 3, new(-1, -1),new())
+                .AddTextBox("T1",10,3)
                 .Build("TB",new(40, 20));
 
             menu.Prepare();
