@@ -15,9 +15,13 @@ namespace TUI
         public int Width { get; set; }
         public Anchor ParentAnchor { get; set; }
 
+        public bool HiddenChars { get; set; }
+        public bool IsEditable { get; set; }
+
         public TUITextBoxPart()
         {
             Text = "";
+            IsEditable = true ;
         }
 
         
@@ -39,28 +43,19 @@ namespace TUI
                 Console.ForegroundColor = OnCursorColorFore;
                 Console.BackgroundColor = OnCursorColorBack;
             }
-            for (int i = 0; i < Height; i++)
-            {
-                if (SetCursor(ParentAnchor.Left + Anchor.Left, ParentAnchor.Top + Anchor.Top + i))
-                    Console.Write(Text.PadRight(Width * Height, '_')[^(Width * Height)..][(Width * i)..(Width * (i + 1))]);
-            }
+            WriteText();
         }
 
         public override void Interact()
         {
             base.Interact();
 
-            if (!Selected)
+            if (!Selected||!IsEditable)
                 return;
 
 
-
-            for (int i = 0; i < Height; i++)
-            {
-                Console.BackgroundColor = ConsoleColor.DarkYellow;
-                if (SetCursor(ParentAnchor.Left + Anchor.Left, ParentAnchor.Top + Anchor.Top + i))
-                    Console.Write(Text.PadRight(Width * Height, '_')[^(Width * Height)..][(Width * i)..(Width * (i + 1))]);
-            }
+            Console.BackgroundColor = ConsoleColor.DarkYellow;
+            WriteText();
 
             /*  if (Text.Length > Width)
               {
@@ -84,6 +79,14 @@ namespace TUI
             Console.CursorVisible = false;
         }
 
+        private void WriteText()
+        {
+            for (int i = 0; i < Height; i++)
+            {
+                if (SetCursor(ParentAnchor.Left + Anchor.Left, ParentAnchor.Top + Anchor.Top + i))
+                    Console.Write(HiddenChars?new string('*',Text.Length).PadRight(Width * Height, '_')[^(Width * Height)..][(Width * i)..(Width * (i + 1))]: Text.PadRight(Width * Height, '_')[^(Width * Height)..][(Width * i)..(Width * (i + 1))]);
+            }
+        }
         private void GetUserInput()
         {
 
@@ -117,12 +120,9 @@ namespace TUI
             }
             void Write()
             {
-                for (int i = 0; i < Height; i++)
-                {
-                    Console.BackgroundColor = ConsoleColor.DarkYellow;
-                    if(SetCursor(ParentAnchor.Left + Anchor.Left, ParentAnchor.Top + Anchor.Top + i))
-                    Console.Write(Text.PadRight(Width*Height, '_')[^(Width * Height)..][(Width * i)..(Width * (i + 1))]);
-                }
+                Console.BackgroundColor = ConsoleColor.DarkYellow;
+                WriteText();
+                
                 /*
                 if (SetCursor(ParentAnchor.Left + Anchor.Left, ParentAnchor.Top + Anchor.Top))
                 Console.Write(Text.PadRight(Width, '_')[^Width..]);*/
