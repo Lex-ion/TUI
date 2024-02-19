@@ -153,7 +153,7 @@ namespace TUI
             return this;
         }
 
-        public void AddButton(string name, string? content,Action action, Anchor? anchor = null, ConsoleColor? interactionForeGround = null, ConsoleColor? interactionBackGround = null, ConsoleColor? foreGround = null, ConsoleColor? backGround = null)
+        public TUIObjectBuilder AddButton(string name, string? content,Action action, Anchor? anchor = null, ConsoleColor? interactionForeGround = null, ConsoleColor? interactionBackGround = null, ConsoleColor? foreGround = null, ConsoleColor? backGround = null)
         {
             if (_Product.Parts.Any(p => p is ITUIInteractable))
                 throw new Exception("There can be only one interactable part at same time in one objecet");
@@ -174,7 +174,19 @@ namespace TUI
             button.Action=action;
             button.Content = content;
             _Product.AddPart(button);
+            return this;
 
+        }
+        public TUIObjectBuilder AddProgressBar(string name,Anchor? anchor,int width,int height ,int value=0, int maximum=100, int minimum=0)
+        {
+            anchor ??= new();
+
+            TUIProgressBarPart pb =new (name,anchor,width,height,value,maximum,minimum);
+            
+
+            _Product.AddPart(pb);
+
+            return this;
         }
     }
 }

@@ -36,13 +36,18 @@ namespace TUI
                 .AddTextBox("T1", 10, 3)
                 .Build("TB", new(40, 20));
 
+            menu.ObjectBuilder.Reset();
+            menu.ObjectBuilder.AddProgressBar("pb", null, 20, 3, 0,10)
+                .Build("PB", new(25, 25));
+
+
+
             menu.Prepare();
             menu.DrawMenu();
 
 
-            menu.Interactables[0].Interacted += test;
-            menu.Interactables[0].Interacted += test;
             menu.Interactables[0].Interacted += CharChange;
+            menu.Interactables[0].Interacted += ChangeBar;
             foreach (ITUIInteractable item in menu.Interactables)
             {
                 item.Interacted += test;
@@ -77,6 +82,12 @@ namespace TUI
             {
                 var tb = (menu.Objects.Values.Where(o => o.Parts.Any(p => p.Value is TUITextBoxPart)).First().Parts.Where(p => p.Value is TUITextBoxPart).First().Value as TUITextBoxPart);
                tb.HiddenChars = !tb.HiddenChars;
+            }
+
+            void ChangeBar()
+            {
+                TUIProgressBarPart pb = (TUIProgressBarPart)menu.Objects["PB"].Parts["pb"];
+                pb.Value++;
             }
 
         }
