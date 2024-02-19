@@ -9,28 +9,26 @@ namespace TUI
 {
     internal class TUIFramePart : AbstractTUIObjectPart, ITUIColorsSet
     {
-        public int Height { get; set; }
-        public int Width { get; set; }
 
-        public FrameOptions Options { get;protected set; }
+        public FrameOptions Options { get; protected set; }
 
-        public ConsoleColor ForeGround { get;protected set; }
-        public ConsoleColor BackGround { get;protected set; }
+        public ConsoleColor ForeGround { get; protected set; }
+        public ConsoleColor BackGround { get; protected set; }
 
         public bool BackGroundSet { get; private set; }
 
         public bool ForeGroundSet { get; private set; }
 
-        public void Set(string name,int height,int width, Anchor anchor,FrameOptions options ,ConsoleColor? foreGround = null, ConsoleColor? backGround = null)
+        public void Set(string name, int height, int width, Anchor anchor, FrameOptions options, ConsoleColor? foreGround = null, ConsoleColor? backGround = null)
         {
             Height = height;
-            Width=width;
+            Width = width;
 
             Options = options;
 
             Name = name;
             Anchor = anchor;
-            Enabled = true;
+            IsEnabled = true;
             PartType = TUIObjectPartType.LABEL;
 
             if (foreGround != null)
@@ -69,13 +67,13 @@ namespace TUI
         {
             Console.ForegroundColor = ForeGround;
             Console.BackgroundColor = BackGround;
-            for (int i =0; i < Width; i++)
+            for (int i = 0; i < Width; i++)
             {
-                for (int j = 0; j <Height ; j++)
+                for (int j = 0; j < Height; j++)
                 {
 
 
-                    if (i > 0 && i < Width-1 && j > 0 && j < Height-1)
+                    if (i > 0 && i < Width - 1 && j > 0 && j < Height - 1)
                         continue;
 
 

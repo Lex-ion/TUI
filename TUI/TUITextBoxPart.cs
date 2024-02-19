@@ -9,10 +9,9 @@ namespace TUI
 {
     public class TUITextBoxPart : AbstractTUIInteractivePart
     {
-        public string Text { get;private set; }
+        public string Text { get; private set; }
 
-        public int Height { get;  set; }
-        public int Width { get; set; }
+
         public Anchor ParentAnchor { get; set; }
 
         public bool HiddenChars { get; set; }
@@ -21,19 +20,19 @@ namespace TUI
         public TUITextBoxPart()
         {
             Text = "";
-            IsEditable = true ;
+            IsEditable = true;
         }
 
-        
+
 
         public override void Draw(Anchor parentAnchor)
         {
             ParentAnchor = parentAnchor;
 
-            if (!SetCursor(parentAnchor.Left+ Anchor.Left,parentAnchor.Top+ Anchor.Top))
+            if (!SetCursor(parentAnchor.Left + Anchor.Left, parentAnchor.Top + Anchor.Top))
                 return;
 
-            if (!Selected)
+            if (!IsSelected)
             {
                 Console.ForegroundColor = ForeGround;
                 Console.BackgroundColor = BackGround;
@@ -50,7 +49,7 @@ namespace TUI
         {
             base.Interact();
 
-            if (!Selected||!IsEditable)
+            if (!IsSelected || !IsEditable)
                 return;
 
 
@@ -84,7 +83,7 @@ namespace TUI
             for (int i = 0; i < Height; i++)
             {
                 if (SetCursor(ParentAnchor.Left + Anchor.Left, ParentAnchor.Top + Anchor.Top + i))
-                    Console.Write(HiddenChars?new string('*',Text.Length).PadRight(Width * Height, '_')[^(Width * Height)..][(Width * i)..(Width * (i + 1))]: Text.PadRight(Width * Height, '_')[^(Width * Height)..][(Width * i)..(Width * (i + 1))]);
+                    Console.Write(HiddenChars ? new string('*', Text.Length).PadRight(Width * Height, '_')[^(Width * Height)..][(Width * i)..(Width * (i + 1))] : Text.PadRight(Width * Height, '_')[^(Width * Height)..][(Width * i)..(Width * (i + 1))]);
             }
         }
         private void GetUserInput()
@@ -122,7 +121,7 @@ namespace TUI
             {
                 Console.BackgroundColor = ConsoleColor.DarkYellow;
                 WriteText();
-                
+
                 /*
                 if (SetCursor(ParentAnchor.Left + Anchor.Left, ParentAnchor.Top + Anchor.Top))
                 Console.Write(Text.PadRight(Width, '_')[^Width..]);*/

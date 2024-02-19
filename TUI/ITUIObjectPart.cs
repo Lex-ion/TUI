@@ -9,9 +9,14 @@ namespace TUI
 {
     public interface ITUIObjectPart
     {
+        event Action? Resized;
+        event Action? Enabled;
+        event Action? Disabled;
+        event Action? Moved;
+
         string Name { get; }
         Anchor Anchor { get; }
-        bool Enabled { get; set; }
+        bool IsEnabled { get; set; }
         public void Draw(Anchor parentAnchor);
 
         TUIObjectPartType PartType { get; }

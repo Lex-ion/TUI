@@ -8,12 +8,17 @@ namespace TUI
 {
     public interface ITUIInteractable
     {
+
+        event Action? Interacted;
+        event Action? Selected;
+        event Action? UnSelected;
+
+
          ConsoleColor OnCursorColorFore { get; }
          ConsoleColor OnCursorColorBack { get; }
          void Interact();
 
-         event Action Interacted;
-         bool Selected { get; set; }
+         bool IsSelected { get; set; }
          
     }
 }

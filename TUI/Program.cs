@@ -75,10 +75,8 @@ namespace TUI
 
              void CharChange()
             {
-                foreach (var tb in menu.Objects.Values.SelectMany(o => o.Parts.Values).OfType<TUITextBoxPart>())
-                {
-                    tb.HiddenChars = !tb.HiddenChars;
-                }
+                var tb = (menu.Objects.Values.Where(o => o.Parts.Any(p => p.Value is TUITextBoxPart)).First().Parts.Where(p => p.Value is TUITextBoxPart).First().Value as TUITextBoxPart);
+               tb.HiddenChars = !tb.HiddenChars;
             }
 
         }

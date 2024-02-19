@@ -7,21 +7,35 @@ using TUI.Structs;
 
 namespace TUI
 {
-    public abstract class AbstractTUIInteractivePart : AbstractTUIObjectPart,ITUIInteractable,ITUIColorsSet
+    public abstract class AbstractTUIInteractivePart : AbstractTUIObjectPart, ITUIInteractable, ITUIColorsSet
     {
+        public event Action? Interacted;
+        public event Action? Selected;
+        public event Action? UnSelected;
+
         public ConsoleColor OnCursorColorFore { get; set; }
 
-        public ConsoleColor OnCursorColorBack {get;set; }
+        public ConsoleColor OnCursorColorBack { get; set; }
 
-        public bool Selected { get ; set; }
+        public bool IsSelected
+        {
+            get => _isSelected; set
+            {
+                _isSelected = value;
+                if (value)
+                    Selected?.Invoke();
+                else
+                    UnSelected?.Invoke();
+            }
+        }
+        bool _isSelected;
 
-        public event Action? Interacted;
 
         public virtual void Interact()
         {
-            if (!Selected)
+            if (!IsSelected)
                 return;
-            Interacted?.Invoke();            
+            Interacted?.Invoke();
         }
         public ConsoleColor ForeGround { get; set; }
         public ConsoleColor BackGround { get; set; }
@@ -55,19 +69,19 @@ namespace TUI
         {
             Name = name;
             Anchor = anchor;
-            Enabled = true;
+            IsEnabled = true;
             PartType = TUIObjectPartType.LABEL;
 
-            
+
 
             if (foreGround != null)
                 SetForeGroundColor((ConsoleColor)foreGround);
             if (backGround != null)
                 SetBackGroundColor((ConsoleColor)backGround);
-            if(interactionBackGround != null)
-               OnCursorColorBack= ((ConsoleColor)interactionBackGround);
+            if (interactionBackGround != null)
+                OnCursorColorBack = ((ConsoleColor)interactionBackGround);
             if (interactionForeGround != null)
-                OnCursorColorFore=((ConsoleColor)interactionForeGround);
+                OnCursorColorFore = ((ConsoleColor)interactionForeGround);
         }
 
     }
