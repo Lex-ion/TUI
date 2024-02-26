@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TUI.Structs;
 
-namespace TUI
+namespace TUI.TUIParts
 {
     public abstract class AbstractTUIObjectPart : ITUIObjectPart
     {
@@ -66,11 +66,31 @@ namespace TUI
         }
         protected int _height;
 
+        public ConsoleColor ForeColor { get; set; }
+        public ConsoleColor BackColor { get; set; }
+
+        protected AbstractTUIObjectPart(string name, Anchor? anchor, int width, int height, ConsoleColor foreColor, ConsoleColor backColor, bool isEnabled, TUIObjectPartType partType)
+        {
+            Name = name;
+            _anchor = anchor ?? new();
+            _isEnabled = isEnabled;
+            PartType = partType;
+            _width = width;
+            _height = height;
+            ForeColor = foreColor;
+            BackColor = backColor;
+        }
+
+
         /// <summary>
         /// Draws part
         /// </summary>
         /// <param name="parentAnchor">Parent anchor to offset from</param>
-        public abstract void Draw(Anchor parentAnchor);
+        public virtual bool Draw(Anchor parentAnchor)
+        {
+            UseColors();
+            return SetCursor(parentAnchor.Left, parentAnchor.Top);
+        }
 
         public bool SetCursor(int left, int top)
         {
@@ -83,6 +103,11 @@ namespace TUI
             Console.SetCursorPosition(pos.Left, pos.Top);
 
             return true;
+        }
+        public virtual void UseColors()
+        {
+            Console.ForegroundColor = ForeColor;
+            Console.BackgroundColor = BackColor;
         }
     }
 }

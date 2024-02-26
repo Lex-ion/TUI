@@ -5,68 +5,28 @@ using System.Text;
 using System.Threading.Tasks;
 using TUI.Structs;
 
-namespace TUI
+namespace TUI.TUIParts
 {
-    internal class TUIFramePart : AbstractTUIObjectPart, ITUIColorsSet
+    internal class TUIFramePart : AbstractTUIObjectPart
     {
+        public TUIFramePart(string name, Anchor? anchor, int width, int height, FrameOptions options, ConsoleColor foreColor, ConsoleColor backColor, bool isEnabled, TUIObjectPartType partType) : base(name, anchor, width, height, foreColor, backColor, isEnabled, partType)
+        {
+            Options = options;
+        }
+
 
         public FrameOptions Options { get; protected set; }
-
-        public ConsoleColor ForeGround { get; protected set; }
-        public ConsoleColor BackGround { get; protected set; }
-
-        public bool BackGroundSet { get; private set; }
-
-        public bool ForeGroundSet { get; private set; }
-
-        public void Set(string name, int height, int width, Anchor anchor, FrameOptions options, ConsoleColor? foreGround = null, ConsoleColor? backGround = null)
-        {
-            Height = height;
-            Width = width;
-
-            Options = options;
-
-            Name = name;
-            Anchor = anchor;
-            IsEnabled = true;
-            PartType = TUIObjectPartType.LABEL;
-
-            if (foreGround != null)
-                SetForeGroundColor((ConsoleColor)foreGround);
-            if (backGround != null)
-                SetBackGroundColor((ConsoleColor)backGround);
-        }
-
-        public void SetColors(ConsoleColor foreGround, ConsoleColor backGround)
-        {
-            ForeGround = foreGround;
-            BackGround = backGround;
-            ForeGroundSet = true;
-            BackGroundSet = true;
-
-        }
-
-        public void SetForeGroundColor(ConsoleColor foreGround)
-        {
-            ForeGround = foreGround;
-            ForeGroundSet = true;
-        }
-
-        public void SetBackGroundColor(ConsoleColor backGround)
-        {
-            BackGround = backGround;
-            BackGroundSet = true;
-        }
 
 
         /// <summary>
         /// Draws frame around object. Anchor is top left corner.
         /// </summary>
         /// <param name="parentAnchor">Parent anchor to offset from</param>
-        public override void Draw(Anchor parentAnchor)
+        public override bool Draw(Anchor parentAnchor)
         {
-            Console.ForegroundColor = ForeGround;
-            Console.BackgroundColor = BackGround;
+            if (!base.Draw(parentAnchor))
+                return false;
+
             for (int i = 0; i < Width; i++)
             {
                 for (int j = 0; j < Height; j++)
@@ -98,6 +58,7 @@ namespace TUI
                 }
             }
             Console.CursorVisible = false;
+            return true;
         }
 
     }

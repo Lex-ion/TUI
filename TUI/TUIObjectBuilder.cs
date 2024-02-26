@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TUI.Structs;
+using TUI.TUIParts;
 
 namespace TUI
 {
@@ -69,7 +70,7 @@ namespace TUI
 
         public int CountOfParts<T>() where T : ITUIObjectPart
         {
-            return _Product.Parts.Where(p=> p is T).Count();    
+            return _Product.Parts?.Where(p=> p is T).Count()??0;    
         }
         public int LenghthOfLongestLabel()
         {
@@ -79,48 +80,30 @@ namespace TUI
 
             return labels.OrderByDescending(l => l.Content.Length).First().Content.Length;
         }
-        /// <summary>
-        /// NotFinished
-        /// </summary>
-        /// <param name="name"></param>
-        /// <param name="anchor"></param>
-        /// <returns></returns>
-        public TUIObjectBuilder AddTextBox(string name, int width,int? height=null,Anchor? anchor = null, ConsoleColor? interactionForeGround = null, ConsoleColor? interactionBackGround = null, ConsoleColor? foreGround = null, ConsoleColor? backGround = null)
+
+        public TUIObjectBuilder AddTextBox(string name, int width,int? height=null,Anchor? anchor = null,string? text=null,bool? isEnabled=null, ConsoleColor? interactionForeGround = null, ConsoleColor? interactionBackGround = null, ConsoleColor? foreColor = null, ConsoleColor? backColor = null)
         {
-            if (anchor is null)
-                anchor = Defaults.Anchor;
-            if (foreGround is null)
-                foreGround = Defaults.ButtonDefaults.ForeGround;
-            if (backGround is null)
-                backGround = Defaults.ButtonDefaults.Background;
-            if (interactionForeGround is null)
-                interactionForeGround = Defaults.ButtonDefaults.InteractionForeGround;
-            if (interactionBackGround is null)
-                interactionBackGround = Defaults.ButtonDefaults.InteractionBackground;
+            anchor = anchor ?? Defaults.Anchor;
+            height = height ?? 1;
+            foreColor = foreColor ?? Defaults.ButtonDefaults.ForeGround;
+            backColor=backColor?? Defaults.ButtonDefaults.BackGround; 
+            interactionForeGround=interactionForeGround ?? Defaults.ButtonDefaults.InteractionForeGround;
+            interactionBackGround = interactionBackGround ?? Defaults.ButtonDefaults.InteractionBackground;
+            isEnabled = isEnabled ?? true;
 
-            if(height is null||height<1)
-                height = 1;
-
-
-            TUITextBoxPart tb = new();
-            tb.Set(name, (Anchor)anchor, foreGround, backGround, interactionForeGround, interactionBackGround);
-            tb.Width = width;
-            tb.Height = (int)height;
+            TUITextBoxPart tb = new(name,anchor,width,(int)height,text!,(ConsoleColor)foreColor, (ConsoleColor)backColor, (ConsoleColor)interactionForeGround, (ConsoleColor)interactionBackGround,(bool)isEnabled,TUIObjectPartType.PROGRESS_BAR);
             _Product.AddPart(tb);
             
             return this;
         }
-        public TUIObjectBuilder AddLabel(string name, string? content, Anchor? anchor=null, ConsoleColor? foreGround = null, ConsoleColor? backGround = null)
+        public TUIObjectBuilder AddLabel(string name, string? content, Anchor? anchor=null, ConsoleColor? foreColor = null, ConsoleColor? backColor = null, bool? isEnabled=null)
         {
-            if (anchor is null)
-                anchor = Defaults.Anchor;
-            if(foreGround is null)
-                foreGround = Defaults.ForeGround;
-            if (backGround is null)
-                backGround = Defaults.BackGround;
+            anchor=anchor?? Defaults.Anchor;
+            foreColor = foreColor ?? Defaults.ForeGround;
+            backColor = backColor ?? Defaults.BackGround;
+            isEnabled = isEnabled ?? true;
 
-            TUILabelPart label = (TUILabelPart) new TUILabelFactory().Create();
-            label.Set(name, (Anchor)anchor, content, foreGround, backGround);
+            TUILabelPart label = new(name,anchor,content,(ConsoleColor)foreColor, (ConsoleColor)backColor,(bool)isEnabled,TUIObjectPartType.LABEL);
             _Product.AddPart(label);
             return this;
         }
@@ -134,58 +117,58 @@ namespace TUI
         /// <param name="frameOptions">Options for frame walls</param>
         /// <param name="foreGround"></param>
         /// <param name="backGround"></param>
-        public TUIObjectBuilder AddFrame(string name, int width, int height, Anchor? anchor = null, FrameOptions? frameOptions = null, ConsoleColor? foreGround = null, ConsoleColor? backGround = null)
+        public TUIObjectBuilder AddFrame(string name, int width, int height, Anchor? anchor = null, FrameOptions? frameOptions = null, ConsoleColor? foreColor = null, ConsoleColor? backColor = null,bool? isEnabled=null)
         {
-            if (anchor is null)
-                anchor = Defaults.Anchor;
-            if (foreGround is null)
-                foreGround = Defaults.ForeGround;
-            if (backGround is null)
-                backGround = Defaults.BackGround;
-            if (frameOptions is null)
-                frameOptions = Defaults.FrameOptions;
+                anchor =anchor?? Defaults.Anchor;
+            foreColor = foreColor ?? Defaults.ForeGround;
+            backColor = backColor ?? Defaults.BackGround;
+            isEnabled = isEnabled ?? true;
+                frameOptions =frameOptions?? Defaults.FrameOptions;
 
-             width+= 2;
+            width+= 2;
             height += 2;
-            TUIFramePart frame = new();
-            frame.Set(name,height,width,(Anchor)anchor,frameOptions,foreGround,backGround);
+            TUIFramePart frame = new(name,anchor,width,height,frameOptions,(ConsoleColor)foreColor, (ConsoleColor)backColor,(bool)isEnabled,TUIObjectPartType.FRAME);
             _Product.AddPart(frame);
             return this;
         }
 
-        public TUIObjectBuilder AddButton(string name, string? content,Action action, Anchor? anchor = null, ConsoleColor? interactionForeGround = null, ConsoleColor? interactionBackGround = null, ConsoleColor? foreGround = null, ConsoleColor? backGround = null)
+        public TUIObjectBuilder AddButton(string name, string? content,Action action, Anchor? anchor = null, ConsoleColor? interactionForeGround = null, ConsoleColor? interactionBackGround = null, ConsoleColor? foreColor = null, ConsoleColor? backColor = null,bool? isEnabled=null)
         {
-            if (_Product.Parts.Any(p => p is ITUIInteractable))
-                throw new Exception("There can be only one interactable part at same time in one objecet");
+            if (_Product.IsInteractable)
+                throw new Exception("There can be only one interactable part at same time in one object");
 
-            if (anchor is null)
-                anchor = Defaults.Anchor;
-            if (foreGround is null)
-                foreGround = Defaults.ButtonDefaults.ForeGround;
-            if (backGround is null)
-                backGround = Defaults.ButtonDefaults.Background;
-            if(interactionForeGround is null)
-                interactionForeGround = Defaults.ButtonDefaults.InteractionForeGround;
-            if (interactionBackGround is null)
-                interactionBackGround = Defaults.ButtonDefaults.InteractionBackground;
+            anchor = anchor ?? Defaults.Anchor;
+            foreColor = foreColor ?? Defaults.ButtonDefaults.ForeGround;
+            backColor = backColor ?? Defaults.ButtonDefaults.BackGround;
+            interactionForeGround = interactionForeGround ?? Defaults.ButtonDefaults.InteractionForeGround;
+            interactionBackGround = interactionBackGround ?? Defaults.ButtonDefaults.InteractionBackground;
+            isEnabled = isEnabled ?? true;
 
-            TUIButtonPart button = new();
-            button.Set(name, (Anchor)anchor, foreGround, backGround, interactionForeGround, interactionBackGround);
+
+            TUIButtonPart button = new(name,anchor,content,(ConsoleColor)foreColor, (ConsoleColor)backColor, (ConsoleColor)interactionForeGround, (ConsoleColor)interactionBackGround,(bool) isEnabled,TUIObjectPartType.BUTTON);
             button.Action=action;
-            button.Content = content;
             _Product.AddPart(button);
             return this;
 
         }
-        public TUIObjectBuilder AddProgressBar(string name,Anchor? anchor,int width,int height ,int value=0, int maximum=100, int minimum=0)
+        public TUIObjectBuilder AddProgressBar(string name,Anchor? anchor,int width,int height ,int value=0, int maximum=100, int minimum=0, ConsoleColor? foreColor = null, ConsoleColor? backColor = null, bool? isEnabled = null)
         {
-            anchor ??= new();
+            anchor ??= Defaults.Anchor;
+            foreColor ??= ConsoleColor.DarkMagenta;
+            backColor ??= ConsoleColor.Gray;
+            isEnabled ??= true;
 
-            TUIProgressBarPart pb =new (name,anchor,width,height,value,maximum,minimum);
+            TUIProgressBarPart pb =new (name,anchor,width,height,value,maximum,minimum, (ConsoleColor)foreColor, (ConsoleColor)backColor,(bool)isEnabled,TUIObjectPartType.PROGRESS_BAR);
             
 
             _Product.AddPart(pb);
 
+            return this;
+        }
+        public TUIObjectBuilder AddRadioButton(string name, Anchor? anchor, int width, int height, ConsoleColor? foreColor = null, ConsoleColor? backColor = null, bool? isEnabled = null)
+		{
+			anchor ??= Defaults.Anchor;
+			TUIRadioButtonPart rb = new();
             return this;
         }
     }

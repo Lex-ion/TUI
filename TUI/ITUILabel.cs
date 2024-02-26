@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace TUI
 {
-    interface ITUILabel:ITUIColorsSet
+    interface ITUILabel
     {
-        string? Content { get; set; }
+		public event Action? TextChanged;
+		string? Content { get; set; }
     }
 }

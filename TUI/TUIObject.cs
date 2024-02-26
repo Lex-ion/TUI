@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TUI.Structs;
+using TUI.TUIParts;
 
 namespace TUI
 {
@@ -12,14 +13,15 @@ namespace TUI
 
         private Dictionary<string,ITUIObjectPart> _parts = new();
 
-        public bool IsInteractable { get;protected set; }
+        public bool IsInteractable => TUIInteractable is not null;
+        public ITUIInteractable? TUIInteractable { get; protected set; }
 
-        public Dictionary<string,ITUIObjectPart> Parts { get { return _parts; } }
+        public Dictionary<string,ITUIObjectPart>? Parts { get { return _parts; } }
         
         public Anchor Anchor { get; set; }
 
         public void Draw()
-        {      foreach (KeyValuePair<string,ITUIObjectPart> pair in _parts)
+        {      foreach (KeyValuePair<string,ITUIObjectPart> pair in _parts!)
             {
                 pair.Value.Draw(Anchor);
             }
@@ -28,23 +30,23 @@ namespace TUI
         public void AddPart(ITUIObjectPart part)
         {
             if (part is ITUIInteractable)
-                IsInteractable = true;
+                TUIInteractable = (ITUIInteractable)part;
 
             _parts.Add(part.Name,part);
         }
 
-        public ITUIInteractable GetInteractable()
+        public ITUIInteractable? GetInteractable()
         {            
-            return (ITUIInteractable)Parts.Values.Where(p => p is ITUIInteractable).First();
+            return TUIInteractable;
         }
 
-        public ITUIObjectPart[] GetParts<T>() where T : ITUIObjectPart
+        public ITUIObjectPart[]? GetParts<T>() where T : ITUIObjectPart
         {
-            return Parts.Values.Where(p => p is T).ToArray();
+            return Parts?.Values.Where(p => p is T).ToArray()??null;
         }
-        public ITUIObjectPart GetPart<T>() where T:ITUIObjectPart
+        public ITUIObjectPart? GetPart<T>() where T:ITUIObjectPart
         {
-            return GetParts<T>().First();
+            return GetParts<T>()?.FirstOrDefault()??null;
         }
     }
 }

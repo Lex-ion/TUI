@@ -11,7 +11,7 @@ namespace TUI.Structs
         public ButtonDefaults(ConsoleColor foreGround, ConsoleColor background, ConsoleColor interactionForeGround, ConsoleColor interactionBackground)
         {
             ForeGround = foreGround;
-            Background = background;
+            BackGround = background;
             InteractionForeGround = interactionForeGround;
             InteractionBackground = interactionBackground;
         }
@@ -19,13 +19,13 @@ namespace TUI.Structs
         public ButtonDefaults()
         {
             ForeGround = ConsoleColor.DarkBlue;
-            Background = ConsoleColor.DarkGray;
+            BackGround = ConsoleColor.DarkGray;
             InteractionForeGround = ConsoleColor.White;
             InteractionBackground = ConsoleColor.DarkMagenta;
         }
 
         public ConsoleColor ForeGround { get; set; }
-        public ConsoleColor Background { get; set; }
+        public ConsoleColor BackGround { get; set; }
         public ConsoleColor InteractionForeGround { get; set; }
         public ConsoleColor InteractionBackground { get; set; }
 

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TUI
+namespace TUI.TUIParts
 {
     public interface ITUIInteractable
     {
@@ -14,11 +14,11 @@ namespace TUI
         event Action? UnSelected;
 
 
-         ConsoleColor OnCursorColorFore { get; }
-         ConsoleColor OnCursorColorBack { get; }
-         void Interact();
+        ConsoleColor OnCursorColorFore { get; }
+        ConsoleColor OnCursorColorBack { get; }
+        void Interact();
 
-         bool IsSelected { get; set; }
-         
+        bool IsSelected { get; set; }
+
     }
 }

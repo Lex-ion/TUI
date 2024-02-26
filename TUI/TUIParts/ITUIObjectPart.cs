@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TUI.Structs;
 
-namespace TUI
+namespace TUI.TUIParts
 {
     public interface ITUIObjectPart
     {
@@ -17,7 +17,7 @@ namespace TUI
         string Name { get; }
         Anchor Anchor { get; }
         bool IsEnabled { get; set; }
-        public void Draw(Anchor parentAnchor);
+        public bool Draw(Anchor parentAnchor);
 
         TUIObjectPartType PartType { get; }
     }

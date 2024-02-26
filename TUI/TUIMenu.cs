@@ -1,11 +1,12 @@
 ﻿using TUI.Structs;
+using TUI.TUIParts;
 
 namespace TUI
 {
     public class TUIMenu
     {
         public Dictionary<string,TUIObject> Objects = new ();
-        public List<ITUIInteractable> Interactables = new();        
+        public List<TUIObject> Interactables { get => Objects.Values.Where(o=>o.IsInteractable).ToList(); }   
         public TUIObjectBuilder ObjectBuilder { get; set; }
         public TUIMenu(ObjectBuilderDefaults defaults)
         {
@@ -14,10 +15,9 @@ namespace TUI
         public void Prepare()
         {
             Interactables.Clear();
-            Objects.Where(o => o.Value.Parts.Any(p => p.Value is ITUIInteractable)).ToList().ForEach(i => Interactables.Add(i.Value.GetInteractable()));
             if (Interactables.Any())
             {
-                Interactables.First().IsSelected = true;
+                Interactables.First().TUIInteractable.IsSelected = true;
             }
         }
 
@@ -35,13 +35,13 @@ namespace TUI
         {
             if (key == ConsoleKey.Enter)
             {
-                Interactables.ForEach(i => i.Interact());               
+                Interactables.ForEach(i => i.TUIInteractable.Interact());               
             }
             else if (key == ConsoleKey.RightArrow)
             {
-                int index = Interactables.IndexOf(Interactables.Where(i => i.IsSelected).First())+1;
-                Interactables.Where(i => i.IsSelected).First().IsSelected = false;
-                Interactables[index>Interactables.Count-1?0:index].IsSelected = true;
+                int index = Interactables.IndexOf(Interactables.Where(i => i.TUIInteractable.IsSelected).First())+1;
+                Interactables.Where(i => i.TUIInteractable.IsSelected).First().TUIInteractable.IsSelected = false;
+                Interactables[index>Interactables.Count-1?0:index].TUIInteractable.IsSelected = true;
             }
         }
 

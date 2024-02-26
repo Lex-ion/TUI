@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using TUI.Structs;
 
-namespace TUI
+namespace TUI.TUIParts
 {
-    public class TUIProgressBarPart : AbstractTUIObjectPart, ITUIColorsSet
+    public class TUIProgressBarPart : AbstractTUIObjectPart
     {
         public event Action? ValueChanged;
         public event Action? MaximumChanged;
@@ -23,14 +23,14 @@ namespace TUI
                 _value = value;
                 ValueChanged?.Invoke();
             }
-            
+
         }
         int _value;
         public int Maximum
         {
             get => _maximum; set
             {
-                if (value <= Minimum||value<Value)
+                if (value <= Minimum || value < Value)
                     throw new ArgumentOutOfRangeException(nameof(value));
                 _maximum = value;
                 MaximumChanged?.Invoke();
@@ -50,49 +50,28 @@ namespace TUI
         int _minimum;
 
 
-        public bool BackGroundSet => throw new NotImplementedException();
-
-        public bool ForeGroundSet => throw new NotImplementedException();
-
-        public TUIProgressBarPart(string name, Anchor? anchor, int width, int height, int value = 0, int maximum = 100, int minimum = 0)
+        public TUIProgressBarPart(string name, Anchor? anchor, int width, int height, int value, int maximum, int minimum, ConsoleColor foreColor, ConsoleColor backColor, bool isEnabled, TUIObjectPartType partType) : base(name, anchor, width, height, foreColor, backColor, isEnabled, partType)
         {
-            Name=name;
-            Anchor = anchor ?? new();
-            Width = width;
-            Height = height;
             Value = value;
             Maximum = maximum;
             Minimum = minimum;
         }
 
-        public override void Draw(Anchor parentAnchor)
+        public override bool Draw(Anchor parentAnchor)
         {
-            if (!SetCursor(parentAnchor.Left + Anchor.Left, parentAnchor.Top + Anchor.Top))
-                return;
+            if (!base.Draw(parentAnchor))
+                return false;
 
             int percentage = (int)100.0 * (Value - Minimum) / (Maximum - Minimum);
-            int segments =(int)Math.Floor(Width * (percentage / (float)100));
+            int segments = (int)Math.Floor(Width * (percentage / (float)100));
             for (int i = 0; i < Height; i++)
             {
-                if (!SetCursor(parentAnchor.Left + Anchor.Left, parentAnchor.Top + Anchor.Top+i))
-                    return;
-                Console.Write(new String('█', segments).PadRight(Width, '░')) ;
+                if (!SetCursor(parentAnchor.Left + Anchor.Left, parentAnchor.Top + Anchor.Top + i))
+                    return false;
+                Console.Write(new string('█', segments).PadRight(Width, '░'));
             }
+            return true;
         }
 
-        public void SetBackGroundColor(ConsoleColor backGround)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void SetColors(ConsoleColor foreGround, ConsoleColor backGround)
-        {            
-            throw new NotImplementedException();
-        }
-
-        public void SetForeGroundColor(ConsoleColor foreGround)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

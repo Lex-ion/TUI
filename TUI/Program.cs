@@ -1,4 +1,5 @@
 ﻿using TUI.Structs;
+using TUI.TUIParts;
 
 
 namespace TUI
@@ -37,8 +38,10 @@ namespace TUI
                 .Build("TB", new(40, 20));
 
             menu.ObjectBuilder.Reset();
-            menu.ObjectBuilder.AddProgressBar("pb", null, 20, 3, 0,10)
+            menu.ObjectBuilder.AddProgressBar("pb", null, 20, 3, 0,10)                
                 .Build("PB", new(25, 25));
+
+
 
 
 
@@ -46,8 +49,8 @@ namespace TUI
             menu.DrawMenu();
 
 
-            menu.Interactables[0].Interacted += CharChange;
-            menu.Interactables[0].Interacted += ChangeBar;
+            menu.Interactables[0].TUIInteractable.Interacted += CharChange;
+            menu.Interactables[0].TUIInteractable.Interacted += ChangeBar;
             foreach (ITUIInteractable item in menu.Interactables)
             {
                 item.Interacted += test;
@@ -58,25 +61,6 @@ namespace TUI
                 menu.DrawMenu();
             }
 
-            /*
-
-                        TUIManager ui = new TUIManager();
-                        List<TUIObject> objs = new();
-
-                        TUIObjectBuilder b = new TUIObjectBuilder();
-                        b.AddLabel("mujLabel", "Text1");
-                        b.AddLabel("label2", "text2", new Anchor(0, 1));
-                        b.AddLabel("long", "Ještě mnohem délší text pro test",new Anchor(0,2));
-                        b.AddFrame("f", b.LenghthOfLongestLabel(), b.CountOfParts<TUILabelPart>(),new Anchor(-1,-1));
-                        b.AddFrame("f2", b.LenghthOfLongestLabel()+5, b.CountOfParts<TUILabelPart>()+5, new Anchor(-5, -5));
-                        b.AddLabel("popis1","Rámeček 1",new Anchor(-3, -5),ConsoleColor.DarkYellow);
-                        b.AddLabel("popis2", "R.2", new Anchor(1, -1),ConsoleColor.DarkYellow);
-                        objs.Add(b.Build(new Anchor(5,5)));
-
-                        ui.Menus.Add("TEST", objs);
-                        ui.OpenMenu("TEST");
-            */
-            Console.ReadKey();
 
              void CharChange()
             {
