@@ -41,19 +41,29 @@ namespace TUI
             menu.ObjectBuilder.AddProgressBar("pb", null, 20, 3, 0,10)                
                 .Build("PB", new(25, 25));
 
+            menu.ObjectBuilder.Reset();
+            menu.ObjectBuilder.AddRadioButton("Rb", 0, "První radio")
+                .Build("RB0",new(5,0));
+
+			menu.ObjectBuilder.Reset();
+			menu.ObjectBuilder.AddRadioButton("Rb", 0, "Druhé radio",true)
+				.Build("RB1", new(5, 1));
+
+			menu.ObjectBuilder.Reset();
+			menu.ObjectBuilder.AddRadioButton("Rb", 0, "Třetí radio")
+				.Build("RB2", new(5, 2)); 
 
 
 
-
-            menu.Prepare();
+			menu.Prepare();
             menu.DrawMenu();
 
 
             menu.Interactables[0].TUIInteractable.Interacted += CharChange;
             menu.Interactables[0].TUIInteractable.Interacted += ChangeBar;
-            foreach (ITUIInteractable item in menu.Interactables)
+            foreach (TUIObject item in menu.Interactables)
             {
-                item.Interacted += test;
+                item.TUIInteractable.Interacted += test;
             }
             while (true)
             {

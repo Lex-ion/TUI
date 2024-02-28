@@ -165,10 +165,23 @@ namespace TUI
 
             return this;
         }
-        public TUIObjectBuilder AddRadioButton(string name, Anchor? anchor, int width, int height, ConsoleColor? foreColor = null, ConsoleColor? backColor = null, bool? isEnabled = null)
+        public TUIObjectBuilder AddRadioButton(string name,int radioFamily,string? content,bool? isTicked=null, Anchor? anchor = null, ConsoleColor? interactionForeGround = null, ConsoleColor? interactionBackGround = null, ConsoleColor? foreColor = null, ConsoleColor? backColor = null, bool? isEnabled = null)
 		{
 			anchor ??= Defaults.Anchor;
-			TUIRadioButtonPart rb = new();
+            content ??= string.Empty;
+
+            foreColor ??= Defaults.ButtonDefaults.ForeGround;
+            backColor??= Defaults.ButtonDefaults.BackGround;
+            
+            interactionForeGround??=Defaults.ButtonDefaults.InteractionForeGround;
+            interactionBackGround ??= Defaults.ButtonDefaults.InteractionBackground;
+
+            isTicked??=false;
+            isEnabled ??= true;
+
+
+            TUIRadioButtonPart rb = new(name,radioFamily,content,(bool)isTicked,anchor,(ConsoleColor)foreColor, (ConsoleColor)backColor,(ConsoleColor)interactionForeGround,(ConsoleColor)interactionBackGround,(bool)isEnabled,TUIObjectPartType.RADIO_BUTTON);
+            _Product.AddPart(rb);
             return this;
         }
     }

@@ -8,11 +8,12 @@ namespace TUI
 {
     public enum TUIObjectPartType
     {
-        LABEL=0,
-        FRAME=1,
-        BUTTON=2,
-        TEXT_BOX=3,
-        PROGRESS_BAR=4,
+        LABEL=0, //done
+        FRAME=1, //done
+        BUTTON=2, //done
+        TEXT_BOX=3, //done
+        PROGRESS_BAR=4, //done
         CHECK_BOX=5,
+        RADIO_BUTTON=6, //done
     }
 }

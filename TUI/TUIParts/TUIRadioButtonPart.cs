@@ -17,15 +17,16 @@ namespace TUI.TUIParts
 		{
 			get => _radioTicked; set
 			{
-				RadioTicked = value;
+				_radioTicked = value;
 				ValueChanged?.Invoke();
 			}
 		}
 		bool _radioTicked;
-		public TUIRadioButtonPart(string name, int radioFamily, string content, Anchor? anchor, int width, int height, ConsoleColor foreColor, ConsoleColor backColor, ConsoleColor onCursorColorFore, ConsoleColor onCursorColorBack, bool isEnabled, TUIObjectPartType partType) : base(name, anchor, width, height, foreColor, backColor, onCursorColorFore, onCursorColorBack, isEnabled, partType)
+		public TUIRadioButtonPart(string name, int radioFamily, string content,bool isTicked, Anchor? anchor, ConsoleColor foreColor, ConsoleColor backColor, ConsoleColor onCursorColorFore, ConsoleColor onCursorColorBack, bool isEnabled, TUIObjectPartType partType) : base(name, anchor, content?.Length+2??1, 1, foreColor, backColor, onCursorColorFore, onCursorColorBack, isEnabled, partType)
 		{
 			RadioFamilyID = radioFamily;
 			_content=content;
+			_radioTicked = isTicked;
 			RadioFamily.RegisterRadio(radioFamily, this);
 		}
 
@@ -45,31 +46,53 @@ namespace TUI.TUIParts
 			if (!SetCursor(Anchor.Left + parentAnchor.Left, Anchor.Top + parentAnchor.Top))
 				return false;
 
-			Console.Write((RadioTicked ? "◙" : "○")+(Content?.Length>0?" "+Content:"" ??""));
+			Console.Write((RadioTicked ? "@" : "o")+(Content?.Length>0?" "+Content:"" ??""));
 			return true;
 		}
 
-	}
-
-	public class RadioFamily
-	{
-		static Dictionary<int, List<TUIRadioButtonPart>> Families = new();
-		public static void RegisterRadio(int family, TUIRadioButtonPart radio)
+		public override void Interact()
 		{
-			radio.ValueChanged += () => { Switched(radio); };
-
-		}
-
-		static void Switched(TUIRadioButtonPart radio)
-		{
-			if (!radio.RadioTicked)
+			if (!IsSelected)
 				return;
-			foreach (TUIRadioButtonPart rbp in Families[radio.RadioFamilyID])
+
+			base.Interact();
+			RadioTicked = true;
+		}
+
+		protected class RadioFamily
+		{
+			static Dictionary<int, List<TUIRadioButtonPart>> Families = new();
+			public static void RegisterRadio(int family, TUIRadioButtonPart radio)
 			{
-				if (rbp != radio)
-					rbp.RadioTicked = false;
+				radio.ValueChanged += () => { Switched(radio); };
+
+				if (!Families.Keys.Any(f => f == family))
+				{
+					Families.Add(family, new List<TUIRadioButtonPart>());
+					radio._radioTicked = true;
+				}
+				else if (radio._radioTicked) {
+					Families[family].ForEach(r=>r._radioTicked=false);
+				}
+
+				Families[family].Add(radio);
+
 			}
+
+			static void Switched(TUIRadioButtonPart radio)
+			{
+				if (!radio.RadioTicked)
+					return;
+				foreach (TUIRadioButtonPart rbp in Families[radio.RadioFamilyID])
+				{
+					if (rbp != radio)
+						rbp.RadioTicked = false;
+				}
+			}
+
 		}
 
 	}
+
+	
 }
