@@ -42,7 +42,7 @@ namespace TUI.TUIParts
             if (!SetCursor(Anchor.Left + parentAnchor.Left, Anchor.Top + parentAnchor.Top))
                 return false;
 
-            Console.Write(Content);
+            WriteText(Content??"",new(Anchor.Left + parentAnchor.Left, Anchor.Top + parentAnchor.Top));
             return true;
         }
         public override void Interact()

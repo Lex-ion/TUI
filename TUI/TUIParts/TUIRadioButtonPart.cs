@@ -46,7 +46,8 @@ namespace TUI.TUIParts
 			if (!SetCursor(Anchor.Left + parentAnchor.Left, Anchor.Top + parentAnchor.Top))
 				return false;
 
-			Console.Write((RadioTicked ? "@" : "o")+(Content?.Length>0?" "+Content:"" ??""));
+			WriteText((RadioTicked ? "@" : "o") + (Content?.Length > 0 ? " " + Content : "" ?? ""),new(Anchor.Left + parentAnchor.Left, Anchor.Top + parentAnchor.Top));
+
 			return true;
 		}
 

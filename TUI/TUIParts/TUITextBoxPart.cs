@@ -64,7 +64,7 @@ namespace TUI.TUIParts
             for (int i = 0; i < Height; i++)
             {
                 if (SetCursor(ParentAnchor.Left + Anchor.Left, ParentAnchor.Top + Anchor.Top + i))
-                    Console.Write(HiddenChars ? new string('*', text.Length).PadRight(Width * Height, '_')[^(Width * Height)..][(Width * i)..(Width * (i + 1))] : text.PadRight(Width * Height, '_')[^(Width * Height)..][(Width * i)..(Width * (i + 1))]);
+                    WriteText(HiddenChars ? new string('*', text.Length).PadRight(Width * Height, '_')[^(Width * Height)..][(Width * i)..(Width * (i + 1))] : text.PadRight(Width * Height, '_')[^(Width * Height)..][(Width * i)..(Width * (i + 1))],new(ParentAnchor.Left + Anchor.Left, ParentAnchor.Top + Anchor.Top + i));
             }
         }
         private void GetUserInput()

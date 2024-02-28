@@ -53,6 +53,10 @@ namespace TUI
 			menu.ObjectBuilder.AddRadioButton("Rb", 0, "Třetí radio")
 				.Build("RB2", new(5, 2)); 
 
+            menu.ObjectBuilder.Reset();
+            menu.ObjectBuilder.AddLabel("L","Lorem ipsum dál to neumím a asi ani nechci no. Takže asi tak. Tenhle text je fakt dlouhej!")
+                .Build("LL",new(25,25
+                ));
 
 
 			menu.Prepare();

@@ -68,7 +68,7 @@ namespace TUI.TUIParts
             {
                 if (!SetCursor(parentAnchor.Left + Anchor.Left, parentAnchor.Top + Anchor.Top + i))
                     return false;
-                Console.Write(new string('█', segments).PadRight(Width, '░'));
+                WriteText(new string('█', segments).PadRight(Width, '░'),new(parentAnchor.Left + Anchor.Left, parentAnchor.Top + Anchor.Top + i));
             }
             return true;
         }

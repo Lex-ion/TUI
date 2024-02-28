@@ -42,9 +42,8 @@ namespace TUI.TUIParts
                 return false;
 
             Anchor pos = new(Anchor.Left + parentAnchor.Left, Anchor.Top + parentAnchor.Top);
-
-            Console.SetCursorPosition(pos.Left, pos.Top);
-            Console.Write(Content);
+            WriteText(Content??"", pos);
+            
             return true;
         }
 

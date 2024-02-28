@@ -112,6 +112,18 @@ namespace TUI.TUIParts
 
 			return true;
 		}
+
+		public void WriteText(string text,Anchor position)
+		{
+			for (int i = 0; i < text?.Length; i++)
+			{
+				if (!SetCursor(position.Left + i, position.Top))
+					break;
+
+				Console.Write(text[i]);
+			}
+		}
+
 		public virtual void UseColors()
 		{
 			Console.ForegroundColor = ForeColor;
