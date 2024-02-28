@@ -33,8 +33,8 @@ namespace TUI
 
             menu.ObjectBuilder.Reset();
             menu.ObjectBuilder
-                .AddFrame("F1", 10, 3, new(-1, -1), new())
-                .AddTextBox("T1", 10, 3)
+                .AddFrame("F1", 20, 3, new(-1, -1), new())
+                .AddTextBox("T1", 20, 3)
                 .Build("TB", new(40, 20));
 
             menu.ObjectBuilder.Reset();
