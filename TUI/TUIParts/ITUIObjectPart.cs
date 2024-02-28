@@ -19,6 +19,8 @@ namespace TUI.TUIParts
         bool IsEnabled { get; set; }
         public bool Draw(Anchor parentAnchor);
 
+        public bool Clear(Anchor parentAnchor);
+
         TUIObjectPartType PartType { get; }
     }
 }

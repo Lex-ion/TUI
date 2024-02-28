@@ -8,9 +8,15 @@ namespace TUI
         public Dictionary<string,TUIObject> Objects = new ();
         public List<TUIObject> Interactables { get => Objects.Values.Where(o=>o.IsInteractable).ToList(); }   
         public TUIObjectBuilder ObjectBuilder { get; set; }
+
+        int previousWidth;
+        int previousHeigth;
+
         public TUIMenu(ObjectBuilderDefaults defaults)
         {
             ObjectBuilder = new(Objects,defaults);
+            previousHeigth = Console.WindowHeight;
+            previousWidth = Console.WindowWidth;
         }
         public void Prepare()
         {
@@ -24,12 +30,29 @@ namespace TUI
         public void DrawMenu()
         {
             Console.BackgroundColor = ConsoleColor.Black;
-            Console.Clear();
-            foreach (KeyValuePair<string, TUIObject> obj in Objects)
+
+            if(previousWidth!=Console.WindowWidth||previousHeigth!=Console.WindowHeight)
+            {
+                Console.Clear();
+            }
+            else
+            {
+
+
+			foreach (KeyValuePair<string, TUIObject> obj in Objects)
+			{
+				obj.Value.Clear(); //issue with resize of console
+			}
+            }
+
+			foreach (KeyValuePair<string, TUIObject> obj in Objects)
             {
                 obj.Value.Draw();
             }
-        }
+
+			previousHeigth = Console.WindowHeight;
+			previousWidth = Console.WindowWidth;
+		}
 
         public void ReadInput(ConsoleKey key)
         {

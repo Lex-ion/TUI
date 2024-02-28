@@ -27,6 +27,14 @@ namespace TUI
             }
         }
 
+        public void Clear()
+        {
+			foreach (KeyValuePair<string, ITUIObjectPart> pair in _parts!)
+			{
+				pair.Value.Clear(Anchor);
+			}
+		}
+
         public void AddPart(ITUIObjectPart part)
         {
             if (part is ITUIInteractable)
