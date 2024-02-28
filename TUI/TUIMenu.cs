@@ -12,6 +12,9 @@ namespace TUI
         int previousWidth;
         int previousHeigth;
 
+        int selectedInteractableIndex;
+        TUIObject? selectedInteractable;
+
         public TUIMenu(ObjectBuilderDefaults defaults)
         {
             ObjectBuilder = new(Objects,defaults);
@@ -20,11 +23,11 @@ namespace TUI
         }
         public void Prepare()
         {
-            Interactables.Clear();
             if (Interactables.Any())
             {
-                Interactables.First().TUIInteractable.IsSelected = true;
-            }
+				selectedInteractable = Interactables.FirstOrDefault();
+                selectedInteractable.TUIInteractable.IsSelected = true;
+			}
         }
 
         public void DrawMenu()
@@ -58,15 +61,33 @@ namespace TUI
         {
             if (key == ConsoleKey.Enter)
             {
-                Interactables.ForEach(i => i.TUIInteractable.Interact());               
+                selectedInteractable.TUIInteractable?.Interact();             
             }
             else if (key == ConsoleKey.RightArrow)
             {
-                int index = Interactables.IndexOf(Interactables.Where(i => i.TUIInteractable.IsSelected).First())+1;
-                Interactables.Where(i => i.TUIInteractable.IsSelected).First().TUIInteractable.IsSelected = false;
-                Interactables[index>Interactables.Count-1?0:index].TUIInteractable.IsSelected = true;
+                if (Interactables.Count == 0)
+                    return;
+
+                selectedInteractable.TUIInteractable.IsSelected = false;
+               selectedInteractableIndex=(selectedInteractableIndex+1)%Interactables.Count;
+                selectedInteractable = Interactables[selectedInteractableIndex];
+                selectedInteractable.TUIInteractable.IsSelected = true;
+
             }
-        }
+			else if (key == ConsoleKey.LeftArrow)
+			{
+				if (Interactables.Count == 0)
+					return;
+
+				selectedInteractable.TUIInteractable.IsSelected = false;
+				selectedInteractableIndex = (selectedInteractableIndex - 1) % Interactables.Count;
+                selectedInteractableIndex = selectedInteractableIndex < 0 ? Interactables.Count-1 : selectedInteractableIndex;
+				selectedInteractable = Interactables[selectedInteractableIndex];
+				selectedInteractable.TUIInteractable.IsSelected = true;
+
+			}
+		}
+
 
     }
 }
