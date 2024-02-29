@@ -13,11 +13,11 @@ namespace TUI.TUIParts
         public event Action? Submited;
         public event Action? Canceled;
 
-		public string Text { get => _text; set { 
+		public string Text { get => _text??""; set { 
             _text = value;
                 TextChanged?.Invoke();
             } }
-        protected string _text;
+        protected string? _text;
 
 
         public Anchor ParentAnchor { get; set; }

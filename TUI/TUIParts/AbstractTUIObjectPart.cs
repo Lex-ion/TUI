@@ -9,6 +9,9 @@ namespace TUI.TUIParts
 		public event Action? Disabled;
 		public event Action? Moved;
 
+		public static int BufferWidth { get; set; }
+		public static int BufferHeight { get; set; }
+
 		/// <summary>
 		/// Name of Part
 		/// </summary>
@@ -103,9 +106,9 @@ namespace TUI.TUIParts
 		public bool SetCursor(int left, int top)
 		{
 			Anchor pos = new(left, top);
-			if (pos.Left < 0 || pos.Left >= Console.BufferWidth)
+			if (pos.Left < 0 || pos.Left >= BufferWidth)
 				return false;
-			if (pos.Top < 0 || pos.Top >= Console.BufferHeight)
+			if (pos.Top < 0 || pos.Top >= BufferHeight)
 				return false;
 
 			Console.SetCursorPosition(pos.Left, pos.Top);

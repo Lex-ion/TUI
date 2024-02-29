@@ -38,15 +38,18 @@ namespace TUI
             {
                 Console.Clear();
             }
-          //else
-          //{
-          //
-          //
+			//else
+			//{
+			//
+			//
 			//foreach (KeyValuePair<string, TUIObject> obj in Objects)
 			//{
 			//	obj.Value.Clear(); //issue with resize of console
 			//}
-          //}
+			//}
+
+            AbstractTUIObjectPart.BufferWidth = Console.WindowWidth;
+			AbstractTUIObjectPart.BufferHeight = Console.WindowHeight;
 
 			foreach (KeyValuePair<string, TUIObject> obj in Objects)
             {
@@ -55,6 +58,7 @@ namespace TUI
 
 			previousHeigth = Console.WindowHeight;
 			previousWidth = Console.WindowWidth;
+
 		}
 
         public void ReadInput(ConsoleKey key)

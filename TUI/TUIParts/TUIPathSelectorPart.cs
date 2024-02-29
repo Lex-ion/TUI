@@ -15,7 +15,7 @@ namespace TUI.TUIParts
 		new int _height;
 
 		DirectoryInfo? _CurrentDirectory;
-		DirectoryInfo[]? _subDirs => _CurrentDirectory?.GetDirectories().Where(d => !d.Attributes.HasFlag(FileAttributes.Hidden)&&!d.Attributes.HasFlag(FileAttributes.System)).ToArray();
+		DirectoryInfo[]? _subDirs => _CurrentDirectory?.GetDirectories("*",new EnumerationOptions() { AttributesToSkip=FileAttributes.System|FileAttributes.Hidden});
 		DriveInfo[] _drives => DriveInfo.GetDrives().Where(d=>d.IsReady).ToArray();
 		string _previousText;
 
@@ -29,7 +29,6 @@ namespace TUI.TUIParts
 		bool _displayedDirs => _subDirs is not null;
 		int _selectedIndex;
 		int _displayoffset;
-		Anchor _parentAnchor;
 
 		public TUIPathSelectorPart(string name, Anchor? anchor, int width, int height, string text, ConsoleColor foreColor, ConsoleColor backColor, ConsoleColor onCursorColorFore, ConsoleColor onCursorColorBack, bool isEnabled, TUIObjectPartType partType) : base(name, anchor, width, 1, text, foreColor, backColor, onCursorColorFore, onCursorColorBack, isEnabled, partType)
 		{
@@ -44,24 +43,25 @@ namespace TUI.TUIParts
 			if (!base.Draw(parentAnchor))
 				return false;
 
-
-
 			return true;
 		}
 
 		public override void Interact()
 		{
 
-			_CurrentDirectory= null;
+			_CurrentDirectory = Text is not null&&Text.Length>0 && new DirectoryInfo(Text).Exists ? new DirectoryInfo(Text) : null ;
 			_previousText = _text;
 			ConsoleKeyInfo info;
+
+			Write(1);
+
 			do
 			{
-				Write();
+				
 
 				info = Console.ReadKey(true);
 				ProcessKey(info);
-
+				Write();
 
 			} while (info.KeyChar != '\r'&&info.Key!=ConsoleKey.Escape);
 			Clear();
@@ -119,7 +119,8 @@ namespace TUI.TUIParts
 
 			if (info.Key == ConsoleKey.Enter)
 			{
-				Text = _text;
+				Text = _text is not null && _text.Length > 0 && new DirectoryInfo(_text).Exists ? _text : null;
+
 				InvokeSubmitted();
 				return;
 			}
@@ -140,7 +141,7 @@ namespace TUI.TUIParts
 			#endregion
 		}
 
-		void Write()
+		void Write(int delay=0)
 		{
 			UseInteractColor();
 			WriteText();
@@ -169,6 +170,7 @@ namespace TUI.TUIParts
 				else Console.BackgroundColor = ConsoleColor.DarkYellow;
 
 				Console.Write(displayText);
+				Thread.Sleep(delay);
 
 			}
 
@@ -176,13 +178,20 @@ namespace TUI.TUIParts
 		void Clear()
 		{
 			Console.BackgroundColor=ConsoleColor.Black;
-			for (int i = 0; i < Height; i++)
-			{
+            for (int i = Height - 1; i >= 0; i--)
+            {
 				if (!SetCursor(ParentAnchor.Left + Anchor.Left, ParentAnchor.Top + Anchor.Top + 1 + i))
 					break;
-					Console.Write(new String(' ', Width));		
-
+				Console.Write(new String(' ', Width));
+				Thread.Sleep(1);
 			}
+            //for (int i = 0; i < Height; i++)
+			//{
+			//	if (!SetCursor(ParentAnchor.Left + Anchor.Left, ParentAnchor.Top + Anchor.Top + 1 + i))
+			//		break;
+			//		Console.Write(new String(' ', Width));		
+			//
+			//}
 		}
 	}
 	
