@@ -38,15 +38,15 @@ namespace TUI
             {
                 Console.Clear();
             }
-            else
-            {
-
-
-			foreach (KeyValuePair<string, TUIObject> obj in Objects)
-			{
-				obj.Value.Clear(); //issue with resize of console
-			}
-            }
+          //else
+          //{
+          //
+          //
+			//foreach (KeyValuePair<string, TUIObject> obj in Objects)
+			//{
+			//	obj.Value.Clear(); //issue with resize of console
+			//}
+          //}
 
 			foreach (KeyValuePair<string, TUIObject> obj in Objects)
             {

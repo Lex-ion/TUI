@@ -94,7 +94,7 @@ namespace TUI.TUIParts
 
 			for (int i = 0; i < Height; i++)
 			{
-				Console.Write(new string(' ', Width));
+				WriteText(new string(' ', Width),new(parentAnchor.Left+Anchor.Left,parentAnchor.Top+Anchor.Top+i));
 			}
 
 			return true;
@@ -128,6 +128,11 @@ namespace TUI.TUIParts
 		{
 			Console.ForegroundColor = ForeColor;
 			Console.BackgroundColor = BackColor;
+		}
+
+		protected void InvokeResized()
+		{
+			Resized?.Invoke();
 		}
 	}
 }

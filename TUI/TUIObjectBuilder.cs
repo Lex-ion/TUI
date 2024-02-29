@@ -184,5 +184,20 @@ namespace TUI
             _Product.AddPart(rb);
             return this;
         }
+
+		public TUIObjectBuilder AddPathSelector(string name, int width, int? height = null, Anchor? anchor = null, string? text = null, bool? isEnabled = null, ConsoleColor? interactionForeGround = null, ConsoleColor? interactionBackGround = null, ConsoleColor? foreColor = null, ConsoleColor? backColor = null)
+		{
+			anchor = anchor ?? Defaults.Anchor;
+			height = height ?? 1;
+			foreColor = foreColor ?? Defaults.ButtonDefaults.ForeGround;
+			backColor = backColor ?? Defaults.ButtonDefaults.BackGround;
+			interactionForeGround = interactionForeGround ?? Defaults.ButtonDefaults.InteractionForeGround;
+			interactionBackGround = interactionBackGround ?? Defaults.ButtonDefaults.InteractionBackground;
+			isEnabled = isEnabled ?? true;
+
+			TUIPathSelectorPart ps = new(name, anchor, width, (int)height, text!, (ConsoleColor)foreColor, (ConsoleColor)backColor, (ConsoleColor)interactionForeGround, (ConsoleColor)interactionBackGround, (bool)isEnabled, TUIObjectPartType.PROGRESS_BAR);
+			_Product.AddPart(ps);
+            return this;
+		}
     }
 }

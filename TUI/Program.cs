@@ -46,17 +46,20 @@ namespace TUI
                 .Build("RB0",new(5,0));
 
 			menu.ObjectBuilder.Reset();
-			menu.ObjectBuilder.AddRadioButton("Rb", 0, "Druhé radio",true)
+			menu.ObjectBuilder.AddRadioButton("Rb", 0, "Druhé radio")
 				.Build("RB1", new(5, 1));
 
 			menu.ObjectBuilder.Reset();
-			menu.ObjectBuilder.AddRadioButton("Rb", 0, "Třetí radio")
+            menu.ObjectBuilder.AddRadioButton("Rb", 0, "Třetí radio", true)
 				.Build("RB2", new(5, 2)); 
 
             menu.ObjectBuilder.Reset();
             menu.ObjectBuilder.AddLabel("L","Lorem ipsum dál to neumím a asi ani nechci no. Takže asi tak. Tenhle text je fakt dlouhej!")
-                .Build("LL",new(25,25
+                .Build("LL",new(25,24
                 ));
+            menu.ObjectBuilder.Reset();
+            menu.ObjectBuilder.AddPathSelector("ps", 35, 10)
+                .Build("Ps",new(2,10));
 
 
 			menu.Prepare();

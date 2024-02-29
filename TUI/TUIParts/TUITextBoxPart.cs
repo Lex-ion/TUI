@@ -17,7 +17,7 @@ namespace TUI.TUIParts
             _text = value;
                 TextChanged?.Invoke();
             } }
-        string _text;
+        protected string _text;
 
 
         public Anchor ParentAnchor { get; set; }
@@ -51,13 +51,17 @@ namespace TUI.TUIParts
                 return;
 
 
-            Console.BackgroundColor = ConsoleColor.DarkYellow;
+         UseInteractColor();
             WriteText();
             GetUserInput();
             Console.CursorVisible = false;
         }
+        protected void UseInteractColor()
+        {
+			Console.BackgroundColor = ConsoleColor.DarkYellow;
+		}
 
-        private void WriteText(string? text=null)
+        protected void WriteText(string? text=null)
         {
             text??= Text;
 
@@ -88,8 +92,6 @@ namespace TUI.TUIParts
                         continue;
                     }
 
-
-
                     currentText = currentText.Remove(currentText.Length - 1);
                     Write();
                     userInput = Console.ReadKey(true).KeyChar;
@@ -112,5 +114,8 @@ namespace TUI.TUIParts
                 WriteText(currentText);
             }
         }
-    }
+
+        protected void InvokeSubmitted() => Submited?.Invoke();
+        protected void InvokeCanceled() => Canceled?.Invoke();
+	}
 }
