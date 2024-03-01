@@ -15,5 +15,6 @@ namespace TUI
         PROGRESS_BAR=4, //done
         CHECK_BOX=5,
         RADIO_BUTTON=6, //done
+        COLOR_OVERLAY=7,//DONE
     }
 }

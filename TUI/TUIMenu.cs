@@ -35,22 +35,12 @@ namespace TUI
             Console.BackgroundColor = ConsoleColor.Black;
 
             if(previousWidth!=Console.WindowWidth||previousHeigth!=Console.WindowHeight)
-            {
+            {                
                 Console.Clear();
             }
-			//else
-			//{
-			//
-			//
-			//foreach (KeyValuePair<string, TUIObject> obj in Objects)
-			//{
-			//	obj.Value.Clear(); //issue with resize of console
-			//}
-			//}
 
-            AbstractTUIObjectPart.BufferWidth = Console.WindowWidth;
-			AbstractTUIObjectPart.BufferHeight = Console.WindowHeight;
 
+            TUIManager.UpdateBuffers();
 			foreach (KeyValuePair<string, TUIObject> obj in Objects)
             {
                 obj.Value.Draw();

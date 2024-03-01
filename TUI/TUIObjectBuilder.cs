@@ -188,7 +188,7 @@ namespace TUI
 		public TUIObjectBuilder AddPathSelector(string name, int width, int? height = null, Anchor? anchor = null, string? text = null, bool? isEnabled = null, ConsoleColor? interactionForeGround = null, ConsoleColor? interactionBackGround = null, ConsoleColor? foreColor = null, ConsoleColor? backColor = null)
 		{
 			anchor = anchor ?? Defaults.Anchor;
-			height = height ?? 1;
+			height = height ?? 4;
 			foreColor = foreColor ?? Defaults.ButtonDefaults.ForeGround;
 			backColor = backColor ?? Defaults.ButtonDefaults.BackGround;
 			interactionForeGround = interactionForeGround ?? Defaults.ButtonDefaults.InteractionForeGround;
@@ -199,5 +199,16 @@ namespace TUI
 			_Product.AddPart(ps);
             return this;
 		}
+
+        public TUIObjectBuilder AddColorOverlay(string name, int width, int height, ConsoleColor color, Anchor? anchor = null)
+        {        
+			anchor = anchor ?? Defaults.Anchor;
+
+            TUIColorOverlay co=new(name, anchor,width,height,color,color,true,TUIObjectPartType.COLOR_OVERLAY);
+            _Product.AddPart(co);
+            return this;
+        }
+
+
     }
 }

@@ -92,6 +92,8 @@ namespace TUI.TUIParts
 
 		public virtual bool Clear(Anchor parentAnchor)
 		{
+			Console.BackgroundColor = ConsoleColor.Black;
+
 			if (!SetCursor(parentAnchor.Left, parentAnchor.Top))
 				return false;
 
@@ -106,9 +108,9 @@ namespace TUI.TUIParts
 		public bool SetCursor(int left, int top)
 		{
 			Anchor pos = new(left, top);
-			if (pos.Left < 0 || pos.Left >= BufferWidth)
+			if (pos.Left < 0 || pos.Left >= TUIManager.BufferWidth)
 				return false;
-			if (pos.Top < 0 || pos.Top >= BufferHeight)
+			if (pos.Top < 0 || pos.Top >= TUIManager.BufferHeight)
 				return false;
 
 			Console.SetCursorPosition(pos.Left, pos.Top);

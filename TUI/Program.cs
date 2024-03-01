@@ -12,6 +12,7 @@ namespace TUI
 
             Console.WriteLine("Hello, World!");
 
+
             TUIMenu menu = new(new ObjectBuilderDefaults());
             //-----OLD
             menu.ObjectBuilder.AddButton("l", "Zkusit", Beeper);
@@ -74,7 +75,7 @@ namespace TUI
             }
             while (true)
             {
-                menu.ReadInput(Console.ReadKey(true).Key);
+                menu.ReadInput(TUIManager.GetKey(false).Key);
                 menu.DrawMenu();
             }
 

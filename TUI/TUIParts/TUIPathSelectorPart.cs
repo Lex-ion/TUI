@@ -17,7 +17,7 @@ namespace TUI.TUIParts
 		DirectoryInfo? _CurrentDirectory;
 		DirectoryInfo[]? _subDirs => _CurrentDirectory?.GetDirectories("*",new EnumerationOptions() { AttributesToSkip=FileAttributes.System|FileAttributes.Hidden});
 		DriveInfo[] _drives => DriveInfo.GetDrives().Where(d=>d.IsReady).ToArray();
-		string _previousText;
+		string? _previousText;
 
 		int _countOfItems
 		{
@@ -57,11 +57,9 @@ namespace TUI.TUIParts
 
 			do
 			{
-				
 
-				info = Console.ReadKey(true);
+				info = TUIManager.GetKey();
 				ProcessKey(info);
-				Write();
 
 			} while (info.KeyChar != '\r'&&info.Key!=ConsoleKey.Escape);
 			Clear();
@@ -70,20 +68,23 @@ namespace TUI.TUIParts
 		void ProcessKey(ConsoleKeyInfo info)
 		{
 			#region List
+			
+
 			if (_selectedIndex > _countOfItems)
 				_selectedIndex = _countOfItems - 1;
 			if (info.Key == ConsoleKey.UpArrow && _selectedIndex > 0)
 			{
 				_selectedIndex--;
 
-				if (_selectedIndex - 1 == _displayoffset && _selectedIndex > 1)
+				if (_selectedIndex == _displayoffset && _selectedIndex >  0)
 					_displayoffset--;
+
 			}
 			else if (info.Key == ConsoleKey.DownArrow && _selectedIndex < _countOfItems)
 			{
 				_selectedIndex++;
 
-				if (_selectedIndex == _displayoffset + Height)
+				if (_selectedIndex+1 == _displayoffset + Height)
 					_displayoffset++;
 			}
 			_selectedIndex = _selectedIndex < 0 ? 0 : _selectedIndex;
@@ -101,9 +102,11 @@ namespace TUI.TUIParts
 					break;
 
 				case ConsoleKey.LeftArrow:
+
+					_displayoffset = 0;
+					_selectedIndex = 0;
 					if (_CurrentDirectory?.Parent is null)
 					{
-
 						_text = "";
 						_CurrentDirectory = null;
 						break;
@@ -113,13 +116,18 @@ namespace TUI.TUIParts
 					_CurrentDirectory = _CurrentDirectory.Parent;
 					break;
 			}
+			
 			#endregion
 
 			#region TextInput
 
 			if (info.Key == ConsoleKey.Enter)
 			{
-				Text = _text is not null && _text.Length > 0 && new DirectoryInfo(_text).Exists ? _text : null;
+				
+				Text = _text!=null&& _text.Length > 0 && new DirectoryInfo(_text).Exists ? _text : "";
+
+				if (  !Directory.Exists(Text))
+					TUIMessageBox.Show("Zadaná cesta není validní!","CHYBA",ConsoleColor.DarkRed);
 
 				InvokeSubmitted();
 				return;
@@ -136,7 +144,13 @@ namespace TUI.TUIParts
 			}
 			else if (!char.IsControl(info.KeyChar))
 				_text += info.KeyChar;
-
+			if (info.Key == ConsoleKey.UpArrow || info.Key == ConsoleKey.DownArrow || info.Key == ConsoleKey.LeftArrow || info.Key == ConsoleKey.RightArrow)
+				Write();
+			else
+			{
+				UseInteractColor();
+				WriteText();
+			}
 
 			#endregion
 		}

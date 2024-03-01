@@ -74,7 +74,7 @@ namespace TUI.TUIParts
         private void GetUserInput()
         {
             string currentText= Text;
-            char userInput = Console.ReadKey(true).KeyChar;
+            char userInput = TUIManager.GetKey().KeyChar;
             while (userInput != '\r')
             {
                 if (userInput == 27)
@@ -88,13 +88,13 @@ namespace TUI.TUIParts
 
                     if (currentText.Length == 0)
                     {
-                        userInput = Console.ReadKey(true).KeyChar;
+                        userInput = TUIManager.GetKey().KeyChar;
                         continue;
                     }
 
                     currentText = currentText.Remove(currentText.Length - 1);
                     Write();
-                    userInput = Console.ReadKey(true).KeyChar;
+                    userInput = TUIManager.GetKey().KeyChar;
                     continue;
                 }
 				if (!char.IsControl(userInput))
@@ -103,7 +103,7 @@ namespace TUI.TUIParts
                 Write();
 
 
-                userInput = Console.ReadKey(true).KeyChar;
+                userInput = TUIManager.GetKey().KeyChar;
             }
             Text = currentText;
             Submited?.Invoke();
