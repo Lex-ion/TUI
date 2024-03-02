@@ -7,7 +7,7 @@ namespace TUI
 	{
 		static TUIObjectBuilder builder = new TUIObjectBuilder();
 
-		public static void Show(string text, string? title=null,ConsoleColor? backColor=null,ConsoleColor? foreColor=null)
+		public static void Show(string text, string? title=null,ConsoleColor? backColor=null,ConsoleColor? foreColor=null,Action? idleAction=null)
 		{
 
 			TUIManager.UpdateBuffers();
@@ -39,9 +39,10 @@ namespace TUI
 
 			while (focused)
 			{
-				
+				if(Console.KeyAvailable)
 				if(TUIManager.GetKey().Key ==ConsoleKey.Enter)
 					@object.TUIInteractable!.Interact();
+				idleAction?.Invoke();
 			}
 
 			@object.Clear();

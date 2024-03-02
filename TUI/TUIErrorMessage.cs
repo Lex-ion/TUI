@@ -5,6 +5,7 @@ namespace TUI
 	public static class TUIErrorMessage
 	{
 		static TUIObjectBuilder Builder = new(new ObjectBuilderDefaults(ConsoleColor.Black, ConsoleColor.DarkRed));
+		static bool b;
 		public static void Show(string message, string? title)
 		{
 
@@ -21,39 +22,21 @@ namespace TUI
 				.Build(new(width, height));
 
 
-			CancellationTokenSource tokenSource = new CancellationTokenSource();
-
-			ThreadPool.QueueUserWorkItem(new WaitCallback(foo), tokenSource.Token);
-
-			Thread thread = new Thread(foo);
-			thread.Start();
-
-			TUIMessageBox.Show(message, title, ConsoleColor.DarkRed, ConsoleColor.Black);
-
-			tokenSource.Cancel();
+			TUIMessageBox.Show(message, title, ConsoleColor.DarkRed, ConsoleColor.Black,foo);
 
 			@object.Clear();
 
-			Thread.Sleep(250);
+			void foo() {
 
-			void foo(object? obj) {
-				if(obj is null)
-					return;
-				CancellationToken token = (CancellationToken)obj;
-
-				Thread.Sleep(50);
-			while (true)
-				{
-					if(token.IsCancellationRequested) 
-						break;
-
-					TUIManager.UpdateBuffers();
+				TUIManager.UpdateBuffers();
+				if (b)
 					@object.Draw();
-						Thread.Sleep(250);
-						@object.Clear();
-						Thread.Sleep(250);
-				}
-				@object.Clear();
+				else
+					@object.Clear();
+
+					
+					Thread.Sleep(250);
+				b = !b;
 			}
 		}
 	}
