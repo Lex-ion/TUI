@@ -127,7 +127,7 @@ namespace TUI.TUIParts
 				Text = _text!=null&& _text.Length > 0 && new DirectoryInfo(_text).Exists ? _text : "";
 
 				if (  !Directory.Exists(Text))
-					TUIMessageBox.Show("Zadaná cesta není validní!","CHYBA",ConsoleColor.DarkRed);
+					TUIErrorMessage.Show("Zadaná cesta není validní!","CHYBA");
 
 				InvokeSubmitted();
 				return;
