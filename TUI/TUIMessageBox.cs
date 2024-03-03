@@ -39,10 +39,19 @@ namespace TUI
 
 			while (focused)
 			{
-				if(Console.KeyAvailable)
-				if(TUIManager.GetKey().Key ==ConsoleKey.Enter)
-					@object.TUIInteractable!.Interact();
-				idleAction?.Invoke();
+				if (idleAction != null)
+				{
+					if (Console.KeyAvailable)
+						if (TUIManager.GetKey().Key == ConsoleKey.Enter)
+							@object.TUIInteractable!.Interact();
+
+					idleAction?.Invoke();
+				}else
+				{
+					if (TUIManager.GetKey().Key == ConsoleKey.Enter)
+						@object.TUIInteractable!.Interact();
+				}
+				
 			}
 
 			@object.Clear();
