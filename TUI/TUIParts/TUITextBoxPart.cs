@@ -24,9 +24,10 @@ namespace TUI.TUIParts
 
         public bool HiddenChars { get; set; }
 
+        public int MaxChars { get; set; }
 
-        public TUITextBoxPart(string name, Anchor? anchor, int width, int height, string text, ConsoleColor foreColor, ConsoleColor backColor, ConsoleColor onCursorColorFore, ConsoleColor onCursorColorBack, bool isEnabled, TUIObjectPartType partType) : base(name, anchor, width, height, foreColor, backColor, onCursorColorFore, onCursorColorBack, isEnabled, partType)
-        {
+        public TUITextBoxPart(string name, Anchor? anchor, int width, int height, string text,int maxChars, ConsoleColor foreColor, ConsoleColor backColor, ConsoleColor onCursorColorFore, ConsoleColor onCursorColorBack, bool isEnabled, TUIObjectPartType partType) : base(name, anchor, width, height, foreColor, backColor, onCursorColorFore, onCursorColorBack, isEnabled, partType)
+        {MaxChars=maxChars;
             _text = text ?? "";
         }
 
@@ -97,6 +98,8 @@ namespace TUI.TUIParts
                     userInput = TUIManager.GetKey().KeyChar;
                     continue;
                 }
+
+                if(MaxChars>0||_text?.Length <= MaxChars)
 				if (!char.IsControl(userInput))
 				currentText += userInput;
 

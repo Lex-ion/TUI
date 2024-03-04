@@ -61,6 +61,9 @@ namespace TUI
             menu.ObjectBuilder.Reset();
             menu.ObjectBuilder.AddPathSelector("ps", 35, 10)
                 .Build("Ps",new(2,10));
+            menu.ObjectBuilder.Reset();
+            menu.ObjectBuilder.AddNumberBox("NB",5)
+                .Build("NB",new(5,9));
 
 
 			menu.Prepare();

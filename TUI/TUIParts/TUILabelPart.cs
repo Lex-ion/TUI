@@ -9,11 +9,26 @@ namespace TUI.TUIParts
 {
     public class TUILabelPart : AbstractTUIObjectPart, ITUILabel
     {
+        public static int PredictLineLenght(string text,int maxLineLength)
+        {
+          int height= maxLineLength > 0 ? text.Length / maxLineLength + 1 : 1;
+		int	width = maxLineLength > 0 ? maxLineLength : text.Length;
+            return height > 1 ? width : text.Length;
+		}
+
         public event Action? TextChanged;
         private string? _content;
+        public int MaxLineLength { get => _MaxLineLenght; set => _MaxLineLenght=value; }
+        int _MaxLineLenght;
 
-        public TUILabelPart(string name, Anchor? anchor, string? content, ConsoleColor foreColor, ConsoleColor backColor, bool isEnabled, TUIObjectPartType partType) : base(name, anchor, content?.Length ?? 0, 1, foreColor, backColor, isEnabled, partType)
+        public override int Height => MaxLineLength > 0 ? Content!.Length / MaxLineLength +1: 1;
+        public override int Width => MaxLineLength > 0 ? MaxLineLength : Content!.Length;
+
+        public int LineLenght => Height > 1 ? Width : Content!.Length;
+
+		public TUILabelPart(string name, Anchor? anchor, string? content,int maxLineLength, ConsoleColor foreColor, ConsoleColor backColor, bool isEnabled, TUIObjectPartType partType) : base(name, anchor, content?.Length ?? 0, 1, foreColor, backColor, isEnabled, partType)
         {
+            _MaxLineLenght = maxLineLength;
             _content = content;
         }
 
@@ -41,8 +56,12 @@ namespace TUI.TUIParts
             if (!base.Draw(parentAnchor))
                 return false;
 
-            Anchor pos = new(Anchor.Left + parentAnchor.Left, Anchor.Top + parentAnchor.Top);
-            WriteText(Content??"", pos);
+            for (int i = 0; i < Height; i++)
+            {
+				Anchor pos = new(Anchor.Left + parentAnchor.Left, Anchor.Top + parentAnchor.Top+i);
+
+                WriteText(Content[(i*MaxLineLength)..((i+1)*MaxLineLength>Content.Length?Content.Length: (i + 1) * MaxLineLength)], pos);
+			}
             
             return true;
         }

@@ -14,6 +14,8 @@ namespace TUI.TUIParts
         event Action? Disabled;
         event Action? Moved;
 
+        public int Height { get; set; }
+        public int Width { get; set; }
         string Name { get; }
         Anchor Anchor { get; }
         bool IsEnabled { get; set; }

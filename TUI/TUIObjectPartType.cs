@@ -16,5 +16,6 @@ namespace TUI
         CHECK_BOX=5,
         RADIO_BUTTON=6, //done
         COLOR_OVERLAY=7,//DONE
+        NUMBER_BOX=8,
     }
 }

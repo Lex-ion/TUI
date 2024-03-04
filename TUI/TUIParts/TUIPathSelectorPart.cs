@@ -30,7 +30,7 @@ namespace TUI.TUIParts
 		int _selectedIndex;
 		int _displayoffset;
 
-		public TUIPathSelectorPart(string name, Anchor? anchor, int width, int height, string text, ConsoleColor foreColor, ConsoleColor backColor, ConsoleColor onCursorColorFore, ConsoleColor onCursorColorBack, bool isEnabled, TUIObjectPartType partType) : base(name, anchor, width, 1, text, foreColor, backColor, onCursorColorFore, onCursorColorBack, isEnabled, partType)
+		public TUIPathSelectorPart(string name, Anchor? anchor, int width, int height, string text, ConsoleColor foreColor, ConsoleColor backColor, ConsoleColor onCursorColorFore, ConsoleColor onCursorColorBack, bool isEnabled, TUIObjectPartType partType) : base(name, anchor, width, 1, text,0, foreColor, backColor, onCursorColorFore, onCursorColorBack, isEnabled, partType)
 		{
 			_height = height - 1;
 		}
@@ -127,7 +127,7 @@ namespace TUI.TUIParts
 				Text = _text!=null&& _text.Length > 0 && new DirectoryInfo(_text).Exists ? _text : "";
 
 				if (  !Directory.Exists(Text))
-					TUIErrorMessage.Show("Zadaná cesta není validní!","CHYBA");
+					TUIWarningMessage.Show("Zadaná cesta není validní!","CHYBA");
 
 				InvokeSubmitted();
 				return;

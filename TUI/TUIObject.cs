@@ -37,8 +37,15 @@ namespace TUI
 
         public void AddPart(ITUIObjectPart part)
         {
-            if (part is ITUIInteractable)
-                TUIInteractable = (ITUIInteractable)part;
+			
+
+			if (part is ITUIInteractable)
+            {
+				if (IsInteractable)
+					throw new Exception("There can be only one interactable part at same time in one object");
+				TUIInteractable = (ITUIInteractable)part;
+			}
+                
 
             _parts.Add(part.Name,part);
         }

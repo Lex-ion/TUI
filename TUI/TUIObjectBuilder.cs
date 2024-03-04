@@ -10,30 +10,34 @@ namespace TUI
 {
     public class TUIObjectBuilder:ITUIObjectBuilder
     {
-        private TUIObject _Product = new();
+        public TUIObject _Product { get; private set; }
 
         public ObjectBuilderDefaults Defaults { get; set; }
         public Dictionary<string, TUIObject> Output { get; set; }
 
         public TUIObjectBuilder()
         {
+            _Product = new();
             Defaults = new ObjectBuilderDefaults();
         }
 
         public TUIObjectBuilder(ObjectBuilderDefaults defaults)
-        {
-            Defaults = defaults;
+		{
+			_Product = new();
+			Defaults = defaults;
         }
 
         public TUIObjectBuilder(Dictionary<string, TUIObject> output, ObjectBuilderDefaults defaults)
-        {
-            Defaults = defaults;
+		{
+			_Product = new();
+			Defaults = defaults;
             Output = output;
         }
 
         public TUIObjectBuilder(Dictionary<string, TUIObject> output)
-        {
-            Output = output;
+		{
+			_Product = new();
+			Output = output;
 
         }
 
@@ -81,7 +85,7 @@ namespace TUI
             return labels.OrderByDescending(l => l.Content.Length).First().Content.Length;
         }
 
-        public TUIObjectBuilder AddTextBox(string name, int width,int? height=null,Anchor? anchor = null,string? text=null,bool? isEnabled=null, ConsoleColor? interactionForeGround = null, ConsoleColor? interactionBackGround = null, ConsoleColor? foreColor = null, ConsoleColor? backColor = null)
+        public TUIObjectBuilder AddTextBox(string name, int width,int? height=null,Anchor? anchor = null,string? text=null,int maxChars=0,bool? isEnabled=null, ConsoleColor? interactionForeGround = null, ConsoleColor? interactionBackGround = null, ConsoleColor? foreColor = null, ConsoleColor? backColor = null)
         {
             anchor = anchor ?? Defaults.Anchor;
             height = height ?? 1;
@@ -91,19 +95,19 @@ namespace TUI
             interactionBackGround = interactionBackGround ?? Defaults.ButtonDefaults.InteractionBackground;
             isEnabled = isEnabled ?? true;
 
-            TUITextBoxPart tb = new(name,anchor,width,(int)height,text!,(ConsoleColor)foreColor, (ConsoleColor)backColor, (ConsoleColor)interactionForeGround, (ConsoleColor)interactionBackGround,(bool)isEnabled,TUIObjectPartType.PROGRESS_BAR);
+            TUITextBoxPart tb = new(name,anchor,width,(int)height,text!,maxChars,(ConsoleColor)foreColor, (ConsoleColor)backColor, (ConsoleColor)interactionForeGround, (ConsoleColor)interactionBackGround,(bool)isEnabled,TUIObjectPartType.PROGRESS_BAR);
             _Product.AddPart(tb);
             
             return this;
         }
-        public TUIObjectBuilder AddLabel(string name, string? content, Anchor? anchor=null, ConsoleColor? foreColor = null, ConsoleColor? backColor = null, bool? isEnabled=null)
+        public TUIObjectBuilder AddLabel(string name, string? content, Anchor? anchor=null, int maxLineLength =0,ConsoleColor? foreColor = null, ConsoleColor? backColor = null, bool? isEnabled=null)
         {
             anchor=anchor?? Defaults.Anchor;
             foreColor = foreColor ?? Defaults.ForeGround;
             backColor = backColor ?? Defaults.BackGround;
             isEnabled = isEnabled ?? true;
 
-            TUILabelPart label = new(name,anchor,content,(ConsoleColor)foreColor, (ConsoleColor)backColor,(bool)isEnabled,TUIObjectPartType.LABEL);
+            TUILabelPart label = new(name,anchor,content,maxLineLength,(ConsoleColor)foreColor, (ConsoleColor)backColor,(bool)isEnabled,TUIObjectPartType.LABEL);
             _Product.AddPart(label);
             return this;
         }
@@ -134,8 +138,7 @@ namespace TUI
 
         public TUIObjectBuilder AddButton(string name, string? content,Action action, Anchor? anchor = null, ConsoleColor? interactionForeGround = null, ConsoleColor? interactionBackGround = null, ConsoleColor? foreColor = null, ConsoleColor? backColor = null,bool? isEnabled=null)
         {
-            if (_Product.IsInteractable)
-                throw new Exception("There can be only one interactable part at same time in one object");
+                
 
             anchor = anchor ?? Defaults.Anchor;
             foreColor = foreColor ?? Defaults.ButtonDefaults.ForeGround;
@@ -209,6 +212,19 @@ namespace TUI
             return this;
         }
 
+        public TUIObjectBuilder AddNumberBox(string name, int width, Anchor? anchor=null, int value=0,int max=int.MaxValue,int min=int.MinValue, bool? isEnabled = null, ConsoleColor? interactionForeGround = null, ConsoleColor? interactionBackGround = null, ConsoleColor? foreColor = null, ConsoleColor? backColor = null)
+        {
+			anchor = anchor ?? Defaults.Anchor;
+			foreColor = foreColor ?? Defaults.ButtonDefaults.ForeGround;
+			backColor = backColor ?? Defaults.ButtonDefaults.BackGround;
+			interactionForeGround = interactionForeGround ?? Defaults.ButtonDefaults.InteractionForeGround;
+			interactionBackGround = interactionBackGround ?? Defaults.ButtonDefaults.InteractionBackground;
+			isEnabled = isEnabled ?? true;
+
+			TUINumberBoxPart nb = new(name,anchor,width,value,max,min, (ConsoleColor)foreColor, (ConsoleColor)backColor, (ConsoleColor)interactionForeGround, (ConsoleColor)interactionBackGround, (bool)isEnabled, TUIObjectPartType.NUMBER_BOX);
+            _Product.AddPart(nb);
+            return this;
+        }
 
     }
 }
