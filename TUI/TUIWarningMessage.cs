@@ -22,8 +22,8 @@ namespace TUI
 			TUIObject @object;
 			Builder.Reset();
 			@object = Builder
-				.AddColorOverlay("OU", message.Length+2, 1, ConsoleColor.DarkYellow, new(-TUILabelPart.PredictLineLenght(message, TUIManager.BufferWidth - 6) / 2 , -5- TUILabelPart.PredictHeight(message, TUIManager.BufferWidth - 10)/2 ))
-				.AddColorOverlay("ROD", message.Length + 2, 1, ConsoleColor.DarkYellow, new(-TUILabelPart.PredictLineLenght(message, TUIManager.BufferWidth - 6) / 2 , 1+ TUILabelPart.PredictHeight(message, TUIManager.BufferWidth - 10)/2 + 4))
+				.AddColorOverlay("OU", message.Length+2, 1, ConsoleColor.DarkYellow, new(-TUILabelPart.PredictLineLenght(message, TUIManager.BufferWidth - 10) / 2 , -5- TUILabelPart.PredictHeight(message, TUIManager.BufferWidth - 10)/2 ))
+				.AddColorOverlay("ROD", message.Length + 2, 1, ConsoleColor.DarkYellow, new(-TUILabelPart.PredictLineLenght(message, TUIManager.BufferWidth - 10) / 2 , 1+ TUILabelPart.PredictHeight(message, TUIManager.BufferWidth - 10)/2 + 4))
 				.Build(new(width, height));
 			
 
