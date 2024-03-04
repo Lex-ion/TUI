@@ -6,7 +6,7 @@ namespace TUI
 	{
 		static TUIObjectBuilder Builder = new(new ObjectBuilderDefaults(ConsoleColor.Black, ConsoleColor.DarkRed));
 		static bool b;
-		public static void Show(string message, string? title)
+		public static void Show(string message, string? title=null)
 		{
 
 			int width = TUIManager.BufferWidth / 2;

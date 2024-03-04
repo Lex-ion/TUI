@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TUI.Structs;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace TUI.TUIParts
 {
@@ -14,6 +15,10 @@ namespace TUI.TUIParts
           int height= maxLineLength > 0 ? text.Length / maxLineLength + 1 : 1;
 		int	width = maxLineLength > 0 ? maxLineLength : text.Length;
             return height > 1 ? width : text.Length;
+		}
+        public static int PredictHeight(string text, int maxLineLength)
+        {
+			return maxLineLength > 0 ? text.Length / maxLineLength + 1 : 1;
 		}
 
         public event Action? TextChanged;

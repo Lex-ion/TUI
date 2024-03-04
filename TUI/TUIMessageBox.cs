@@ -24,7 +24,7 @@ namespace TUI
 
 
 			builder
-				.AddColorOverlay("O", TUILabelPart.PredictLineLenght(text, TUIManager.BufferWidth - 6) + 3, 8, (ConsoleColor)backColor, new(-TUILabelPart.PredictLineLenght(text, TUIManager.BufferWidth - 6) / 2 - 1, -3))
+				.AddColorOverlay("O", TUILabelPart.PredictLineLenght(text, TUIManager.BufferWidth - 6) + 3,TUILabelPart.PredictHeight(text,TUIManager.BufferWidth-6)+7, (ConsoleColor)backColor, new(-TUILabelPart.PredictLineLenght(text, TUIManager.BufferWidth - 6) / 2 - 1, -3))
 				.AddLabel("L0", text, new(-TUILabelPart.PredictLineLenght(text, TUIManager.BufferWidth - 6) / 2 + 1, 0), TUIManager.BufferWidth - 6)			
 				.AddFrame("F", TUILabelPart.PredictLineLenght(text, TUIManager.BufferWidth - 6) + 2, 5 + builder._Product.Parts["L0"].Height, new(-TUILabelPart.PredictLineLenght(text, TUIManager.BufferWidth - 6) / 2 - 1, -3))
 				.AddButton("B","> OK <",Done,new(-2,2+ builder._Product.Parts["L0"].Height));

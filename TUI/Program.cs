@@ -12,7 +12,6 @@ namespace TUI
 
             Console.WriteLine("Hello, World!");
 
-
             TUIMenu menu = new(new ObjectBuilderDefaults());
             //-----OLD
             menu.ObjectBuilder.AddButton("l", "Zkusit", Beeper);
