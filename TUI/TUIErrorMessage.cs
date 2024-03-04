@@ -1,4 +1,6 @@
 ﻿using TUI.Structs;
+using static System.Net.Mime.MediaTypeNames;
+using TUI.TUIParts;
 
 namespace TUI
 {
@@ -8,18 +10,18 @@ namespace TUI
 		static bool b;
 		public static void Show(string message, string? title=null)
 		{
-
+			TUIManager.UpdateBuffers();
 			int width = TUIManager.BufferWidth / 2;
 			int height = TUIManager.BufferHeight / 2;
 
 			TUIObject @object;
 			Builder.Reset();
 			@object = Builder
-				.AddColorOverlay("LOU", 1, 6, ConsoleColor.Red, new(-message.Length / 2 - 3, -3))
-				.AddColorOverlay("LOD", 1, 1, ConsoleColor.Red, new(-message.Length / 2 - 3, 4))
-				.AddColorOverlay("ROU", 1, 6, ConsoleColor.Red, new(message.Length / 2 + 4, -3))
-				.AddColorOverlay("ROD", 1, 1, ConsoleColor.Red, new(message.Length / 2 + 4, 4))
-				.Build(new(width, height));
+				.AddColorOverlay("LOU", 1, 6, ConsoleColor.Red, new(-TUILabelPart.PredictLineLenght(message, TUIManager.BufferWidth - 10) / 2 - 3, -3))
+				.AddColorOverlay("LOD", 1, 1, ConsoleColor.Red, new(-TUILabelPart.PredictLineLenght(message, TUIManager.BufferWidth - 10) / 2 - 3, 4))
+				.AddColorOverlay("ROU", 1, 6, ConsoleColor.Red, new(TUILabelPart.PredictLineLenght(message, TUIManager.BufferWidth - 10) / 2 + 4, -3))
+				.AddColorOverlay("ROD", 1, 1, ConsoleColor.Red, new(TUILabelPart.PredictLineLenght(message, TUIManager.BufferWidth - 10) / 2 + 4, 4))
+				.Build(new(width, height ));
 
 
 			TUIMessageBox.Show(message, title, ConsoleColor.DarkRed, ConsoleColor.Black,foo);

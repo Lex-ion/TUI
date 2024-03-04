@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TUI.Structs;
+using static System.Net.Mime.MediaTypeNames;
+using TUI.TUIParts;
 
 namespace TUI
 {
@@ -13,15 +15,15 @@ namespace TUI
 		static bool b;
 		public static void Show(string message, string? title = null)
 		{
-			
+			TUIManager.UpdateBuffers();
+
 			int width = TUIManager.BufferWidth / 2;
 			int height = TUIManager.BufferHeight / 2;
-			
 			TUIObject @object;
 			Builder.Reset();
 			@object = Builder
-				.AddColorOverlay("OU", message.Length+2, 1, ConsoleColor.DarkYellow, new(-message.Length / 2 , -5))
-				.AddColorOverlay("ROD", message.Length + 2, 1, ConsoleColor.DarkYellow, new(-message.Length / 2 , 6))
+				.AddColorOverlay("OU", message.Length+2, 1, ConsoleColor.DarkYellow, new(-TUILabelPart.PredictLineLenght(message, TUIManager.BufferWidth - 6) / 2 , -5- TUILabelPart.PredictHeight(message, TUIManager.BufferWidth - 10)/2 ))
+				.AddColorOverlay("ROD", message.Length + 2, 1, ConsoleColor.DarkYellow, new(-TUILabelPart.PredictLineLenght(message, TUIManager.BufferWidth - 6) / 2 , 1+ TUILabelPart.PredictHeight(message, TUIManager.BufferWidth - 10)/2 + 4))
 				.Build(new(width, height));
 			
 
