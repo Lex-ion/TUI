@@ -44,7 +44,7 @@ namespace TUI
 			{
 				if (idleAction != null)
 				{
-					if (Console.KeyAvailable)
+					while (Console.KeyAvailable)
 						if (TUIManager.GetKey().Key == ConsoleKey.Enter)
 							@object.TUIInteractable!.Interact();
 
