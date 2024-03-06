@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,7 +27,7 @@ namespace TUI.TUIParts
 
         public int MaxChars { get; set; }
 
-        public TUITextBoxPart(string name, Anchor? anchor, int width, int height, string text,int maxChars, ConsoleColor foreColor, ConsoleColor backColor, ConsoleColor onCursorColorFore, ConsoleColor onCursorColorBack, bool isEnabled, TUIObjectPartType partType) : base(name, anchor, width, height, foreColor, backColor, onCursorColorFore, onCursorColorBack, isEnabled, partType)
+        public TUITextBoxPart(string name, Anchor? anchor, int width, int height, string text,int maxChars, Color foreColor, Color backColor, Color onCursorColorFore, Color onCursorColorBack, bool isEnabled, TUIObjectPartType partType) : base(name, anchor, width, height, foreColor, backColor, onCursorColorFore, onCursorColorBack, isEnabled, partType)
         {MaxChars=maxChars;
             _text = text ?? "";
         }

@@ -23,8 +23,9 @@ namespace TUI.Defaults
 		public TUIFrameDefaults DefaultFrame { get; set; }
         public TUIProgressBarDefaults DefaultProgressBar { get; set; }
         public TUITextBoxDefaults DefaultTextBox { get; set; }
+		public TUIPathSelectorDefaults DefaultTUIPathSelector { get; set; }
 
-		public TUIBuilderDefaults(Color defaultForeGroundColor, Color defaultBackGroundColor, Color defaultBlankColor, Anchor defaultAnchor, TUIButtonDefaults defaultButton, TUIButtonDefaults defaultRadioButton, TUIFrameDefaults defaultFrame, TUIProgressBarDefaults defaultProgressBar, TUITextBoxDefaults defaultTextBox)
+		public TUIBuilderDefaults(Color defaultForeGroundColor, Color defaultBackGroundColor, Color defaultBlankColor, Anchor defaultAnchor, TUIButtonDefaults defaultButton, TUIButtonDefaults defaultRadioButton, TUIFrameDefaults defaultFrame, TUIProgressBarDefaults defaultProgressBar, TUITextBoxDefaults defaultTextBox, TUIPathSelectorDefaults defaultTUIPathSelector)
 		{
 			DefaultForeGroundColor = defaultForeGroundColor;
 			DefaultBackGroundColor = defaultBackGroundColor;
@@ -35,13 +36,23 @@ namespace TUI.Defaults
 			DefaultFrame = defaultFrame;
 			DefaultProgressBar = defaultProgressBar;
 			DefaultTextBox = defaultTextBox;
+			DefaultTUIPathSelector = defaultTUIPathSelector;
 		}
 
 		public TUIBuilderDefaults()
         {
-            DefaultRadioButton = DefaultButton;
+			DefaultForeGroundColor = Color.White;
+			DefaultBackGroundColor = Color.Black;
+			DefaultBlankColor = Color.Black;
+			DefaultAnchor = new();
+			DefaultButton = new();
+			DefaultRadioButton = DefaultButton;
+			DefaultFrame = new();
+			DefaultProgressBar = new();
+			DefaultTextBox = new();
+			DefaultTUIPathSelector = new();
 
-        }
+		}
 
 
     }

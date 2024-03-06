@@ -1,4 +1,5 @@
-﻿using TUI.Structs;
+﻿using System.Drawing;
+using TUI.Structs;
 
 namespace TUI.TUIParts
 {
@@ -64,10 +65,10 @@ namespace TUI.TUIParts
 		}
 		protected int _height;
 
-		public ConsoleColor ForeColor { get; set; }
-		public ConsoleColor BackColor { get; set; }
+		public Color ForeColor { get; set; }
+		public Color BackColor { get; set; }
 
-		protected AbstractTUIObjectPart(string name, Anchor? anchor, int width, int height, ConsoleColor foreColor, ConsoleColor backColor, bool isEnabled, TUIObjectPartType partType)
+		protected AbstractTUIObjectPart(string name, Anchor? anchor, int width, int height, Color foreColor, Color backColor, bool isEnabled, TUIObjectPartType partType)
 		{
 			Name = name;
 			_anchor = anchor ?? new();
@@ -131,8 +132,12 @@ namespace TUI.TUIParts
 
 		public virtual void UseColors()
 		{
-			Console.ForegroundColor = ForeColor;
-			Console.BackgroundColor = BackColor;
+			//48 - backgr
+			Console.Write($"\u001b[48;2;{BackColor.R};{BackColor.G};{BackColor.B};38;2;{ForeColor.R};{ForeColor.G};{ForeColor.B}m");
+		}
+		public void ResetColors()
+		{
+			Console.ResetColor();
 		}
 
 		protected void InvokeResized()

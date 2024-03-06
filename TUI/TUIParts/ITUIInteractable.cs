@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,8 +15,8 @@ namespace TUI.TUIParts
         event Action? UnSelected;
 
 
-        ConsoleColor OnCursorColorFore { get; }
-        ConsoleColor OnCursorColorBack { get; }
+		Color OnCursorColorFore { get; }
+		Color OnCursorColorBack { get; }
         void Interact();
 
         bool IsSelected { get; set; }

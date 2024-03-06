@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Reflection.Emit;
 using System.Text;
@@ -22,7 +23,7 @@ namespace TUI.TUIParts
 			}
 		}
 		bool _radioTicked;
-		public TUIRadioButtonPart(string name, int radioFamily, string content,bool isTicked, Anchor? anchor, ConsoleColor foreColor, ConsoleColor backColor, ConsoleColor onCursorColorFore, ConsoleColor onCursorColorBack, bool isEnabled, TUIObjectPartType partType) : base(name, anchor, content?.Length+2??1, 1, foreColor, backColor, onCursorColorFore, onCursorColorBack, isEnabled, partType)
+		public TUIRadioButtonPart(string name, int radioFamily, string content,bool isTicked, Anchor? anchor, Color foreColor, Color backColor, Color onCursorColorFore, Color onCursorColorBack, bool isEnabled, TUIObjectPartType partType) : base(name, anchor, content?.Length+2??1, 1, foreColor, backColor, onCursorColorFore, onCursorColorBack, isEnabled, partType)
 		{
 			RadioFamilyID = radioFamily;
 			_content=content;

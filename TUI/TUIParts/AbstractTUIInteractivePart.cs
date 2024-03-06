@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,9 +14,9 @@ namespace TUI.TUIParts
         public event Action? Selected;
         public event Action? UnSelected;
 
-        public ConsoleColor OnCursorColorFore { get; set; }
+        public Color OnCursorColorFore { get; set; }
 
-        public ConsoleColor OnCursorColorBack { get; set; }
+        public Color OnCursorColorBack { get; set; }
 
         public bool IsSelected
         {
@@ -29,7 +30,7 @@ namespace TUI.TUIParts
             }
         }
         bool _isSelected;
-        protected AbstractTUIInteractivePart(string name, Anchor? anchor, int width, int height, ConsoleColor foreColor, ConsoleColor backColor, ConsoleColor onCursorColorFore, ConsoleColor onCursorColorBack, bool isEnabled, TUIObjectPartType partType) : base(name, anchor, width, height, foreColor, backColor, isEnabled, partType)
+        protected AbstractTUIInteractivePart(string name, Anchor? anchor, int width, int height, Color foreColor, Color backColor, Color onCursorColorFore, Color onCursorColorBack, bool isEnabled, TUIObjectPartType partType) : base(name, anchor, width, height, foreColor, backColor, isEnabled, partType)
         {
             OnCursorColorFore = onCursorColorFore;
             OnCursorColorBack = onCursorColorBack;
@@ -44,8 +45,10 @@ namespace TUI.TUIParts
 
         public override void UseColors()
         {
-            Console.ForegroundColor = IsSelected ? OnCursorColorFore : ForeColor;
-            Console.BackgroundColor = IsSelected ? OnCursorColorBack : BackColor;
+            if (IsSelected)
+				Console.Write($"\u001b[48;2;{OnCursorColorBack.R};{OnCursorColorBack.G};{OnCursorColorBack.B};38;2;{OnCursorColorFore.R};{OnCursorColorFore.G};{OnCursorColorFore.B}m");
+            else
+                base.UseColors();
         }
 
     }

@@ -11,15 +11,36 @@ namespace TUI.Defaults
 	{
 		public Color ForeColor { get; set; }
 		public Color BackColor { get; set; }
-		public Color InteractionForeColor { get; set; }
-		public Color InteractionBackColor { get; set; }
+		public Color CursorForeColor { get; set; }
+		public Color CursorBackColor { get; set; }
+
+		public Color WritingColor { get; set; }
 
 		public char FreespaceChar { get; set; }
 		public char HiddenChar { get; set; }
 
+		public TUITextBoxDefaults(Color foreColor, Color backColor, Color cursorForeColor, Color cursorBackColor, Color writingColor, char freespaceChar, char hiddenChar)
+		{
+			ForeColor = foreColor;
+			BackColor = backColor;
+			CursorForeColor = cursorForeColor;
+			CursorBackColor = cursorBackColor;
+			WritingColor = writingColor;
+			FreespaceChar = freespaceChar;
+			HiddenChar = hiddenChar;
+		}
+
 		public TUITextBoxDefaults()
 		{
-			throw new NotImplementedException();
+			ForeColor = Color.DarkBlue;
+			BackColor = Color.DarkGray;
+			CursorForeColor = Color.White;
+			CursorBackColor = Color.DarkMagenta;
+
+			WritingColor=Color.Yellow;
+
+			FreespaceChar = '_';
+			HiddenChar = '*';
 		}
 	}
 }

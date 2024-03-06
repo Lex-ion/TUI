@@ -12,20 +12,22 @@ namespace TUI.Defaults
 		public Color ForeColor { get; set; }
 		public Color BackColor { get; set; }
 		public Color CursorForeColor { get; set; }
-		public Color CurosorBackColor { get; set; }
+		public Color CursorBackColor { get; set; }
 
 		public TUIButtonDefaults(Color foreColor, Color backColor, Color cursorForeColor, Color curosorBackColor)
 		{
 			ForeColor = foreColor;
 			BackColor = backColor;
 			CursorForeColor = cursorForeColor;
-			CurosorBackColor = curosorBackColor;
+			CursorBackColor = curosorBackColor;
 		}
 
 		public TUIButtonDefaults() 
 		{ 
-			ForeColor = Color.White;
-			BackColor = Color.DarkMagenta;
+			ForeColor = Color.DarkBlue;
+			BackColor = Color.DarkGray;
+			CursorForeColor = Color.White;
+			CursorBackColor = Color.DarkMagenta;
 		}
 	}
 }

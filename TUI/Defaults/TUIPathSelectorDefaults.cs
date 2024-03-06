@@ -10,12 +10,16 @@ namespace TUI.Defaults
 	public class TUIPathSelectorDefaults
 	{
 		public TUITextBoxDefaults TextBoxDefaults { get; set; }
-		public Color SelectionDefaults { get; set; }
+		public Color SelectionBackGrDefault { get; set; }
 
 		public TUIPathSelectorDefaults(TUITextBoxDefaults textBoxDefaults, Color selectionDefaults)
 		{
 			TextBoxDefaults = textBoxDefaults;
-			SelectionDefaults = selectionDefaults;
+			SelectionBackGrDefault = selectionDefaults;
+		}
+		public TUIPathSelectorDefaults() {
+			TextBoxDefaults = new();
+			SelectionBackGrDefault =Color.Lime;
 		}
 	}
 }

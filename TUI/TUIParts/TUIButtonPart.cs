@@ -1,4 +1,5 @@
-﻿using TUI.Structs;
+﻿using System.Drawing;
+using TUI.Structs;
 
 namespace TUI.TUIParts
 {
@@ -28,7 +29,7 @@ namespace TUI.TUIParts
         /// </summary>
         public Action? Action { get; set; }
 
-        public TUIButtonPart(string name, Anchor? anchor, string? content, ConsoleColor foreColor, ConsoleColor backColor, ConsoleColor onCursorColorFore, ConsoleColor onCursorColorBack, bool isEnabled, TUIObjectPartType partType) : base(name, anchor, content?.Length ?? 0, 1, foreColor, backColor, onCursorColorFore, onCursorColorBack, isEnabled, partType)
+        public TUIButtonPart(string name, Anchor? anchor, string? content, Color foreColor, Color backColor, Color onCursorColorFore, Color onCursorColorBack, bool isEnabled, TUIObjectPartType partType) : base(name, anchor, content?.Length ?? 0, 1, foreColor, backColor, onCursorColorFore, onCursorColorBack, isEnabled, partType)
         {
             _content = content;
 

@@ -159,8 +159,7 @@ namespace TUI.TUIParts
 		{
 			UseInteractColor();
 			WriteText();
-
-			Console.BackgroundColor = ConsoleColor.DarkYellow;
+			UseColors();
 			for (int i = 0; i < Height; i++)
 			{
 				if (!SetCursor(ParentAnchor.Left + Anchor.Left, ParentAnchor.Top + Anchor.Top + 1 + i))

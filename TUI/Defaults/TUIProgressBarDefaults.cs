@@ -29,6 +29,17 @@ namespace TUI.Defaults
 			FillColor = fillColor;
 			EmptyColor = emptyColor;
 		}
+		public TUIProgressBarDefaults()
+		{
+
+			DefaultValue = 0;
+			DefaultMaxValue = 100;
+			DefaultMinValue = 0;
+			FillChar = '█';
+			EmptyChar = '░';
+			FillColor = Color.DarkOrange;
+			EmptyColor = Color.White;
+		}
 
 	}
 }
