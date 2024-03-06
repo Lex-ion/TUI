@@ -125,7 +125,7 @@ namespace TUI.TUIParts
             }
             catch (Exception ex)
             {
-                TUIWarningMessage.Show(ex.Message);
+                TUIErrorMessage.Show(ex.Message);
                 Canceled?.Invoke();
             }
 

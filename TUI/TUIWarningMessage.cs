@@ -19,12 +19,17 @@ namespace TUI
 
 			int width = TUIManager.BufferWidth / 2;
 			int height = TUIManager.BufferHeight / 2;
-			TUIObject @object;
+
+
+            int LineLength = TUILabelPart.PredictLineLenght(message, TUIManager.BufferWidth - 10);
+            int LabelHeight = TUILabelPart.PredictHeight(message, TUIManager.BufferWidth - 10);
+
+            TUIObject @object;
 			Builder.Reset();
 			@object = Builder
-				.AddColorOverlay("OU", message.Length+2, 1, ConsoleColor.DarkYellow, new(-TUILabelPart.PredictLineLenght(message, TUIManager.BufferWidth - 10) / 2 , -5- TUILabelPart.PredictHeight(message, TUIManager.BufferWidth - 10)/2 ))
-				.AddColorOverlay("ROD", message.Length + 2, 1, ConsoleColor.DarkYellow, new(-TUILabelPart.PredictLineLenght(message, TUIManager.BufferWidth - 10) / 2 , 1+ TUILabelPart.PredictHeight(message, TUIManager.BufferWidth - 10)/2 + 4))
-				.Build(new(width, height));
+				.AddColorOverlay("OU", LineLength + 2, 1, ConsoleColor.DarkYellow, new(-LineLength / 2 , -5- LabelHeight/2 ))
+				.AddColorOverlay("OD", LineLength + 2, 1, ConsoleColor.DarkYellow, new(-LineLength/ 2 ,  LabelHeight/2 + 6 +(LabelHeight / 2 > 0 ? -1 : 0)))
+				.Build(new(width, height+1));
 			
 
 			TUIMessageBox.Show(message, title, ConsoleColor.Yellow, ConsoleColor.Black,foo);
