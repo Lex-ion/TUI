@@ -1,10 +1,10 @@
 ﻿using TUI.Structs;
 using static System.Net.Mime.MediaTypeNames;
-using TUI.TUIParts;
+using TUI.Builder.TUIParts;
 
 namespace TUI
 {
-	public static class TUIErrorMessage
+    public static class TUIErrorMessage
 	{
 		static TUIObjectBuilder Builder = new(new ObjectBuilderDefaults(ConsoleColor.Black, ConsoleColor.DarkRed));
 		static bool b;

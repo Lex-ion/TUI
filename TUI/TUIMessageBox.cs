@@ -1,9 +1,9 @@
-﻿using TUI.TUIParts;
+﻿using TUI.Builder.TUIParts;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace TUI
 {
-	public static class TUIMessageBox
+    public static class TUIMessageBox
 	{
 		static TUIObjectBuilder builder = new TUIObjectBuilder();
 

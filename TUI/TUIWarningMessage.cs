@@ -5,11 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using TUI.Structs;
 using static System.Net.Mime.MediaTypeNames;
-using TUI.TUIParts;
+using TUI.Builder.TUIParts;
 
 namespace TUI
 {
-	public static class TUIWarningMessage
+    public static class TUIWarningMessage
 	{
 		static TUIObjectBuilder Builder = new(new ObjectBuilderDefaults(ConsoleColor.Black, ConsoleColor.Yellow));
 		static bool b;

@@ -1,5 +1,5 @@
-﻿using TUI.Structs;
-using TUI.TUIParts;
+﻿using TUI.Builder.TUIParts;
+using TUI.Structs;
 
 
 namespace TUI

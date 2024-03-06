@@ -4,8 +4,8 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TUI.Builder.TUIParts;
 using TUI.Structs;
-using TUI.TUIParts;
 
 namespace TUI
 {
