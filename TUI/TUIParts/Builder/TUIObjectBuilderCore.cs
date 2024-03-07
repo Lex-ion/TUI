@@ -66,6 +66,14 @@ namespace TUI.TUIParts.Builder
 			return this;
 		}
 
+		void ValidateName(string name)
+		{
+			if (!string.IsNullOrEmpty(name))
+				throw new ArgumentException("Invalid name!");
+			else if (Product.Parts?.Keys.Any(k => k == name) ?? false)
+				throw new ArgumentException("There is already part with that name!");
+		}
+
 
 	}
 }

@@ -135,6 +135,11 @@ namespace TUI.TUIParts
 			//48 - backgr
 			Console.Write($"\u001b[48;2;{BackColor.R};{BackColor.G};{BackColor.B};38;2;{ForeColor.R};{ForeColor.G};{ForeColor.B}m");
 		}
+		public void UseColors(Color colorFore, Color colorBack)
+		{
+			Console.Write($"\u001b[48;2;{colorBack.R};{colorBack.G};{colorBack.B};38;2;{colorFore.R};{colorFore.G};{colorFore.B}m");
+		}
+
 		public void ResetColors()
 		{
 			Console.ResetColor();
