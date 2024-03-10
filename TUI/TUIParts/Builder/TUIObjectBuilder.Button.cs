@@ -28,7 +28,7 @@ namespace TUI.TUIParts.Builder
 		public TUIObjectBuilder AddButton(string name, string? content, Anchor anchor)
 		{
 			var defs = Defaults.DefaultButton;
-			AddButton(name, content, anchor, defs.CursorForeColor, defs.CursorBackColor);
+			AddButton(name, content, anchor, defs.ForeColor, defs.BackColor);
 			return this;
 		}
 		public TUIObjectBuilder AddButton(string name, string? content)
