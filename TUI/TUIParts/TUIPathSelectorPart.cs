@@ -34,7 +34,7 @@ namespace TUI.TUIParts
 		public Color SelectedColor { get; protected set; }
 
 		public TUIPathSelectorPart(string name, Anchor? anchor, int width, int height, string text, int maxChars, Color foreColor, Color backColor, Color onCursorColorFore, Color onCursorColorBack, bool isEnabled, TUIObjectPartType partType, char freeSpaceChar, char secretChar, Color writingColorFore, Color writingColorBack,Color selectedColor) 
-			: base(name, anchor, width, height, text, maxChars, foreColor, backColor, onCursorColorFore, onCursorColorBack, isEnabled, partType, freeSpaceChar, secretChar, writingColorFore, writingColorBack)
+			: base(name, anchor, width, 1, text, maxChars, foreColor, backColor, onCursorColorFore, onCursorColorBack, isEnabled, partType, freeSpaceChar, secretChar, writingColorFore, writingColorBack)
 		{
 			_height = height - 1;
 			SelectedColor = selectedColor;
@@ -182,8 +182,8 @@ namespace TUI.TUIParts
 					displayText = displayText.PadRight(Width, ' ');
 
 				if (i == _selectedIndex - _displayoffset)
-					Console.BackgroundColor = ConsoleColor.Green;
-				else Console.BackgroundColor = ConsoleColor.DarkYellow;
+					UseColors(WritingColorFore, SelectedColor);
+				else UseColors(WritingColorFore, WritingColorBack);
 
 				Console.Write(displayText);
 				Thread.Sleep(delay);
