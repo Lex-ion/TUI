@@ -1,4 +1,5 @@
-﻿using TUI.Structs;
+﻿using System.Drawing;
+using TUI.Structs;
 
 namespace TUI.TUIParts
 {
@@ -30,12 +31,14 @@ namespace TUI.TUIParts
 		int _selectedIndex;
 		int _displayoffset;
 
-		public TUIPathSelectorPart(string name, Anchor? anchor, int width, int height, string text, ConsoleColor foreColor, ConsoleColor backColor, ConsoleColor onCursorColorFore, ConsoleColor onCursorColorBack, bool isEnabled, TUIObjectPartType partType) : base(name, anchor, width, 1, text,0, foreColor, backColor, onCursorColorFore, onCursorColorBack, isEnabled, partType)
+		public Color SelectedColor { get; protected set; }
+
+		public TUIPathSelectorPart(string name, Anchor? anchor, int width, int height, string text, int maxChars, Color foreColor, Color backColor, Color onCursorColorFore, Color onCursorColorBack, bool isEnabled, TUIObjectPartType partType, char freeSpaceChar, char secretChar, Color writingColorFore, Color writingColorBack,Color selectedColor) 
+			: base(name, anchor, width, height, text, maxChars, foreColor, backColor, onCursorColorFore, onCursorColorBack, isEnabled, partType, freeSpaceChar, secretChar, writingColorFore, writingColorBack)
 		{
 			_height = height - 1;
+			SelectedColor = selectedColor;
 		}
-
-
 
 		public override bool Draw(Anchor parentAnchor)
 		{

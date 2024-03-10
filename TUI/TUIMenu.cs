@@ -1,5 +1,7 @@
-﻿using TUI.Structs;
+﻿using TUI.Defaults;
+using TUI.Structs;
 using TUI.TUIParts;
+using TUI.TUIParts.Builder;
 
 namespace TUI
 {
@@ -15,9 +17,9 @@ namespace TUI
         int selectedInteractableIndex;
         TUIObject? selectedInteractable;
 
-        public TUIMenu(ObjectBuilderDefaults defaults)
+        public TUIMenu(TUIBuilderDefaults defaults)
         {
-            ObjectBuilder = new(Objects,defaults);
+            ObjectBuilder = new(defaults,Objects);
             previousHeigth = Console.WindowHeight;
             previousWidth = Console.WindowWidth;
         }

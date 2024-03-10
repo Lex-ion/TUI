@@ -17,5 +17,6 @@ namespace TUI
         RADIO_BUTTON=6, //done
         COLOR_OVERLAY=7,//DONE
         NUMBER_BOX=8,
+        PATH_SELECTOR=9,
     }
 }

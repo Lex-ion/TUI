@@ -24,8 +24,9 @@ namespace TUI.Defaults
         public TUIProgressBarDefaults DefaultProgressBar { get; set; }
         public TUITextBoxDefaults DefaultTextBox { get; set; }
 		public TUIPathSelectorDefaults DefaultTUIPathSelector { get; set; }
+		public TUINumberBoxDefaults NumberBoxDefaults { get; set; }
 
-		public TUIBuilderDefaults(Color defaultForeGroundColor, Color defaultBackGroundColor, Color defaultBlankColor, Anchor defaultAnchor, TUIButtonDefaults defaultButton, TUIButtonDefaults defaultRadioButton, TUIFrameDefaults defaultFrame, TUIProgressBarDefaults defaultProgressBar, TUITextBoxDefaults defaultTextBox, TUIPathSelectorDefaults defaultTUIPathSelector)
+		public TUIBuilderDefaults(Color defaultForeGroundColor, Color defaultBackGroundColor, Color defaultBlankColor, Anchor defaultAnchor, TUIButtonDefaults defaultButton, TUIButtonDefaults defaultRadioButton, TUIFrameDefaults defaultFrame, TUIProgressBarDefaults defaultProgressBar, TUITextBoxDefaults defaultTextBox, TUIPathSelectorDefaults defaultTUIPathSelector, TUINumberBoxDefaults numberBoxDefaults)
 		{
 			DefaultForeGroundColor = defaultForeGroundColor;
 			DefaultBackGroundColor = defaultBackGroundColor;
@@ -37,6 +38,7 @@ namespace TUI.Defaults
 			DefaultProgressBar = defaultProgressBar;
 			DefaultTextBox = defaultTextBox;
 			DefaultTUIPathSelector = defaultTUIPathSelector;
+			NumberBoxDefaults = numberBoxDefaults;
 		}
 
 		public TUIBuilderDefaults()
@@ -51,7 +53,23 @@ namespace TUI.Defaults
 			DefaultProgressBar = new();
 			DefaultTextBox = new();
 			DefaultTUIPathSelector = new();
+			NumberBoxDefaults = new();
+		}
+		public TUIBuilderDefaults(Color defaultForeGroundColor, Color defaultBackGroundColor)
+		{
+			DefaultBackGroundColor = defaultBackGroundColor;
+			DefaultForeGroundColor = defaultForeGroundColor;
 
+			DefaultBlankColor = defaultBackGroundColor;
+
+			DefaultAnchor = new();
+			DefaultButton = new();
+			DefaultRadioButton = DefaultButton;
+			DefaultFrame = new();
+			DefaultProgressBar = new();
+			DefaultTextBox = new();
+			DefaultTUIPathSelector = new();
+			NumberBoxDefaults = new();
 		}
 
 

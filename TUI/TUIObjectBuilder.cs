@@ -1,4 +1,5 @@
-﻿using System;
+﻿/*
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -213,19 +214,20 @@ namespace TUI
             return this;
         }
 
-        public TUIObjectBuilder AddNumberBox(string name, int width, Anchor? anchor=null, int value=0,int max=int.MaxValue,int min=int.MinValue, bool? isEnabled = null, ConsoleColor? interactionForeGround = null, ConsoleColor? interactionBackGround = null, ConsoleColor? foreColor = null, ConsoleColor? backColor = null)
-        {
-			anchor = anchor ?? Defaults.Anchor;
-			foreColor = foreColor ?? Defaults.ButtonDefaults.ForeGround;
-			backColor = backColor ?? Defaults.ButtonDefaults.BackGround;
-			interactionForeGround = interactionForeGround ?? Defaults.ButtonDefaults.InteractionForeGround;
-			interactionBackGround = interactionBackGround ?? Defaults.ButtonDefaults.InteractionBackground;
-			isEnabled = isEnabled ?? true;
+            public TUIObjectBuilder AddNumberBox(string name, int width, Anchor? anchor=null, int value=0,int max=int.MaxValue,int min=int.MinValue, bool? isEnabled = null, ConsoleColor? interactionForeGround = null, ConsoleColor? interactionBackGround = null, ConsoleColor? foreColor = null, ConsoleColor? backColor = null)
+            {
+			    anchor = anchor ?? Defaults.Anchor;
+			    foreColor = foreColor ?? Defaults.ButtonDefaults.ForeGround;
+			    backColor = backColor ?? Defaults.ButtonDefaults.BackGround;
+			    interactionForeGround = interactionForeGround ?? Defaults.ButtonDefaults.InteractionForeGround;
+			    interactionBackGround = interactionBackGround ?? Defaults.ButtonDefaults.InteractionBackground;
+			    isEnabled = isEnabled ?? true;
 
-			TUINumberBoxPart nb = new(name,anchor,width,value,max,min, (ConsoleColor)foreColor, (ConsoleColor)backColor, (ConsoleColor)interactionForeGround, (ConsoleColor)interactionBackGround, (bool)isEnabled, TUIObjectPartType.NUMBER_BOX);
-            _Product.AddPart(nb);
-            return this;
-        }
+			    TUINumberBoxPart nb = new(name,anchor,width,value,max,min, (ConsoleColor)foreColor, (ConsoleColor)backColor, (ConsoleColor)interactionForeGround, (ConsoleColor)interactionBackGround, (bool)isEnabled, TUIObjectPartType.NUMBER_BOX);
+                _Product.AddPart(nb);
+                return this;
+            }
 
     }
 }
+*/

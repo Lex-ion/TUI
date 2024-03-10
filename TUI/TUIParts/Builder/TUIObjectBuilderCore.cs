@@ -19,6 +19,11 @@ namespace TUI.TUIParts.Builder
 			Product=new TUIObject();
 			Defaults=TUIBuilderDefaults.MasterDefault;
 		}
+		public TUIObjectBuilder(TUIBuilderDefaults defs)
+		{
+			Product = new TUIObject();
+			Defaults=defs;
+		}
 
 		public TUIObjectBuilder(TUIBuilderDefaults defaults, Dictionary<string, TUIObject>? output)
 		{
@@ -68,7 +73,7 @@ namespace TUI.TUIParts.Builder
 
 		void ValidateName(string name)
 		{
-			if (!string.IsNullOrEmpty(name))
+			if (string.IsNullOrEmpty(name))
 				throw new ArgumentException("Invalid name!");
 			else if (Product.Parts?.Keys.Any(k => k == name) ?? false)
 				throw new ArgumentException("There is already part with that name!");

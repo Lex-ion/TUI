@@ -24,10 +24,6 @@ namespace TUI.TUIParts
                 TextChanged?.Invoke();
             }
         }
-        /// <summary>
-        /// OLD, use Interacted instead.
-        /// </summary>
-        public Action? Action { get; set; }
 
         public TUIButtonPart(string name, Anchor? anchor, string? content, Color foreColor, Color backColor, Color onCursorColorFore, Color onCursorColorBack, bool isEnabled, TUIObjectPartType partType) : base(name, anchor, content?.Length ?? 0, 1, foreColor, backColor, onCursorColorFore, onCursorColorBack, isEnabled, partType)
         {
@@ -45,13 +41,6 @@ namespace TUI.TUIParts
 
             WriteText(Content??"",new(Anchor.Left + parentAnchor.Left, Anchor.Top + parentAnchor.Top));
             return true;
-        }
-        public override void Interact()
-        {
-            base.Interact();
-            if (!IsSelected)
-                return;
-            Action?.Invoke();
         }
     }
 }

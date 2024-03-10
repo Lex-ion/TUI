@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Security;
 using System.Text;
@@ -47,14 +48,20 @@ namespace TUI.TUIParts
         int _maximum;
         int _minimum;
 
+       public Color WritingFore { get; protected set; }
+        public Color WritingBack { get; protected set; }
+
 
         Anchor _parentAnchor;
 
-        public TUINumberBoxPart(string name, Anchor? anchor, int width, int value, int max, int min, ConsoleColor foreColor, ConsoleColor backColor, ConsoleColor onCursorColorFore, ConsoleColor onCursorColorBack, bool isEnabled, TUIObjectPartType partType) : base(name, anchor, width, 1, foreColor, backColor, onCursorColorFore, onCursorColorBack, isEnabled, partType)
+        public TUINumberBoxPart(string name, Anchor? anchor, int width, int value, int max, int min, Color foreColor, Color backColor, Color onCursorColorFore, Color onCursorColorBack,Color writingFore,Color writingBack, bool isEnabled, TUIObjectPartType partType) 
+            : base(name, anchor, width, 1, foreColor, backColor, onCursorColorFore, onCursorColorBack, isEnabled, partType)
         {
             _value = value;
             _minimum = min;
             _maximum = max;
+            WritingFore = writingFore;
+            WritingBack= writingBack;
         }
 
         public override bool Draw(Anchor parentAnchor)
@@ -75,8 +82,8 @@ namespace TUI.TUIParts
 
 			int currentNumber = Value;
 
-            Console.BackgroundColor = ConsoleColor.DarkYellow;
-            Write(currentNumber);
+			UseColors(WritingFore, WritingBack);
+			Write(currentNumber);
 
             ConsoleKeyInfo input = TUIManager.GetKey();
             try
@@ -116,7 +123,7 @@ namespace TUI.TUIParts
                     currentNumber = Maximum;
                 else if (currentNumber < Minimum)
                     currentNumber = Minimum;
-                Console.BackgroundColor = ConsoleColor.DarkYellow;
+               UseColors(WritingFore,WritingBack);
                 Write(currentNumber);
 				 input = TUIManager.GetKey();
 			}

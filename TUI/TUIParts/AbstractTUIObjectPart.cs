@@ -140,6 +140,8 @@ namespace TUI.TUIParts
 			Console.Write($"\u001b[48;2;{colorBack.R};{colorBack.G};{colorBack.B};38;2;{colorFore.R};{colorFore.G};{colorFore.B}m");
 		}
 
+	
+
 		public void ResetColors()
 		{
 			Console.ResetColor();

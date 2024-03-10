@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -49,12 +50,16 @@ namespace TUI.TUIParts
         }
         int _minimum;
 
+        public char FillChar { get; set; }
+        public char EmptyChar { get; set; } 
 
-        public TUIProgressBarPart(string name, Anchor? anchor, int width, int height, int value, int maximum, int minimum, ConsoleColor foreColor, ConsoleColor backColor, bool isEnabled, TUIObjectPartType partType) : base(name, anchor, width, height, foreColor, backColor, isEnabled, partType)
+        public TUIProgressBarPart(string name, Anchor? anchor, int width, int height, int value, int maximum, int minimum,char fillChar, char emptyChar, Color foreColor, Color backColor, bool isEnabled, TUIObjectPartType partType) : base(name, anchor, width, height, foreColor, backColor, isEnabled, partType)
         {
             Value = value;
             Maximum = maximum;
             Minimum = minimum;
+            FillChar = fillChar;
+            EmptyChar = emptyChar;
         }
 
         public override bool Draw(Anchor parentAnchor)
@@ -68,7 +73,7 @@ namespace TUI.TUIParts
             {
                 if (!SetCursor(parentAnchor.Left + Anchor.Left, parentAnchor.Top + Anchor.Top + i))
                     return false;
-                WriteText(new string('█', segments).PadRight(Width, '░'),new(parentAnchor.Left + Anchor.Left, parentAnchor.Top + Anchor.Top + i));
+                WriteText(new string(FillChar, segments).PadRight(Width, EmptyChar),new(parentAnchor.Left + Anchor.Left, parentAnchor.Top + Anchor.Top + i));
             }
             return true;
         }

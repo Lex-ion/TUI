@@ -16,7 +16,7 @@ namespace TUI.TUIParts.Builder
 
 			if (height < 1||width<1)
 			{
-				throw new ArgumentException("Height or width can not be less then 1!");
+				throw new ArgumentException("Height or width can not be less than 1!");
 			}
 			
 			anchor ??= Defaults.DefaultAnchor;
@@ -41,7 +41,7 @@ namespace TUI.TUIParts.Builder
 		public TUIObjectBuilder AddTextBox(string name, int width, int height,int maxChars)
 		{
 			var defs = Defaults.DefaultTextBox;
-			AddTextBox(name, width, height, Defaults.DefaultAnchor, "", 0, true, defs.CursorForeColor, defs.CursorBackColor, defs.ForeColor, defs.BackColor, defs.FreespaceChar, defs.HiddenChar, defs.WritingColorFore, defs.WritingColorBack);
+			AddTextBox(name, width, height, Defaults.DefaultAnchor, "",maxChars, true, defs.CursorForeColor, defs.CursorBackColor, defs.ForeColor, defs.BackColor, defs.FreespaceChar, defs.HiddenChar, defs.WritingColorFore, defs.WritingColorBack);
 			return this;
 		}
 	}

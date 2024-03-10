@@ -27,8 +27,8 @@ namespace TUI.TUIParts
 
         public int MaxChars { get; set; }
 
-        public char FreeSpaceChar { get; set; }
-        public char SecretChar {  get; set; }
+        public char FreeSpaceChar { get;protected set; }
+        public char SecretChar {  get;protected set; }
 
 		public Color WritingColorFore { get; set; }
 		public Color WritingColorBack { get; set; }
