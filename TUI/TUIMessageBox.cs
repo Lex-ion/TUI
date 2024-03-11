@@ -1,20 +1,22 @@
-﻿using TUI.TUIParts;
+﻿using TUI.TUIParts.Builder;
+using TUI.TUIParts;
+using TUI.Defaults;
+using System.Drawing;
+using TUI.Structs;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace TUI
 {
-	public static class TUIMessageBox
+    public static class TUIMessageBox
 	{
 		static TUIObjectBuilder builder = new TUIObjectBuilder();
 
-		public static void Show(string text, string? title=null,ConsoleColor? backColor=null,ConsoleColor? foreColor=null,Action? idleAction=null)
+		public static void Show(string text, string? title,Color backColor,Color foreColor,Action? idleAction=null)
 		{
 
 			TUIManager.UpdateBuffers();
-			foreColor ??= builder.Defaults.ForeGround;
-			backColor ??= builder.Defaults.BackGround;
 
-			builder.Defaults = new((ConsoleColor)foreColor, (ConsoleColor)backColor);
+			builder.Defaults = new(foreColor, backColor);
 
 			bool focused = true;
 			builder.Reset();
@@ -26,17 +28,18 @@ namespace TUI
 			int LabelHeight = TUILabelPart.PredictHeight(text, TUIManager.BufferWidth - 10);
 
 			builder
-				.AddColorOverlay("O", LineLength + 3, LabelHeight + 6, (ConsoleColor)backColor, new(-LineLength / 2 - 1, -LabelHeight/2-2))
+				.AddColorOverlay("O", LineLength + 3, LabelHeight + 6, backColor, new(-LineLength / 2 - 1, -LabelHeight/2-2))
 				.AddLabel("L0", text, new(-LineLength / 2 + 1, -LabelHeight / 2 ), TUIManager.BufferWidth -10)			
-				.AddFrame("F", LineLength + 2, 5 + builder._Product.Parts["L0"].Height, new(-LineLength / 2 - 1,-LabelHeight/2-2))
-				.AddButton("B","> OK <",Done,new(-2, LabelHeight / 2+( LabelHeight /2>0?2:3)));
+				.AddFrame("F", LineLength + 2, 5 + builder.Product.Parts["L0"].Height, new Anchor(-LineLength / 2 - 1,-LabelHeight/2-2))
+				.AddButton("B","> OK <",new Anchor(-2, LabelHeight / 2+( LabelHeight /2>0?2:3)));
 
 			if (title != null)
 				builder.AddLabel("L1", title, new(-LineLength/2+1,- LabelHeight / 2 - 2));
 
-			@object = builder.Build(new(width, height));
+			@object = builder.Build(new Anchor(width, height));
 
 			@object.TUIInteractable!.IsSelected = true;
+			@object.TUIInteractable.Interacted += Done;
 
 			@object.Draw();
 

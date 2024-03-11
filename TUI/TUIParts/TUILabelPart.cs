@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,7 +32,7 @@ namespace TUI.TUIParts
 
         public int LineLenght => Height > 1 ? Width : Content!.Length;
 
-		public TUILabelPart(string name, Anchor? anchor, string? content,int maxLineLength, ConsoleColor foreColor, ConsoleColor backColor, bool isEnabled, TUIObjectPartType partType) : base(name, anchor, content?.Length ?? 0, 1, foreColor, backColor, isEnabled, partType)
+		public TUILabelPart(string name, Anchor? anchor, string? content,int maxLineLength, Color foreColor, Color backColor,Color clearingColor, bool isEnabled, TUIObjectPartType partType) : base(name, anchor, content?.Length ?? 0, 1, foreColor, backColor,clearingColor, isEnabled, partType)
         {
             _MaxLineLenght = maxLineLength;
             _content = content;

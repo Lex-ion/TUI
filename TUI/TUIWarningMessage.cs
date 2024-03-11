@@ -5,13 +5,16 @@ using System.Text;
 using System.Threading.Tasks;
 using TUI.Structs;
 using static System.Net.Mime.MediaTypeNames;
+using TUI.TUIParts.Builder;
 using TUI.TUIParts;
+using TUI.Defaults;
+using System.Drawing;
 
 namespace TUI
 {
-	public static class TUIWarningMessage
+    public static class TUIWarningMessage
 	{
-		static TUIObjectBuilder Builder = new(new ObjectBuilderDefaults(ConsoleColor.Black, ConsoleColor.Yellow));
+		static TUIObjectBuilder Builder = new(new TUIBuilderDefaults(Color.Black, Color.Yellow));
 		static bool b;
 		public static void Show(string message, string? title = null)
 		{
@@ -27,12 +30,12 @@ namespace TUI
             TUIObject @object;
 			Builder.Reset();
 			@object = Builder
-				.AddColorOverlay("OU", LineLength + 2, 1, ConsoleColor.DarkYellow, new(-LineLength / 2 , -5- LabelHeight/2 ))
-				.AddColorOverlay("OD", LineLength + 2, 1, ConsoleColor.DarkYellow, new(-LineLength/ 2 ,  LabelHeight/2 + 6 +(LabelHeight / 2 > 0 ? -1 : 0)))
-				.Build(new(width, height+1));
+				.AddColorOverlay("OU", LineLength + 2, 1,Color.FromArgb(200,200,0), new(-LineLength / 2 , -5- LabelHeight/2 ))
+				.AddColorOverlay("OD", LineLength + 2, 1,Color.FromArgb(200, 200, 0), new(-LineLength/ 2 ,  LabelHeight/2 + 6 +(LabelHeight / 2 > 0 ? -1 : 0)))
+				.Build (new Anchor(width, height+1) );
 			
 
-			TUIMessageBox.Show(message, title, ConsoleColor.Yellow, ConsoleColor.Black,foo);
+			TUIMessageBox.Show(message, title, Color.Yellow, Color.Black,foo);
 
 			@object.Clear();
 

@@ -1,4 +1,5 @@
-﻿using TUI.Structs;
+﻿using System.Drawing;
+using TUI.Structs;
 
 namespace TUI.TUIParts
 {
@@ -64,10 +65,12 @@ namespace TUI.TUIParts
 		}
 		protected int _height;
 
-		public ConsoleColor ForeColor { get; set; }
-		public ConsoleColor BackColor { get; set; }
+		public Color ForeColor { get; set; }
+		public Color BackColor { get; set; }
 
-		protected AbstractTUIObjectPart(string name, Anchor? anchor, int width, int height, ConsoleColor foreColor, ConsoleColor backColor, bool isEnabled, TUIObjectPartType partType)
+		public Color ClearingColor { get;private set; }
+
+		protected AbstractTUIObjectPart(string name, Anchor? anchor, int width, int height, Color foreColor, Color backColor,Color clearingColor, bool isEnabled, TUIObjectPartType partType)
 		{
 			Name = name;
 			_anchor = anchor ?? new();
@@ -77,6 +80,7 @@ namespace TUI.TUIParts
 			_height = height;
 			ForeColor = foreColor;
 			BackColor = backColor;
+			ClearingColor = clearingColor;
 		}
 
 
@@ -92,7 +96,10 @@ namespace TUI.TUIParts
 
 		public virtual bool Clear(Anchor parentAnchor)
 		{
-			Console.BackgroundColor = ConsoleColor.Black;
+			if (ClearingColor == Color.Black)
+				Console.BackgroundColor = ConsoleColor.Black;
+			else
+			UseColors(ClearingColor,ClearingColor);
 
 			if (!SetCursor(parentAnchor.Left, parentAnchor.Top))
 				return false;
@@ -131,8 +138,19 @@ namespace TUI.TUIParts
 
 		public virtual void UseColors()
 		{
-			Console.ForegroundColor = ForeColor;
-			Console.BackgroundColor = BackColor;
+			//48 - backgr
+			Console.Write($"\u001b[48;2;{BackColor.R};{BackColor.G};{BackColor.B};38;2;{ForeColor.R};{ForeColor.G};{ForeColor.B}m");
+		}
+		public void UseColors(Color colorFore, Color colorBack)
+		{
+			Console.Write($"\u001b[48;2;{colorBack.R};{colorBack.G};{colorBack.B};38;2;{colorFore.R};{colorFore.G};{colorFore.B}m");
+		}
+
+	
+
+		public void ResetColors()
+		{
+			Console.ResetColor();
 		}
 
 		protected void InvokeResized()

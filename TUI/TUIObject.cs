@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TUI.Structs;
 using TUI.TUIParts;
+using TUI.Structs;
 
 namespace TUI
 {

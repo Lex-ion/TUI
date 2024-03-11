@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,10 +27,21 @@ namespace TUI.TUIParts
 
         public int MaxChars { get; set; }
 
-        public TUITextBoxPart(string name, Anchor? anchor, int width, int height, string text,int maxChars, ConsoleColor foreColor, ConsoleColor backColor, ConsoleColor onCursorColorFore, ConsoleColor onCursorColorBack, bool isEnabled, TUIObjectPartType partType) : base(name, anchor, width, height, foreColor, backColor, onCursorColorFore, onCursorColorBack, isEnabled, partType)
+        public char FreeSpaceChar { get;protected set; }
+        public char SecretChar {  get;protected set; }
+
+		public Color WritingColorFore { get; set; }
+		public Color WritingColorBack { get; set; }
+
+		public TUITextBoxPart(string name, Anchor? anchor, int width, int height, string text,int maxChars, Color foreColor, Color backColor, Color onCursorColorFore, Color onCursorColorBack,Color clearingColor, bool isEnabled, TUIObjectPartType partType,char freeSpaceChar, char secretChar, Color writingColorFore, Color writingColorBack) 
+            : base(name, anchor, width, height, foreColor, backColor, onCursorColorFore, onCursorColorBack,clearingColor, isEnabled, partType)
         {MaxChars=maxChars;
             _text = text ?? "";
-        }
+            SecretChar=secretChar;
+            FreeSpaceChar=freeSpaceChar;
+			WritingColorFore = writingColorFore;
+			WritingColorBack = writingColorBack;
+		}
 
         public override bool Draw(Anchor parentAnchor)
         {
@@ -59,7 +71,7 @@ namespace TUI.TUIParts
         }
         protected void UseInteractColor()
         {
-			Console.BackgroundColor = ConsoleColor.DarkYellow;
+            UseColors(WritingColorFore,WritingColorBack);
 		}
 
         protected void WriteText(string? text=null)
@@ -69,7 +81,7 @@ namespace TUI.TUIParts
             for (int i = 0; i < Height; i++)
             {
                 if (SetCursor(ParentAnchor.Left + Anchor.Left, ParentAnchor.Top + Anchor.Top + i))
-                    WriteText(HiddenChars ? new string('*', text.Length).PadRight(Width * Height, '_')[^(Width * Height)..][(Width * i)..(Width * (i + 1))] : text.PadRight(Width * Height, '_')[^(Width * Height)..][(Width * i)..(Width * (i + 1))],new(ParentAnchor.Left + Anchor.Left, ParentAnchor.Top + Anchor.Top + i));
+                    WriteText(HiddenChars ? new string(SecretChar, text.Length).PadRight(Width * Height, FreeSpaceChar)[^(Width * Height)..][(Width * i)..(Width * (i + 1))] : text.PadRight(Width * Height, FreeSpaceChar)[^(Width * Height)..][(Width * i)..(Width * (i + 1))],new(ParentAnchor.Left + Anchor.Left, ParentAnchor.Top + Anchor.Top + i));
             }
         }
         private void GetUserInput()
@@ -112,9 +124,9 @@ namespace TUI.TUIParts
             Submited?.Invoke();
 
             void Write()
-            {
-                Console.BackgroundColor = ConsoleColor.DarkYellow;
-                WriteText(currentText);
+			{
+				UseColors(WritingColorFore, WritingColorBack);
+				WriteText(currentText);
             }
         }
 

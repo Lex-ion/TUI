@@ -1,12 +1,15 @@
 ﻿using TUI.Structs;
 using static System.Net.Mime.MediaTypeNames;
+using TUI.TUIParts.Builder;
 using TUI.TUIParts;
+using TUI.Defaults;
+using System.Drawing;
 
 namespace TUI
 {
-	public static class TUIErrorMessage
+    public static class TUIErrorMessage
 	{
-		static TUIObjectBuilder Builder = new(new ObjectBuilderDefaults(ConsoleColor.Black, ConsoleColor.DarkRed));
+		static TUIObjectBuilder Builder = new(new TUIBuilderDefaults(Color.FromArgb(139, 0, 0),Color.Black));
 		static bool b;
 		public static void Show(string message, string? title=null)
 		{
@@ -20,14 +23,14 @@ namespace TUI
             TUIObject @object;
 			Builder.Reset();
 			@object = Builder
-				.AddColorOverlay("LOU", 1, 6, ConsoleColor.Red, new(-LineLength / 2 - 3, -3))
-				.AddColorOverlay("LOD", 1, 1, ConsoleColor.Red, new(-LineLength / 2 - 3, 4))
-				.AddColorOverlay("ROU", 1, 6, ConsoleColor.Red, new(LineLength / 2 + 5 + (LineLength % 2 == 0 ? -1 : 0), -3))
-				.AddColorOverlay("ROD", 1, 1, ConsoleColor.Red, new(LineLength / 2 + 5+(LineLength % 2  ==0 ? -1 : 0), 4))
-				.Build(new(width, height +1));
+				.AddColorOverlay("LOU", 1, 6, Color.Red, new(-LineLength / 2 - 3, -3))
+				.AddColorOverlay("LOD", 1, 1, Color.Red, new(-LineLength / 2 - 3, 4))
+				.AddColorOverlay("ROU", 1, 6, Color.Red, new(LineLength / 2 + 5 + (LineLength % 2 == 0 ? -1 : 0), -3))
+				.AddColorOverlay("ROD", 1, 1, Color.Red, new(LineLength / 2 + 5+(LineLength % 2  ==0 ? -1 : 0), 4))
+				.Build(new Anchor(width, height +1));
 
 
-			TUIMessageBox.Show(message, title, ConsoleColor.DarkRed, ConsoleColor.Black,foo);
+			TUIMessageBox.Show(message, title, Color.FromArgb(200,0,0), Color.Black,foo);
 
 			@object.Clear();
 
