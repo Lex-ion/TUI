@@ -1,9 +1,10 @@
 ﻿using System.Drawing;
+using TUI.Menus.PopUps;
 using TUI.Structs;
 
 namespace TUI.TUIParts
 {
-	internal class TUIPathSelectorPart : TUITextBoxPart
+    internal class TUIPathSelectorPart : TUITextBoxPart
 	{
 		public new int Height
 		{

@@ -2,6 +2,8 @@
 using TUI.TUIParts.Builder;
 using TUI.Structs;
 using System.Drawing;
+using TUI.Menus;
+using TUI.Menus.PopUps;
 
 
 namespace TUI

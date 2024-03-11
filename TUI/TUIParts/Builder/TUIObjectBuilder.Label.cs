@@ -8,7 +8,7 @@ using TUI.Structs;
 
 namespace TUI.TUIParts.Builder
 {
-	public partial class TUIObjectBuilder //Label addon
+    public partial class TUIObjectBuilder //Label addon
 	{
 
 		public TUIObjectBuilder AddLabel(string name, string? content, Anchor? anchor, int maxLineLength, Color foreColor , Color backColor , bool isEnabled)

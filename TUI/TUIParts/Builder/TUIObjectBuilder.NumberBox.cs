@@ -9,7 +9,7 @@ using TUI.Structs;
 
 namespace TUI.TUIParts.Builder
 {
-	public partial class TUIObjectBuilder
+    public partial class TUIObjectBuilder
 	{
 		public TUIObjectBuilder AddNumberBox(string name, int width, Anchor anchor, int value, int max, int min, bool isEnabled, Color interactionForeGround, Color interactionBackGround, Color foreColor, Color backColor,Color writingFore, Color writingBack)
 		{

@@ -8,7 +8,7 @@ using TUI.Structs;
 
 namespace TUI.TUIParts.Builder
 {
-	public partial class TUIObjectBuilder
+    public partial class TUIObjectBuilder
 	{
 		public TUIObjectBuilder AddRadioButton(string name, int radioFamily, string content, bool isTicked, Anchor anchor , Color interactionForeGround, Color interactionBackGround , Color foreColor, Color backColor, bool isEnabled)
 		{

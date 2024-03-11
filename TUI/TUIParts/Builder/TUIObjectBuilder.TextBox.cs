@@ -8,7 +8,7 @@ using TUI.Structs;
 
 namespace TUI.TUIParts.Builder
 {
-	public partial class TUIObjectBuilder//TextBox addon
+    public partial class TUIObjectBuilder//TextBox addon
 	{
 		public TUIObjectBuilder AddTextBox(string name, int width, int height, Anchor? anchor, string? text, int maxChars, bool isEnabled , Color interactionForeGround , Color interactionBackGround , Color foreColor , Color backColor,char freeSpaceChar,char secretChar, Color writingColFore, Color writingColBack)
 		{

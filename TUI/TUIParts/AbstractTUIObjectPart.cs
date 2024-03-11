@@ -3,7 +3,7 @@ using TUI.Structs;
 
 namespace TUI.TUIParts
 {
-	public abstract class AbstractTUIObjectPart : ITUIObjectPart
+    public abstract class AbstractTUIObjectPart : ITUIObjectPart
 	{
 		public event Action? Resized;
 		public event Action? Enabled;

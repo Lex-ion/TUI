@@ -8,7 +8,7 @@ using TUI.Structs;
 
 namespace TUI.TUIParts.Builder
 {
-	public partial class TUIObjectBuilder 
+    public partial class TUIObjectBuilder 
 	{
 		public TUIObjectBuilder AddPathSelector(string name, int width, int height, Anchor anchor, string text, bool isEnabled, Color interactionForeGround, Color interactionBackGround, Color foreColor, Color backColor, Color writingColorFore, Color writingColorBack, Color selectionColor)
 		{

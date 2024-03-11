@@ -9,7 +9,7 @@ using TUI.Structs;
 
 namespace TUI.TUIParts.Builder
 {
-	public partial class TUIObjectBuilder
+    public partial class TUIObjectBuilder
 	{
 		public TUIObjectBuilder AddFrame(string name, int width, int height, Anchor anchor, TUIFrameStyle style, Color foreColor, Color backColor , bool isEnabled)
 		{

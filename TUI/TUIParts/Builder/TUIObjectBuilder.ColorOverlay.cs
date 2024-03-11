@@ -8,7 +8,7 @@ using TUI.Structs;
 
 namespace TUI.TUIParts.Builder
 {
-	public partial class TUIObjectBuilder
+    public partial class TUIObjectBuilder
 	{
 		public TUIObjectBuilder AddColorOverlay(string name, int width, int height, Color color, Anchor anchor)
 		{

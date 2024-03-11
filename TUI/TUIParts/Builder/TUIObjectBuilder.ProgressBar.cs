@@ -8,7 +8,7 @@ using TUI.Structs;
 
 namespace TUI.TUIParts.Builder
 {
-	public partial class TUIObjectBuilder
+    public partial class TUIObjectBuilder
 	{
 		public TUIObjectBuilder AddProgressBar(string name, Anchor anchor, int width, int height, int value, int maximum, int minimum, Color foreColor , Color backColor , bool isEnabled )
 		{
