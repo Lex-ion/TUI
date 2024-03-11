@@ -11,7 +11,7 @@ namespace TUI.TUIParts
 {
     internal class TUIFramePart : AbstractTUIObjectPart
     {
-        public TUIFramePart(string name, Anchor? anchor, int width, int height, TUIFrameStyle style, Color foreColor, Color backColor, bool isEnabled, TUIObjectPartType partType) : base(name, anchor, width, height, foreColor, backColor, isEnabled, partType)
+        public TUIFramePart(string name, Anchor? anchor, int width, int height, TUIFrameStyle style, Color foreColor, Color backColor,Color clearingColor, bool isEnabled, TUIObjectPartType partType) : base(name, anchor, width, height, foreColor, backColor,clearingColor, isEnabled, partType)
         {
             Style = style;
         }

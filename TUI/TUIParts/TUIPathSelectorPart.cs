@@ -33,8 +33,8 @@ namespace TUI.TUIParts
 
 		public Color SelectedColor { get; protected set; }
 
-		public TUIPathSelectorPart(string name, Anchor? anchor, int width, int height, string text, int maxChars, Color foreColor, Color backColor, Color onCursorColorFore, Color onCursorColorBack, bool isEnabled, TUIObjectPartType partType, char freeSpaceChar, char secretChar, Color writingColorFore, Color writingColorBack,Color selectedColor) 
-			: base(name, anchor, width, 1, text, maxChars, foreColor, backColor, onCursorColorFore, onCursorColorBack, isEnabled, partType, freeSpaceChar, secretChar, writingColorFore, writingColorBack)
+		public TUIPathSelectorPart(string name, Anchor? anchor, int width, int height, string text, int maxChars, Color foreColor, Color backColor, Color onCursorColorFore, Color onCursorColorBack,Color clearingColor, bool isEnabled, TUIObjectPartType partType, char freeSpaceChar, char secretChar, Color writingColorFore, Color writingColorBack,Color selectedColor) 
+			: base(name, anchor, width, 1, text, maxChars, foreColor, backColor, onCursorColorFore, onCursorColorBack,clearingColor, isEnabled, partType, freeSpaceChar, secretChar, writingColorFore, writingColorBack)
 		{
 			_height = height - 1;
 			SelectedColor = selectedColor;
@@ -193,8 +193,13 @@ namespace TUI.TUIParts
 		}
 		void Clear()
 		{
-			Console.BackgroundColor=ConsoleColor.Black;
-            for (int i = Height - 1; i >= 0; i--)
+
+			if (ClearingColor == Color.Black)
+				Console.BackgroundColor = ConsoleColor.Black;
+			else
+				UseColors(ClearingColor, ClearingColor);
+
+			for (int i = Height - 1; i >= 0; i--)
             {
 				if (!SetCursor(ParentAnchor.Left + Anchor.Left, ParentAnchor.Top + Anchor.Top + 1 + i))
 					break;

@@ -14,7 +14,7 @@ namespace TUI.TUIParts.Builder
 
 		public TUIObjectBuilder AddButton(string name, string? content, Anchor anchor, Color interactionForeGround, Color interactionBackGround , Color foreColor , Color backColor, bool isEnabled )
 		{
-			TUIButtonPart button = new(name, anchor, content, foreColor, backColor, interactionForeGround, interactionBackGround, isEnabled, TUIObjectPartType.BUTTON);
+			TUIButtonPart button = new(name, anchor, content, foreColor, backColor, interactionForeGround, interactionBackGround, Defaults.DefaultBlankColor, isEnabled, TUIObjectPartType.BUTTON);
 			Product.AddPart(button);
 			return this;
 		}

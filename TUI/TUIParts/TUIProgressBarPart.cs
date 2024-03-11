@@ -49,7 +49,7 @@ namespace TUI.TUIParts
             }
         }
         int _minimum;
-        public TUIProgressBarPart(string name, Anchor? anchor, int width, int height, int value, int maximum, int minimum, Color foreColor, Color backColor, bool isEnabled, TUIObjectPartType partType) : base(name, anchor, width, height, foreColor, backColor, isEnabled, partType)
+        public TUIProgressBarPart(string name, Anchor? anchor, int width, int height, int value, int maximum, int minimum, Color foreColor, Color backColor,Color clearingColor, bool isEnabled, TUIObjectPartType partType) : base(name, anchor, width, height, foreColor, backColor,clearingColor, isEnabled, partType)
         {
             Value = value;
             Maximum = maximum;

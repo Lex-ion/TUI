@@ -11,7 +11,7 @@ namespace TUI.TUIParts
 	public class TUIColorOverlay : AbstractTUIObjectPart
 	{
 		
-		public TUIColorOverlay(string name, Anchor? anchor, int width, int height, Color foreColor, Color backColor, bool isEnabled, TUIObjectPartType partType) : base(name, anchor, width, height, foreColor, backColor, isEnabled, partType)
+		public TUIColorOverlay(string name, Anchor? anchor, int width, int height, Color foreColor, Color backColor, Color clearingColor, bool isEnabled, TUIObjectPartType partType) : base(name, anchor, width, height, foreColor, backColor,clearingColor, isEnabled, partType)
 		{
 		}
 		public override bool Draw(Anchor parentAnchor)

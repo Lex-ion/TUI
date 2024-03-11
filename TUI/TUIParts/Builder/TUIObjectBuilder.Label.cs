@@ -16,7 +16,7 @@ namespace TUI.TUIParts.Builder
 			ValidateName(name);
 			anchor ??= Defaults.DefaultAnchor; 
 			
-			TUILabelPart label = new(name, anchor, content, maxLineLength, foreColor, backColor, isEnabled, TUIObjectPartType.LABEL);
+			TUILabelPart label = new(name, anchor, content, maxLineLength, foreColor, backColor, Defaults.DefaultBlankColor, isEnabled, TUIObjectPartType.LABEL);
 			Product.AddPart(label);
 			return this;
 		}

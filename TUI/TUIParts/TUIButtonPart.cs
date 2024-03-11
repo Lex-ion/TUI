@@ -25,7 +25,7 @@ namespace TUI.TUIParts
             }
         }
 
-        public TUIButtonPart(string name, Anchor? anchor, string? content, Color foreColor, Color backColor, Color onCursorColorFore, Color onCursorColorBack, bool isEnabled, TUIObjectPartType partType) : base(name, anchor, content?.Length ?? 0, 1, foreColor, backColor, onCursorColorFore, onCursorColorBack, isEnabled, partType)
+        public TUIButtonPart(string name, Anchor? anchor, string? content, Color foreColor, Color backColor, Color onCursorColorFore, Color onCursorColorBack,Color clearingColor, bool isEnabled, TUIObjectPartType partType) : base(name, anchor, content?.Length ?? 0, 1, foreColor, backColor, onCursorColorFore, onCursorColorBack,clearingColor, isEnabled, partType)
         {
             _content = content;
 

@@ -32,7 +32,7 @@ namespace TUI.TUIParts
 
         public int LineLenght => Height > 1 ? Width : Content!.Length;
 
-		public TUILabelPart(string name, Anchor? anchor, string? content,int maxLineLength, Color foreColor, Color backColor, bool isEnabled, TUIObjectPartType partType) : base(name, anchor, content?.Length ?? 0, 1, foreColor, backColor, isEnabled, partType)
+		public TUILabelPart(string name, Anchor? anchor, string? content,int maxLineLength, Color foreColor, Color backColor,Color clearingColor, bool isEnabled, TUIObjectPartType partType) : base(name, anchor, content?.Length ?? 0, 1, foreColor, backColor,clearingColor, isEnabled, partType)
         {
             _MaxLineLenght = maxLineLength;
             _content = content;

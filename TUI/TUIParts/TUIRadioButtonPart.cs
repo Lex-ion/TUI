@@ -23,7 +23,7 @@ namespace TUI.TUIParts
 			}
 		}
 		bool _radioTicked;
-		public TUIRadioButtonPart(string name, int radioFamily, string content,bool isTicked, Anchor? anchor, Color foreColor, Color backColor, Color onCursorColorFore, Color onCursorColorBack, bool isEnabled, TUIObjectPartType partType) : base(name, anchor, content?.Length+2??1, 1, foreColor, backColor, onCursorColorFore, onCursorColorBack, isEnabled, partType)
+		public TUIRadioButtonPart(string name, int radioFamily, string content,bool isTicked, Anchor? anchor, Color foreColor, Color backColor, Color onCursorColorFore, Color onCursorColorBack,Color clearingColor, bool isEnabled, TUIObjectPartType partType) : base(name, anchor, content?.Length+2??1, 1, foreColor, backColor, onCursorColorFore, onCursorColorBack,clearingColor, isEnabled, partType)
 		{
 			RadioFamilyID = radioFamily;
 			_content=content;

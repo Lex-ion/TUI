@@ -21,7 +21,7 @@ namespace TUI.TUIParts.Builder
 			
 			anchor ??= Defaults.DefaultAnchor;
 
-			TUITextBoxPart tb = new(name, anchor, width, (int)height, text!, maxChars, (Color)foreColor, (Color)backColor, (Color)interactionForeGround, (Color)interactionBackGround, isEnabled, TUIObjectPartType.PROGRESS_BAR,freeSpaceChar,secretChar,writingColFore,writingColBack);
+			TUITextBoxPart tb = new(name, anchor, width, (int)height, text!, maxChars, (Color)foreColor, (Color)backColor, (Color)interactionForeGround, (Color)interactionBackGround, Defaults.DefaultBlankColor, isEnabled, TUIObjectPartType.PROGRESS_BAR,freeSpaceChar,secretChar,writingColFore,writingColBack);
 			Product.AddPart(tb);
 
 			return this;

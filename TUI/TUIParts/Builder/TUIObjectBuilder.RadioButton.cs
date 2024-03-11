@@ -13,7 +13,7 @@ namespace TUI.TUIParts.Builder
 		public TUIObjectBuilder AddRadioButton(string name, int radioFamily, string content, bool isTicked, Anchor anchor , Color interactionForeGround, Color interactionBackGround , Color foreColor, Color backColor, bool isEnabled)
 		{
 
-			TUIRadioButtonPart rb = new(name, radioFamily, content, isTicked, anchor, foreColor, backColor, interactionForeGround, interactionBackGround, isEnabled, TUIObjectPartType.RADIO_BUTTON);
+			TUIRadioButtonPart rb = new(name, radioFamily, content, isTicked, anchor, foreColor, backColor, interactionForeGround, interactionBackGround, Defaults.DefaultBlankColor, isEnabled, TUIObjectPartType.RADIO_BUTTON);
 			Product.AddPart(rb);
 			return this;
 		}

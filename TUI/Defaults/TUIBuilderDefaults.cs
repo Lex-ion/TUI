@@ -60,7 +60,7 @@ namespace TUI.Defaults
 			DefaultBackGroundColor = defaultBackGroundColor;
 			DefaultForeGroundColor = defaultForeGroundColor;
 
-			DefaultBlankColor = defaultBackGroundColor;
+			DefaultBlankColor = Color.Black;
 
 			DefaultAnchor = new();
 			DefaultButton = new();
@@ -71,7 +71,23 @@ namespace TUI.Defaults
 			DefaultTUIPathSelector = new();
 			NumberBoxDefaults = new();
 		}
+		public TUIBuilderDefaults(Color defaultForeGroundColor, Color defaultBackGroundColor,Color clearingColor)
+		{
+			DefaultBackGroundColor = defaultBackGroundColor;
+			DefaultForeGroundColor = defaultForeGroundColor;
+
+			DefaultBlankColor = clearingColor;
+
+			DefaultAnchor = new();
+			DefaultButton = new();
+			DefaultRadioButton = DefaultButton;
+			DefaultFrame = new(defaultForeGroundColor, defaultBackGroundColor);
+			DefaultProgressBar = new();
+			DefaultTextBox = new();
+			DefaultTUIPathSelector = new();
+			NumberBoxDefaults = new();
+		}
 
 
-    }
+	}
 }

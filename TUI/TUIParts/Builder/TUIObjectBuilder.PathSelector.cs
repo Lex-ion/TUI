@@ -17,7 +17,7 @@ namespace TUI.TUIParts.Builder
 			if (width < 1)
 				throw new ArgumentException("Width must be greater than 1");
 
-			TUIPathSelectorPart ps = new(name, anchor, width, height, text, 0, foreColor, backColor, interactionForeGround, interactionBackGround, isEnabled, TUIObjectPartType.PATH_SELECTOR, '_', '*', writingColorFore, writingColorBack, selectionColor);
+			TUIPathSelectorPart ps = new(name, anchor, width, height, text, 0, foreColor, backColor, interactionForeGround, interactionBackGround, Defaults.DefaultBlankColor, isEnabled, TUIObjectPartType.PATH_SELECTOR, '_', '*', writingColorFore, writingColorBack, selectionColor);
 			Product.AddPart(ps);
 			return this;
 		}

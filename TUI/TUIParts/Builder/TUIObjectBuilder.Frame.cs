@@ -15,7 +15,7 @@ namespace TUI.TUIParts.Builder
 		{
 			width += 2;
 			height += 2;
-			TUIFramePart frame = new(name, anchor, width, height, style, foreColor, backColor, isEnabled, TUIObjectPartType.FRAME);
+			TUIFramePart frame = new(name, anchor, width, height, style, foreColor, backColor, Defaults.DefaultBlankColor, isEnabled, TUIObjectPartType.FRAME);
 			Product.AddPart(frame);
 			return this;
 		}

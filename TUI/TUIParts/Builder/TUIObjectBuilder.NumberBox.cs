@@ -13,7 +13,7 @@ namespace TUI.TUIParts.Builder
 	{
 		public TUIObjectBuilder AddNumberBox(string name, int width, Anchor anchor, int value, int max, int min, bool isEnabled, Color interactionForeGround, Color interactionBackGround, Color foreColor, Color backColor,Color writingFore, Color writingBack)
 		{
-			TUINumberBoxPart nb = new(name, anchor, width, value, max, min, foreColor, backColor, interactionForeGround, interactionBackGround,writingFore,writingBack, (bool)isEnabled, TUIObjectPartType.NUMBER_BOX);
+			TUINumberBoxPart nb = new(name, anchor, width, value, max, min, foreColor, backColor, interactionForeGround, interactionBackGround,writingFore,writingBack, Defaults.DefaultBlankColor, (bool)isEnabled, TUIObjectPartType.NUMBER_BOX);
 			Product.AddPart(nb);
 			return this;
 		}

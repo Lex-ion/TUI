@@ -12,7 +12,7 @@ namespace TUI.TUIParts.Builder
 	{
 		public TUIObjectBuilder AddProgressBar(string name, Anchor anchor, int width, int height, int value, int maximum, int minimum, Color foreColor , Color backColor , bool isEnabled )
 		{
-			TUIProgressBarPart pb = new(name, anchor, width, height, value, maximum, minimum, foreColor, backColor, isEnabled, TUIObjectPartType.PROGRESS_BAR);
+			TUIProgressBarPart pb = new(name, anchor, width, height, value, maximum, minimum, foreColor, backColor,Defaults.DefaultBlankColor, isEnabled, TUIObjectPartType.PROGRESS_BAR);
 			Product.AddPart(pb);
 
 			return this;

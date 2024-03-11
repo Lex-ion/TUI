@@ -68,7 +68,9 @@ namespace TUI.TUIParts
 		public Color ForeColor { get; set; }
 		public Color BackColor { get; set; }
 
-		protected AbstractTUIObjectPart(string name, Anchor? anchor, int width, int height, Color foreColor, Color backColor, bool isEnabled, TUIObjectPartType partType)
+		public Color ClearingColor { get;private set; }
+
+		protected AbstractTUIObjectPart(string name, Anchor? anchor, int width, int height, Color foreColor, Color backColor,Color clearingColor, bool isEnabled, TUIObjectPartType partType)
 		{
 			Name = name;
 			_anchor = anchor ?? new();
@@ -78,6 +80,7 @@ namespace TUI.TUIParts
 			_height = height;
 			ForeColor = foreColor;
 			BackColor = backColor;
+			ClearingColor = clearingColor;
 		}
 
 
@@ -93,7 +96,10 @@ namespace TUI.TUIParts
 
 		public virtual bool Clear(Anchor parentAnchor)
 		{
-			Console.BackgroundColor = ConsoleColor.Black;
+			if (ClearingColor == Color.Black)
+				Console.BackgroundColor = ConsoleColor.Black;
+			else
+			UseColors(ClearingColor,ClearingColor);
 
 			if (!SetCursor(parentAnchor.Left, parentAnchor.Top))
 				return false;

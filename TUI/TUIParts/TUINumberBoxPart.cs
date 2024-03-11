@@ -54,8 +54,8 @@ namespace TUI.TUIParts
 
         Anchor _parentAnchor;
 
-        public TUINumberBoxPart(string name, Anchor? anchor, int width, int value, int max, int min, Color foreColor, Color backColor, Color onCursorColorFore, Color onCursorColorBack,Color writingFore,Color writingBack, bool isEnabled, TUIObjectPartType partType) 
-            : base(name, anchor, width, 1, foreColor, backColor, onCursorColorFore, onCursorColorBack, isEnabled, partType)
+        public TUINumberBoxPart(string name, Anchor? anchor, int width, int value, int max, int min, Color foreColor, Color backColor, Color onCursorColorFore, Color onCursorColorBack,Color writingFore,Color writingBack,Color clearingColor, bool isEnabled, TUIObjectPartType partType) 
+            : base(name, anchor, width, 1, foreColor, backColor, onCursorColorFore, onCursorColorBack,clearingColor, isEnabled, partType)
         {
             _value = value;
             _minimum = min;

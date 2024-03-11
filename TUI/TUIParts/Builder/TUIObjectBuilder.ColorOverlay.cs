@@ -13,7 +13,7 @@ namespace TUI.TUIParts.Builder
 		public TUIObjectBuilder AddColorOverlay(string name, int width, int height, Color color, Anchor anchor)
 		{
 
-			TUIColorOverlay co = new(name, anchor, width, height, color, color, true, TUIObjectPartType.COLOR_OVERLAY);
+			TUIColorOverlay co = new(name, anchor, width, height, color, color, Defaults.DefaultBlankColor, true, TUIObjectPartType.COLOR_OVERLAY);
 			Product.AddPart(co);
 			return this;
 		}

@@ -33,8 +33,8 @@ namespace TUI.TUIParts
 		public Color WritingColorFore { get; set; }
 		public Color WritingColorBack { get; set; }
 
-		public TUITextBoxPart(string name, Anchor? anchor, int width, int height, string text,int maxChars, Color foreColor, Color backColor, Color onCursorColorFore, Color onCursorColorBack, bool isEnabled, TUIObjectPartType partType,char freeSpaceChar, char secretChar, Color writingColorFore, Color writingColorBack) 
-            : base(name, anchor, width, height, foreColor, backColor, onCursorColorFore, onCursorColorBack, isEnabled, partType)
+		public TUITextBoxPart(string name, Anchor? anchor, int width, int height, string text,int maxChars, Color foreColor, Color backColor, Color onCursorColorFore, Color onCursorColorBack,Color clearingColor, bool isEnabled, TUIObjectPartType partType,char freeSpaceChar, char secretChar, Color writingColorFore, Color writingColorBack) 
+            : base(name, anchor, width, height, foreColor, backColor, onCursorColorFore, onCursorColorBack,clearingColor, isEnabled, partType)
         {MaxChars=maxChars;
             _text = text ?? "";
             SecretChar=secretChar;

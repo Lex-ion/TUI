@@ -30,7 +30,7 @@ namespace TUI.TUIParts
             }
         }
         bool _isSelected;
-        protected AbstractTUIInteractivePart(string name, Anchor? anchor, int width, int height, Color foreColor, Color backColor, Color onCursorColorFore, Color onCursorColorBack, bool isEnabled, TUIObjectPartType partType) : base(name, anchor, width, height, foreColor, backColor, isEnabled, partType)
+        protected AbstractTUIInteractivePart(string name, Anchor? anchor, int width, int height, Color foreColor, Color backColor, Color onCursorColorFore, Color onCursorColorBack,Color clearingColor, bool isEnabled, TUIObjectPartType partType) : base(name, anchor, width, height, foreColor, backColor,clearingColor, isEnabled, partType)
         {
             OnCursorColorFore = onCursorColorFore;
             OnCursorColorBack = onCursorColorBack;
