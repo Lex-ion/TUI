@@ -65,7 +65,7 @@ namespace TUI.Defaults
 			DefaultAnchor = new();
 			DefaultButton = new();
 			DefaultRadioButton = DefaultButton;
-			DefaultFrame = new();
+			DefaultFrame = new(defaultForeGroundColor,defaultBackGroundColor);
 			DefaultProgressBar = new();
 			DefaultTextBox = new();
 			DefaultTUIPathSelector = new();

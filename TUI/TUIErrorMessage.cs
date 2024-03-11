@@ -30,7 +30,7 @@ namespace TUI
 				.Build(new Anchor(width, height +1));
 
 
-			TUIMessageBox.Show(message, title, Color.FromArgb(139, 0, 0), Color.Black,foo);
+			TUIMessageBox.Show(message, title, Color.FromArgb(200,0,0), Color.Black,foo);
 
 			@object.Clear();
 

@@ -24,6 +24,12 @@ namespace TUI.Defaults
 			DefaultBackGroundColor = Color.Black;
 			DefaultStyle = TUIFrameStyle.GetStyle("double");
 		}
+		public TUIFrameDefaults(Color defaultForeGroundColor, Color defaultBackGroundColor)
+		{
+			DefaultForeGroundColor = defaultForeGroundColor;
+			DefaultBackGroundColor = defaultBackGroundColor;
+			DefaultStyle = TUIFrameStyle.GetStyle("double");
+		}
 	}
 
 	public class TUIFrameStyle

@@ -13,19 +13,14 @@ namespace TUI.Defaults
 		public int DefaultMaxValue { get; set; }
 		public int DefaultMinValue { get; set; } 
 
-		public char FillChar { get; set; }
-		public char EmptyChar { get; set; }
-
 		public Color FillColor { get; set; }
 		public Color EmptyColor { get; set; }
 
-		public TUIProgressBarDefaults(int defaultValue, int defaultMaxValue, int defaultMinValue, char fillChar, char emptyChar, Color fillColor, Color emptyColor)
+		public TUIProgressBarDefaults(int defaultValue, int defaultMaxValue, int defaultMinValue, Color fillColor, Color emptyColor)
 		{
 			DefaultValue = defaultValue;
 			DefaultMaxValue = defaultMaxValue;
 			DefaultMinValue = defaultMinValue;
-			FillChar = fillChar;
-			EmptyChar = emptyChar;
 			FillColor = fillColor;
 			EmptyColor = emptyColor;
 		}
@@ -35,10 +30,8 @@ namespace TUI.Defaults
 			DefaultValue = 0;
 			DefaultMaxValue = 100;
 			DefaultMinValue = 0;
-			FillChar = '█';
-			EmptyChar = '░';
 			FillColor = Color.DarkOrange;
-			EmptyColor = Color.White;
+			EmptyColor = Color.DarkViolet;
 		}
 
 	}

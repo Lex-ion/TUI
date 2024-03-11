@@ -10,24 +10,19 @@ namespace TUI.TUIParts.Builder
 {
 	public partial class TUIObjectBuilder
 	{
-		public TUIObjectBuilder AddProgressBar(string name, Anchor anchor, int width, int height, int value, int maximum, int minimum,char fillChar, char emptyChar , Color foreColor , Color backColor , bool isEnabled )
+		public TUIObjectBuilder AddProgressBar(string name, Anchor anchor, int width, int height, int value, int maximum, int minimum, Color foreColor , Color backColor , bool isEnabled )
 		{
-			TUIProgressBarPart pb = new(name, anchor, width, height, value, maximum, minimum,fillChar,emptyChar, foreColor, backColor, isEnabled, TUIObjectPartType.PROGRESS_BAR);
+			TUIProgressBarPart pb = new(name, anchor, width, height, value, maximum, minimum, foreColor, backColor, isEnabled, TUIObjectPartType.PROGRESS_BAR);
 			Product.AddPart(pb);
 
 			return this;
 		}
 
-		public TUIObjectBuilder AddProgressBar(string name, Anchor anchor, int width, int height, int value, int maximum, int minimum, char fillChar, char emptyChar)
-		{
-			var defs = Defaults.DefaultProgressBar;
-			return AddProgressBar(name, anchor, width, height, value, maximum, minimum, fillChar, emptyChar, defs.FillColor, defs.EmptyColor, true);
-		}
 
 		public TUIObjectBuilder AddProgressBar(string name, Anchor anchor, int width, int height, int value, int maximum, int minimum)
 		{
 			var defs = Defaults.DefaultProgressBar;
-			return AddProgressBar(name, anchor, width, height, value, maximum, minimum, defs.FillChar, defs.FillChar);
+			return AddProgressBar(name, anchor, width, height, value, maximum, minimum,defs.FillColor,defs.EmptyColor,true);
 		}
 		public TUIObjectBuilder AddProgressBar(string name, Anchor anchor, int width, int height)
 		{

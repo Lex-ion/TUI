@@ -30,8 +30,8 @@ namespace TUI
             TUIObject @object;
 			Builder.Reset();
 			@object = Builder
-				.AddColorOverlay("OU", LineLength + 2, 1, Color.FromArgb(255, 87, 51), new(-LineLength / 2 , -5- LabelHeight/2 ))
-				.AddColorOverlay("OD", LineLength + 2, 1, Color.FromArgb(255, 87, 51), new(-LineLength/ 2 ,  LabelHeight/2 + 6 +(LabelHeight / 2 > 0 ? -1 : 0)))
+				.AddColorOverlay("OU", LineLength + 2, 1,Color.FromArgb(200,200,0), new(-LineLength / 2 , -5- LabelHeight/2 ))
+				.AddColorOverlay("OD", LineLength + 2, 1,Color.FromArgb(200, 200, 0), new(-LineLength/ 2 ,  LabelHeight/2 + 6 +(LabelHeight / 2 > 0 ? -1 : 0)))
 				.Build (new Anchor(width, height+1) );
 			
 
