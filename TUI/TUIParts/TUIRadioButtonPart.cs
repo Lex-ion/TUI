@@ -9,7 +9,7 @@ using TUI.Structs;
 
 namespace TUI.TUIParts
 {
-	public class TUIRadioButtonPart : AbstractTUIInteractivePart, ITUILabel
+    public class TUIRadioButtonPart : AbstractTUIInteractivePart, ITUILabel
 	{
 		public event Action? ValueChanged;
 
