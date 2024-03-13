@@ -4,13 +4,10 @@ using TUI.TUIParts;
 using TUI.TUIParts.Builder;
 
 namespace TUI.Menus
-{
-    public class TUIMenu
+{/*
+    public class TUIMenu :AbstractTUIMenu
     {
-        public Dictionary<string, TUIObject> Objects = new();
-        public List<TUIObject> Interactables { get => Objects.Values.Where(o => o.IsInteractable).ToList(); }
-        public TUIObjectBuilder ObjectBuilder { get; set; }
-
+        /*
         int previousWidth;
         int previousHeigth;
 
@@ -25,11 +22,11 @@ namespace TUI.Menus
         }
         public void Prepare()
         {
-            if (Interactables.Any())
+           /* if (Interactables.Any())
             {
                 selectedInteractable = Interactables.FirstOrDefault();
                 selectedInteractable.TUIInteractable.IsSelected = true;
-            }
+            }*//*
         }
 
         public void DrawMenu()
@@ -85,5 +82,5 @@ namespace TUI.Menus
         }
 
 
-    }
+    }*/
 }

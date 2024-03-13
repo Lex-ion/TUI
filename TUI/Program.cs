@@ -21,7 +21,11 @@ namespace TUI
 			TUIWarningMessage.Show("Lorem ipsum dál to neumím a asi ani nechci no. Takže asi tak. Tenhle text je fakt dlouhej!Lorem ipsum dál to neumím a asi ani nechci no. Takže asi tak. Tenhle text je fakt dlouhej!Lorem ipsum dál to neumím a asi ani nechci no. Takže asi tak. Tenhle text je fakt dlouhej!Lorem ipsum dál to neumím a asi ani nechci no. Takže asi tak. Tenhle text je fakt dlouhej!Lorem ipsum dál to neumím a asi ani nechci no. Takže asi tak. Tenhle text je fakt dlouhej!Lorem ipsum dál to neumím a asi ani nechci no. Takže asi tak. Tenhle text je fakt dlouhej!Lorem ipsum dál to neumím a asi ani nechci no. Takže asi tak. Tenhle text je fakt dlouhej!Lorem ipsum dál to neumím a asi ani nechci no. Takže asi tak. Tenhle text je fakt dlouhej!Lorem ipsum dál to neumím a asi ani nechci no. Takže asi tak. Tenhle text je fakt dlouhej!Lorem ipsum dál to neumím a asi ani nechci no. Takže asi tak. Tenhle text je fakt dlouhej!Lorem ipsum dál to neumím a asi ani nechci no. Takže asi tak. Tenhle text je fakt dlouhej!Lorem ipsum dál to neumím a asi ani nechci no. Takže asi tak. Tenhle text je fakt dlouhej!", "Ahoj");
 			TUIErrorMessage.Show("Lorem ipsum dál to neumím a asi ani nechci no. Takže asi tak. Tenhle text je fakt dlouhej!Lorem ipsum dál to neumím a asi ani nechci no. Takže asi tak. Tenhle text je fakt dlouhej!Lorem ipsum dál to neumím a asi ani nechci no. Takže asi tak. Tenhle text je fakt dlouhej!Lorem ipsum dál to neumím a asi ani nechci no. Takže asi tak. Tenhle text je fakt dlouhej!Lorem ipsum dál to neumím a asi ani nechci no. Takže asi tak. Tenhle text je fakt dlouhej!Lorem ipsum dál to neumím a asi ani nechci no. Takže asi tak. Tenhle text je fakt dlouhej!Lorem ipsum dál to neumím a asi ani nechci no. Takže asi tak. Tenhle text je fakt dlouhej!Lorem ipsum dál to neumím a asi ani nechci no. Takže asi tak. Tenhle text je fakt dlouhej!Lorem ipsum dál to neumím a asi ani nechci no. Takže asi tak. Tenhle text je fakt dlouhej!Lorem ipsum dál to neumím a asi ani nechci no. Takže asi tak. Tenhle text je fakt dlouhej!Lorem ipsum dál to neumím a asi ani nechci no. Takže asi tak. Tenhle text je fakt dlouhej!Lorem ipsum dál to neumím a asi ani nechci no. Takže asi tak. Tenhle text je fakt dlouhej!", "Ahoj");
 
-			TUIMenu menu = new(new());
+			TestMenu menu = new(new Defaults.TUIBuilderDefaults(),Color.LimeGreen);
+
+            TUIManager.Start(menu);
+
+            /*
             //-----OLD
             menu.ObjectBuilder.AddButton("l", "Zkusit", Beeper);
             menu.ObjectBuilder.AddFrame("f", "tlačítko".Length, 1, new(-1, -1));
@@ -41,10 +45,14 @@ namespace TUI
                 .Build("Test");
 
             menu.ObjectBuilder.Reset();
-            menu.ObjectBuilder
-                .AddFrame("F1", 20, 3, new(-1, -1))
-                .AddTextBox("T1", 20, 3)
-                .Build("TB", new(40, 20));
+			menu.ObjectBuilder
+				.AddFrame("F1", 20, 3, new(-1, -1))
+                .AddTextBox("T1", 20, 3);
+
+
+			menu.ObjectBuilder.FabricateOverLay(0, 0, Color.Red, new());
+
+			menu.ObjectBuilder.Build("TB", new(40, 20));
 
             menu.ObjectBuilder.Reset();
             menu.ObjectBuilder.AddProgressBar("pb", new Anchor(), 20, 3, 0,10,0)                
@@ -72,6 +80,7 @@ namespace TUI
             menu.ObjectBuilder.Reset();
             menu.ObjectBuilder.AddNumberBox("NB",5)
                 .Build("NB",new(5,9));
+
 
 
 			menu.Prepare();
@@ -102,7 +111,7 @@ namespace TUI
                 TUIProgressBarPart pb = (TUIProgressBarPart)menu.Objects["PB"].Parts["pb"];
                 pb.Value++;
             }
-
+            */
         }
         public static void test() {
             Random random = new Random();
