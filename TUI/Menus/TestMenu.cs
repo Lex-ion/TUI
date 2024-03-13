@@ -31,6 +31,10 @@ namespace TUI.Menus
 
 			builder.AddButton("b", "Button 5");
 			builder.Build("Batn5", new(40, 20));
+
+			builder.AddPathSelector("p", 15, 5)
+				.Build("p",new(80,8));
+
 		}
 	}
 }

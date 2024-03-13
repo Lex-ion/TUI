@@ -45,14 +45,22 @@ namespace TUI
         {
             CurrentMenu = menu;
             CurrentMenu.Clear();
-            CurrentMenu.Draw();
 
             while
                 (true)
             {
-                CurrentMenu.HandleInput(GetKey());
                 CurrentMenu.Draw();
+                CurrentMenu.HandleInput(GetKey());
             }
+        }
+
+        public static void RedrawCurrent()
+        {
+            if (CurrentMenu is null)
+                return;
+
+            CurrentMenu.Clear();
+            CurrentMenu.Draw();
         }
 
     }

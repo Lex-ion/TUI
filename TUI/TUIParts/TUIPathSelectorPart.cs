@@ -68,6 +68,7 @@ namespace TUI.TUIParts
 
 			} while (info.KeyChar != '\r'&&info.Key!=ConsoleKey.Escape);
 			Clear();
+			TUIManager.RedrawCurrent();
 		}
 
 		void ProcessKey(ConsoleKeyInfo info)

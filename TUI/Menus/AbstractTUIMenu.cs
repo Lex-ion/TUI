@@ -1,6 +1,7 @@
 ﻿using System.Drawing;
 using TUI.Defaults;
 using TUI.Structs;
+using TUI.TUIParts;
 using TUI.TUIParts.Builder;
 
 namespace TUI.Menus
@@ -52,6 +53,10 @@ namespace TUI.Menus
 		public void Clear()
 		{
 			TUIObject bckgr = objectBuilder!.FabricateOverLay(TUIManager.BufferWidth, TUIManager.BufferHeight, BackGroundColor, new());
+
+			TUIColorOverlay co = bckgr.Parts!.Values.OfType<TUIColorOverlay>().First();
+			co.UseUnsafeDrawing = true;
+
 			bckgr.Draw();
 		}
 

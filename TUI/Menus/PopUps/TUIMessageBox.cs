@@ -63,6 +63,8 @@ namespace TUI.Menus.PopUps
 
             @object.Clear();
 
+            //TUIManager.RedrawCurrent();
+
             void Done() => focused = false;
         }
     }

@@ -10,12 +10,20 @@ namespace TUI.TUIParts
 {
     public class TUIColorOverlay : AbstractTUIObjectPart
 	{
-		
+		public bool UseUnsafeDrawing { get; set; }
 		public TUIColorOverlay(string name, Anchor? anchor, int width, int height, Color foreColor, Color backColor, Color clearingColor, bool isEnabled, TUIObjectPartType partType) : base(name, anchor, width, height, foreColor, backColor,clearingColor, isEnabled, partType)
 		{
+			UseUnsafeDrawing = false;
 		}
 		public override bool Draw(Anchor parentAnchor)
 		{
+			if(UseUnsafeDrawing)
+			{
+				UnsafeDraw(parentAnchor);
+				return true;
+			}
+
+
 			if (!base.Draw(parentAnchor))
 				return false;
 
@@ -35,6 +43,17 @@ namespace TUI.TUIParts
 			}
 
 			return true;
+		}
+
+		public void UnsafeDraw(Anchor parentAnchor)
+		{
+			UseColors();
+			for (int i = 0; i < Height; i++)
+			{
+					Console.SetCursorPosition(Anchor.Left + parentAnchor.Left , Anchor.Top + parentAnchor.Top + i);
+					Console.Write(new string (' ',Width));
+				
+			}
 		}
 	}
 }
