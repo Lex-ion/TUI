@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TUI.Defaults;
+using TUI.Menus;
 using TUI.Structs;
 
 namespace TUI.TUIParts.Builder
 {
-	public partial class TUIObjectBuilder //Core file containing essentials for builder
+    public partial class TUIObjectBuilder //Core file containing essentials for builder
 	{
 		public TUIObject Product { get;protected set; }
 		public TUIBuilderDefaults Defaults { get; set; }

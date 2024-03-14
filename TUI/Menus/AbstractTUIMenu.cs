@@ -7,7 +7,7 @@ using TUI.TUIParts.Builder;
 
 namespace TUI.Menus
 {
-	public abstract class AbstractTUIMenu : ITUIMenu
+    public abstract class AbstractTUIMenu : ITUIMenu
 	{
 		public Dictionary<string, TUIObject> Objects { get; protected set; }
 
