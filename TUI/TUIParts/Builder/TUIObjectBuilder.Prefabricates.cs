@@ -11,7 +11,7 @@ namespace TUI.TUIParts.Builder
 {
 	public partial class TUIObjectBuilder
 	{
-		private TUIObject oldProduct;
+		private TUIObject? oldProduct;
 
 		private void SaveProduct()
 		{
@@ -19,7 +19,7 @@ namespace TUI.TUIParts.Builder
 		}
 		private void LoadProduct()
 		{
-			Product=oldProduct;
+			Product=oldProduct??throw new Exception("There is not saved product");
 		}
 
 		public TUIObject FabricateOverLay(int width, int height, Color color,Anchor anchor)

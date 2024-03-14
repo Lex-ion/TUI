@@ -30,11 +30,11 @@ namespace TUI.Menus.PopUps
             builder
                 .AddColorOverlay("O", LineLength + 3, LabelHeight + 6, backColor, new(-LineLength / 2 - 1, -LabelHeight / 2 - 2))
                 .AddLabel("L0", text, new(-LineLength / 2 + 1, -LabelHeight / 2), TUIManager.BufferWidth - 10)
-                .AddFrame("F", LineLength + 2, 5 + builder.Product.Parts["L0"].Height, new Anchor(-LineLength / 2 - 1, -LabelHeight / 2 - 2))
+                .AddFrame("F", LineLength + 2, 5 + builder.Product.Parts!["L0"].Height, new Anchor(-LineLength / 2 - 1, -LabelHeight / 2 - 2))
                 .AddButton("B", "> OK <", new Anchor(-2, LabelHeight / 2 + (LabelHeight / 2 > 0 ? 2 : 3)));
 
             if (title != null)
-                builder.AddLabel("L1", title, new(-LineLength / 2 + 1, -LabelHeight / 2 - 2));
+                builder.AddLabel("L1", title, new(builder.Product.Parts["F"].Anchor.Left+2, builder.Product.Parts["F"].Anchor.Top));
 
             @object = builder.Build(new Anchor(width, height));
 

@@ -1,5 +1,6 @@
 ﻿using System.Drawing;
 using TUI.Defaults;
+using TUI.Menus.PopUps;
 using TUI.Structs;
 using TUI.TUIParts;
 using TUI.TUIParts.Builder;
@@ -12,9 +13,7 @@ namespace TUI.Menus
 
 		public List<TUIObject> Interactables { get => Objects.Values.Where(o => o.IsInteractable).ToList(); }
 
-		public Color BackGroundColor { get; private set; }
-
-		private int? selectedInteractableIndex;
+		public Color BackGroundColor { get; protected set; }
 
 		private TUIObject? selectedInteractable;
 
@@ -90,6 +89,16 @@ namespace TUI.Menus
 				selectedInteractable = SearchObject(selectedInteractable, SearchOptions.DOWN) ?? selectedInteractable;
 				selectedInteractable.TUIInteractable!.IsSelected = true;
 			}
+			else if (info.Key == ConsoleKey.F1)
+			{
+				ShowHelp();
+				TUIManager.RedrawCurrent();
+			}
+		}
+
+		protected virtual void ShowHelp()
+		{
+			TUIMessageBox.Show("Nápověda zde není k dispozici.", "Nápověda", Color.DarkSlateBlue,Color.GhostWhite);			
 		}
 
 		TUIObject? SearchObject(TUIObject originObject, SearchOptions searchOptions)
@@ -107,12 +116,12 @@ namespace TUI.Menus
 					case SearchOptions.RIGHT:
 						for (int i = 0; i < Math.Abs(searchingAnchor.Left - originAnchor.Left) / 2; i++)
 						{
-							foundObj ??= Objects.Values.Where(o => o.Anchor.Left == searchingAnchor.Left && o.Anchor.Top == searchingAnchor.Top - i).FirstOrDefault();
+							foundObj ??= Objects.Values.Where(o => o.Anchor.Left == searchingAnchor.Left && o.Anchor.Top == searchingAnchor.Top - i&&o.IsInteractable).FirstOrDefault();
 						}
 
 						for (int i = 0; i < Math.Abs(searchingAnchor.Left - originAnchor.Left) / 2; i++)
 						{
-							foundObj ??= Objects.Values.Where(o => o.Anchor.Left == searchingAnchor.Left && o.Anchor.Top == searchingAnchor.Top + i).FirstOrDefault();
+							foundObj ??= Objects.Values.Where(o => o.Anchor.Left == searchingAnchor.Left && o.Anchor.Top == searchingAnchor.Top + i&&o.IsInteractable).FirstOrDefault();
 						}
 						searchingAnchor = new(searchingAnchor.Left + 1, searchingAnchor.Top);
 						break;
@@ -120,12 +129,12 @@ namespace TUI.Menus
 					case SearchOptions.LEFT:
 						for (int i = 0; i < Math.Abs(searchingAnchor.Left - originAnchor.Left) / 2; i++)
 						{
-							foundObj ??= Objects.Values.Where(o => o.Anchor.Left == searchingAnchor.Left && o.Anchor.Top == searchingAnchor.Top - i).FirstOrDefault();
+							foundObj ??= Objects.Values.Where(o => o.Anchor.Left == searchingAnchor.Left && o.Anchor.Top == searchingAnchor.Top - i && o.IsInteractable).FirstOrDefault();
 						}
 
 						for (int i = 0; i < Math.Abs(searchingAnchor.Left - originAnchor.Left) / 2; i++)
 						{
-							foundObj ??= Objects.Values.Where(o => o.Anchor.Left == searchingAnchor.Left && o.Anchor.Top == searchingAnchor.Top + i).FirstOrDefault();
+							foundObj ??= Objects.Values.Where(o => o.Anchor.Left == searchingAnchor.Left && o.Anchor.Top == searchingAnchor.Top + i&& o.IsInteractable).FirstOrDefault();
 						}
 						searchingAnchor = new(searchingAnchor.Left - 1, searchingAnchor.Top);
 						break;
@@ -133,12 +142,12 @@ namespace TUI.Menus
 					case SearchOptions.DOWN:
 						for (int i = 0; i < Math.Abs(searchingAnchor.Top - originAnchor.Top); i++)
 						{
-							foundObj ??= Objects.Values.Where(o => o.Anchor.Left == searchingAnchor.Left-i && o.Anchor.Top == searchingAnchor.Top ).FirstOrDefault();
+							foundObj ??= Objects.Values.Where(o => o.Anchor.Left == searchingAnchor.Left-i && o.Anchor.Top == searchingAnchor.Top && o.IsInteractable).FirstOrDefault();
 						}
 
 						for (int i = 0; i < Math.Abs(searchingAnchor.Top - originAnchor.Top); i++)
 						{
-							foundObj ??= Objects.Values.Where(o => o.Anchor.Left == searchingAnchor.Left+i && o.Anchor.Top == searchingAnchor.Top).FirstOrDefault();
+							foundObj ??= Objects.Values.Where(o => o.Anchor.Left == searchingAnchor.Left+i && o.Anchor.Top == searchingAnchor.Top&& o.IsInteractable).FirstOrDefault();
 						}
 						searchingAnchor = new(searchingAnchor.Left, searchingAnchor.Top+1);
 						break;

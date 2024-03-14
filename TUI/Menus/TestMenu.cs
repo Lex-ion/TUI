@@ -35,6 +35,16 @@ namespace TUI.Menus
 			builder.AddPathSelector("p", 15, 5)
 				.Build("p",new(80,8));
 
+
+			Objects["Batn1"].TUIInteractable!.Interacted += Barvička;
+
+		}
+
+		public void Barvička()
+		{
+			Random rnd = new();
+			BackGroundColor = Color.FromArgb(rnd.Next(255), rnd.Next(255), rnd.Next(255));
+			TUIManager.RedrawCurrent();
 		}
 	}
 }
