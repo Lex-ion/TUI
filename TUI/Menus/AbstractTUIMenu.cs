@@ -155,12 +155,12 @@ namespace TUI.Menus
 					case SearchOptions.UP:
 						for (int i = 0; i < Math.Abs(searchingAnchor.Top - originAnchor.Top) ; i++)
 						{
-							foundObj ??= Objects.Values.Where(o => o.Anchor.Left == searchingAnchor.Left - i && o.Anchor.Top == searchingAnchor.Top).FirstOrDefault();
+							foundObj ??= Objects.Values.Where(o => o.Anchor.Left == searchingAnchor.Left - i && o.Anchor.Top == searchingAnchor.Top&&o.IsInteractable).FirstOrDefault();
 						}
 
 						for (int i = 0; i < Math.Abs(searchingAnchor.Left - originAnchor.Left) ; i++)
 						{
-							foundObj ??= Objects.Values.Where(o => o.Anchor.Left == searchingAnchor.Left + i && o.Anchor.Top == searchingAnchor.Top).FirstOrDefault();
+							foundObj ??= Objects.Values.Where(o => o.Anchor.Left == searchingAnchor.Left + i && o.Anchor.Top == searchingAnchor.Top&&o.IsInteractable).FirstOrDefault();
 						}
 						searchingAnchor = new(searchingAnchor.Left, searchingAnchor.Top -1);
 						break;
