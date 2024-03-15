@@ -5,7 +5,7 @@ using TUI.Structs;
 
 namespace TUI.TUIParts
 {
-    internal class TUIPathSelectorPart : TUITextBoxPart
+    public class TUIPathSelectorPart : TUITextBoxPart
 	{
 		public new int Height
 		{
@@ -17,20 +17,23 @@ namespace TUI.TUIParts
 		}
 		new int _height;
 
-		DirectoryInfo? _CurrentDirectory;
-		DirectoryInfo[]? _subDirs => _CurrentDirectory?.GetDirectories("*",new EnumerationOptions() { AttributesToSkip=FileAttributes.System|FileAttributes.Hidden});
-		DriveInfo[] _drives => DriveInfo.GetDrives().Where(d=>d.IsReady).ToArray();
+		protected DirectoryInfo? _CurrentDirectory;
+		protected DirectoryInfo[]? _subDirs => _CurrentDirectory?.GetDirectories("*",new EnumerationOptions() { AttributesToSkip=FileAttributes.System|FileAttributes.Hidden});
+		protected DriveInfo[] _drives => DriveInfo.GetDrives().Where(d=>d.IsReady).ToArray();
 		string? _previousText;
 
-		int _countOfItems
+		protected virtual int _countOfItems
 		{
 			get
 			{
 				return _subDirs?.Length-1 ?? _drives?.Length-1 ?? 0;
 			}
 		}
+
+		protected virtual string[]? Names=>_subDirs?.Select(s=>s.Name).ToArray()??null;
+
 		bool _displayedDirs => _subDirs is not null;
-		int _selectedIndex;
+		protected int _selectedIndex;
 		int _displayoffset;
 
 		public Color SelectedColor { get; protected set; }
@@ -95,33 +98,7 @@ namespace TUI.TUIParts
 			}
 			_selectedIndex = _selectedIndex < 0 ? 0 : _selectedIndex;
 
-			switch (info.Key)
-			{
-				case ConsoleKey.RightArrow:
-					if (_subDirs is not null && _subDirs?.Length == 0)
-						break;
-					_text = _subDirs?[_selectedIndex].FullName ?? _drives[_selectedIndex].Name;
-					_CurrentDirectory = new(_subDirs?[_selectedIndex].FullName ?? _drives[_selectedIndex].Name);
-
-					_selectedIndex = 0;
-					_displayoffset = 0;
-					break;
-
-				case ConsoleKey.LeftArrow:
-
-					_displayoffset = 0;
-					_selectedIndex = 0;
-					if (_CurrentDirectory?.Parent is null)
-					{
-						_text = "";
-						_CurrentDirectory = null;
-						break;
-					}
-
-					_text = _CurrentDirectory.Parent.ToString();
-					_CurrentDirectory = _CurrentDirectory.Parent;
-					break;
-			}
+			DiveIn(info);
 			
 			#endregion
 
@@ -161,7 +138,38 @@ namespace TUI.TUIParts
 			#endregion
 		}
 
-		void Write(int delay=0)
+		protected virtual void DiveIn(ConsoleKeyInfo info)
+		{
+			switch (info.Key)
+			{
+				case ConsoleKey.RightArrow:
+					if (_subDirs is not null && _subDirs?.Length == 0)
+						break;
+					_text = _subDirs?[_selectedIndex].FullName ?? _drives[_selectedIndex].Name;
+					_CurrentDirectory = new(_subDirs?[_selectedIndex].FullName ?? _drives[_selectedIndex].Name);
+
+					_selectedIndex = 0;
+					_displayoffset = 0;
+					break;
+
+				case ConsoleKey.LeftArrow:
+
+					_displayoffset = 0;
+					_selectedIndex = 0;
+					if (_CurrentDirectory?.Parent is null)
+					{
+						_text = "";
+						_CurrentDirectory = null;
+						break;
+					}
+
+					_text = _CurrentDirectory.Parent.ToString();
+					_CurrentDirectory = _CurrentDirectory.Parent;
+					break;
+			}
+		}
+
+		protected virtual void Write(int delay=0)
 		{
 			UseInteractColor();
 			WriteText();
@@ -176,7 +184,7 @@ namespace TUI.TUIParts
 					continue;
 				}
 
-				string displayText = _subDirs?[i + _displayoffset].Name.ToString() ?? _drives[i + _displayoffset].ToString();
+				string displayText = Names?[i + _displayoffset] ?? _drives[i + _displayoffset].ToString();
 
 
 				if (displayText.Length > Width)
@@ -194,6 +202,8 @@ namespace TUI.TUIParts
 			}
 
 		}
+
+
 		void Clear()
 		{
 

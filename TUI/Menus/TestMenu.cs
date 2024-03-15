@@ -35,6 +35,9 @@ namespace TUI.Menus
 			builder.AddPathSelector("p", 15, 5)
 				.Build("p",new(80,8));
 
+			builder.AddFileSelector("fs",15,5,new())
+				.Build("f",new(80,7));
+
 
 			Objects["Batn1"].TUIInteractable!.Interacted += Barvička;
 
