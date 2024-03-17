@@ -30,10 +30,14 @@ namespace TUI.TUIParts
 		{
 			if (info.Key==ConsoleKey.LeftArrow ||_CurrentDirectory is null || (_subDirs?.Any(s => s.Name == Names![_selectedIndex])??false))
 			base.DiveIn(info);
-			else if (info.Key==ConsoleKey.RightArrow)
+			else if (info.Key==ConsoleKey.RightArrow&&Names is not null)
 			{
 				_text = files!.Where(f => f.Name == Names![_selectedIndex]).FirstOrDefault()!.FullName;
 			}
+		}
+		protected override bool ValidPath()
+		{
+			return File.Exists(_text);
 		}
 	}
 }

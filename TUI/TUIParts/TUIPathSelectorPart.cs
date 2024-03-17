@@ -74,6 +74,11 @@ namespace TUI.TUIParts
 			TUIManager.RedrawCurrent();
 		}
 
+		protected virtual bool ValidPath()
+		{
+			return Directory.Exists(_text);
+		}
+
 		void ProcessKey(ConsoleKeyInfo info)
 		{
 			#region List
@@ -107,10 +112,15 @@ namespace TUI.TUIParts
 			if (info.Key == ConsoleKey.Enter)
 			{
 				
-				Text = _text!=null&& _text.Length > 0 && new DirectoryInfo(_text).Exists ? _text : "";
 
-				if (  !Directory.Exists(Text))
+				if (!ValidPath())
+				{
 					TUIWarningMessage.Show("Zadaná cesta není validní!","CHYBA");
+					Text = "";
+					_CurrentDirectory= null;
+					return;
+				}
+				Text = _text??"";
 
 				InvokeSubmitted();
 				return;
@@ -178,7 +188,7 @@ namespace TUI.TUIParts
 			{
 				if (!SetCursor(ParentAnchor.Left + Anchor.Left, ParentAnchor.Top + Anchor.Top + 1 + i))
 					break;
-				if (i + _displayoffset > _countOfItems||i+_displayoffset>(Names?.Length-1??_drives.Length-1))
+				if (i + _displayoffset > _countOfItems||_CurrentDirectory is not null && Names is null)
 				{
 					Console.Write(new String(' ', Width));
 					continue;
