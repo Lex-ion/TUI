@@ -24,9 +24,7 @@ namespace TUI.TUIParts
 
 		FileInfo[]? files => _CurrentDirectory?.GetFiles()??null;
 
-		protected override int _countOfItems => (_subDirs?.Length  ?? 0 )+(files?.Length??0)<1
-			? _drives?.Length - 1 ?? 0
-			: (_subDirs?.Length  ?? 0) + (files?.Length  ?? 0)-1;
+		protected override int _countOfItems => Names?.Length - 1 ?? _drives.Length - 1;
 
 		protected override void DiveIn(ConsoleKeyInfo info)
 		{

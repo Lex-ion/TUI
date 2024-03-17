@@ -26,7 +26,7 @@ namespace TUI.TUIParts
 		{
 			get
 			{
-				return _subDirs?.Length-1 ?? _drives?.Length-1 ?? 0;
+				return Names?.Length-1 ?? _drives?.Length-1 ?? 0;
 			}
 		}
 
@@ -178,12 +178,11 @@ namespace TUI.TUIParts
 			{
 				if (!SetCursor(ParentAnchor.Left + Anchor.Left, ParentAnchor.Top + Anchor.Top + 1 + i))
 					break;
-				if (i + _displayoffset > _countOfItems)
+				if (i + _displayoffset > _countOfItems||i+_displayoffset>(Names?.Length-1??_drives.Length-1))
 				{
 					Console.Write(new String(' ', Width));
 					continue;
 				}
-
 				string displayText = Names?[i + _displayoffset] ?? _drives[i + _displayoffset].ToString();
 
 
