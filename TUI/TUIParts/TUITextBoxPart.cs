@@ -112,7 +112,7 @@ namespace TUI.TUIParts
                     continue;
                 }
 
-                if(MaxChars<=0||currentText?.Length <= MaxChars)
+                if(MaxChars<=0||currentText?.Length < MaxChars)
 				if (!char.IsControl(userInput))
 				currentText += userInput;
 
