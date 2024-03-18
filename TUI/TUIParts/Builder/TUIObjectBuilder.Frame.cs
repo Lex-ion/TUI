@@ -38,6 +38,12 @@ namespace TUI.TUIParts.Builder
 			AddFrame(name,width,height,Defaults.DefaultAnchor,defs.DefaultForeGroundColor,defs.DefaultBackGroundColor);
 			return this;
 		}
+		public TUIObjectBuilder AddFrame(string name, int width, int height, Anchor anchor, TUIFrameStyle style)
+		{
+			var defs = Defaults.DefaultFrame;
+			AddFrame(name, width, height, anchor, style, defs.DefaultForeGroundColor, defs.DefaultBackGroundColor, true);
+			return this;
+		}
 
 	}
 }
